@@ -1,72 +1,294 @@
 <!DOCTYPE html><html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CASTING SCHEDULE</title>
+<title>뮤지컬 〈비더슈탄트〉 CASTING SCHEDULE</title>
 <style>
-body{background:#f4efe7;font-family:sans-serif;padding:20px}
-.title{text-align:center;font-size:48px;color:#7a6046}
-.filters{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0;justify-content:center}
-.actor-filter{padding:6px 12px;cursor:pointer}
-table{width:100%;border-collapse:collapse;background:#fff}
-th,td{border:1px solid #ddd;padding:8px;text-align:center}
-.month-divider td{background:#7a6046;color:#fff;font-weight:bold}
-.actor{padding:3px 8px;border-radius:12px;cursor:pointer}
+body {
+  background: #f4efe7;
+  font-family: sans-serif;
+  padding: 20px;
+  margin: 0;
+}
+
+/* 1. 테이블 폭을 적당하게 줄여주는 가운데 정렬 컨테이너 */
+.container {
+  max-width: 900px; /* 표의 최대 가로 폭 */
+  margin: 0 auto;   /* 화면 중앙 정렬 */
+}
+
+.title {
+  text-align: center;
+  font-size: 36px;
+  color: #7a6046;
+  margin-bottom: 20px;
+}
+
+/* 필터 전체 감싸는 영역 */
+.filters-container {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+/* 전체보기 버튼 영역 */
+.global-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+#showAll {
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #7a6046;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+}
+#showAll:hover {
+  background-color: #5c4834;
+}
+
+/* 역할별 필터 그리드 레이아웃 */
+.filters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 15px;
+}
+
+/* 각 역할 그룹 상자 */
+.filter-group {
+  background: #faf8f5;
+  border: 1px solid #e8e3dc;
+  border-radius: 6px;
+  padding: 10px;
+}
+
+/* 역할 이름 (타이틀) */
+.group-title {
+  font-size: 13px;
+  font-weight: bold;
+  color: #5c4834;
+  margin-bottom: 8px;
+  border-left: 3px solid #7a6046;
+  padding-left: 6px;
+}
+
+/* 배우 버튼들을 가로로 나열 */
+.group-buttons {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+/* 배우 필터 버튼 기본 스타일 */
+.actor-filter {
+  flex: 1;
+  min-width: 60px;
+  padding: 5px 8px;
+  font-size: 12px;
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  text-align: center;
+  transition: all 0.2s;
+}
+.actor-filter:hover {
+  background-color: #eee;
+}
+
+/* 배우 필터 선택(활성화) 상태 */
+.actor-filter.active {
+  background-color: #7a6046 !important;
+  color: #fff !important;
+  border-color: #7a6046 !important;
+  font-weight: bold;
+}
+
+/* 테이블 크기 및 폰트 축소로 슬림화 */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  font-size: 13px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 6px 4px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+th {
+  background-color: #fcfbf9;
+}
+
+.month-divider td {
+  background: #7a6046;
+  color: #fff;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 8px;
+}
+
+/* 배우 이름을 감싸는 기본 상자 스타일 */
+.actor {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  vertical-align: middle;
+  font-size: 12px;
+  min-height: 18px;
+  box-sizing: border-box;
+}
+
+/* 첫공 표시 스타일 */
+.actor.first-show::after {
+  content: '첫공';
+  display: inline-block;
+  margin-top: 3px;
+  background-color: #555555;
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: bold;
+  padding: 1px 4px;
+  border-radius: 3px;
+  text-align: center;
+  line-height: 1.1;
+} 
+
+/* 복사 버튼 스타일 */
+.copy-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-size: 14px;
+  outline: none;
+}
+.copy-btn:hover {
+  opacity: 0.7;
+}
+
+/* 각 배우별 고유 배경색 */
 .actor-1{background:#e7f0ff} .actor-2{background:#ffe8ef}
 .actor-3{background:#e8f8ec} .actor-4{background:#fff1e6}
 .actor-5{background:#f1e8ff} .actor-6{background:#fff7d9}
 .actor-7{background:#e9f7ff} .actor-8{background:#ffecec}
 .actor-9{background:#eefaea} .actor-10{background:#f4ecff}
 </style></head><body>
-<h1 class="title">CASTING SCHEDULE</h1>
-<div class="filters">
-<button id="showAll">전체보기</button>
-<button class="actor-filter" data-actor="강병훈">강병훈</button>
-<button class="actor-filter" data-actor="고철순">고철순</button>
-<button class="actor-filter" data-actor="김도민">김도민</button>
-<button class="actor-filter" data-actor="김도현">김도현</button>
-<button class="actor-filter" data-actor="김방언">김방언</button>
-<button class="actor-filter" data-actor="김보현">김보현</button>
-<button class="actor-filter" data-actor="김준식">김준식</button>
-<button class="actor-filter" data-actor="김지웅">김지웅</button>
-<button class="actor-filter" data-actor="김태환">김태환</button>
-<button class="actor-filter" data-actor="박정원">박정원</button>
-<button class="actor-filter" data-actor="이한솔">이한솔</button>
-<button class="actor-filter" data-actor="이형훈">이형훈</button>
-<button class="actor-filter" data-actor="조모세">조모세</button>
-<button class="actor-filter" data-actor="최기정">최기정</button>
-<button class="actor-filter" data-actor="최석진">최석진</button>
-<button class="actor-filter" data-actor="한상훈">한상훈</button>
-<button class="actor-filter" data-actor="황건우">황건우</button>
-<button class="actor-filter" data-actor="황순종">황순종</button>
+
+<div class="container">
+
+<h1 class="title"><strong>뮤지컬 〈비더슈탄트〉</strong><br>CASTING SCHEDULE</h1>
+
+<!-- 정리된 역할별 필터 영역 시작 -->
+<div class="filters-container">
+  <div class="global-actions">
+    <button id="showAll">전체보기 (초기화)</button>
+  </div>
+  
+  <div class="filters-grid">
+    <!-- 매그너스 볼커 -->
+    <div class="filter-group">
+      <div class="group-title">매그너스 볼커</div>
+      <div class="group-buttons">
+        <button class="actor-filter" data-actor="최석진">최석진</button>
+        <button class="actor-filter" data-actor="한상훈">한상훈</button>
+        <button class="actor-filter" data-actor="황순종">황순종</button>
+      </div>
+    </div>
+
+    <!-- 아벨 루터 -->
+    <div class="filter-group">
+      <div class="group-title">아벨 루터</div>
+      <div class="group-buttons">
+        <button class="actor-filter" data-actor="박정원">박정원</button>
+        <button class="actor-filter" data-actor="이한솔">이한솔</button>
+        <button class="actor-filter" data-actor="강병훈">강병훈</button>
+      </div>
+    </div>
+
+    <!-- 프레드릭 칼 -->
+    <div class="filter-group">
+      <div class="group-title">프레드릭 칼</div>
+      <div class="group-buttons">
+        <button class="actor-filter" data-actor="김도현">김도현</button>
+        <button class="actor-filter" data-actor="김방언">김방언</button>
+        <button class="actor-filter" data-actor="김준식">김준식</button>
+      </div>
+    </div>
+
+    <!-- 하겐 악스만 -->
+    <div class="filter-group">
+      <div class="group-title">하겐 악스만</div>
+      <div class="group-buttons">
+        <button class="actor-filter" data-actor="조모세">조모세</button>
+        <button class="actor-filter" data-actor="김지웅">김지웅</button>
+        <button class="actor-filter" data-actor="황건우">황건우</button>
+      </div>
+    </div>
+
+    <!-- 재스퍼 뮬러 -->
+    <div class="filter-group">
+      <div class="group-title">재스퍼 뮬러</div>
+      <div class="group-buttons">
+        <button class="actor-filter" data-actor="김태환">김태환</button>
+        <button class="actor-filter" data-actor="최기정">최기정</button>
+        <button class="actor-filter" data-actor="김도민">김도민</button>
+      </div>
+    </div>
+
+    <!-- 라인하르트 클레어 (오타 수정 반영) -->
+    <div class="filter-group">
+      <div class="group-title">라인하르트 클레어</div>
+      <div class="group-buttons">
+        <button class="actor-filter" data-actor="김보현">김보현</button>
+        <button class="actor-filter" data-actor="이형훈">이형훈</button>
+        <button class="actor-filter" data-actor="고철순">고철순</button>
+      </div>
+    </div>
+  </div>
 </div>
+<!-- 필터 영역 끝 -->
+
 <table>
 <thead><tr><th>날짜</th><th>요일</th><th>시간</th><th>매그너스 볼커</th><th>아벨 루터</th><th>프레드릭 칼</th><th>하겐 악스만</th><th>재스퍼 뮬러</th><th>라인하르트 클레어</th><th>복사</th></tr></thead>
 <tbody>
-<tr class="month-divider"><td colspan="10">7월</td></tr><tr class="schedule-row">
-<td>7월 23일</td><td>목</td><td>19:30</td>
-<td><span class="actor actor-1" data-actor="최석진">최석진<span class="fb">첫공</span></span></div>
-<td><span class="actor actor-2" data-actor="박정원">박정원<span class="fb">첫공</span></span></div>
-<td><span class="actor actor-3" data-actor="김도현">김도현<span class="fb">첫공</span></span></div>
-<td><span class="actor actor-4" data-actor="조모세">조모세<span class="fb">첫공</span></span></div>
-<td><span class="actor actor-5" data-actor="김태환">김태환<span class="fb">첫공</span></span></div>
-<td><span class="actor actor-6" data-actor="김보현">김보현<span class="fb">첫공</span></span></div>
+<tr class="month-divider"><td colspan="10">7월</td></tr>
+<tr class="schedule-row"><td>7월 23일</td><td>목</td><td>19:30</td>
+<td><span class="actor actor-1 first-show" data-actor="최석진">최석진</span></td>
+<td><span class="actor actor-2 first-show" data-actor="박정원">박정원</span></td>
+<td><span class="actor actor-3 first-show" data-actor="김도현">김도현</span></td>
+<td><span class="actor actor-4 first-show" data-actor="조모세">조모세</span></td>
+<td><span class="actor actor-5 first-show" data-actor="김태환">김태환</span></td>
+<td><span class="actor actor-6 first-show" data-actor="김보현">김보현</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>7월 24일</td><td>금</td><td>19:30</td>
-<td><span class="actor actor-7" data-actor="한상훈">한상훈<span class="fb">첫공</span></span></div>
-<td><span class="actor actor-8" data-actor="이한솔">이한솔<span class="fb">첫공</span></span></div>
-<td><span class="actor actor-9" data-actor="김방언">김방언<span class="fb">첫공</span></span></div>
-<td><span class="actor actor-10" data-actor="김지웅">김지웅<span class="fb">첫공</span></span></div>
-<td><span class="actor actor-1" data-actor="최기정">최기정<span class="fb">첫공</span></span></div>
-<td><span class="actor actor-2" data-actor="이형훈">이형훈<span class="fb">첫공</span></span></div>
+<td><span class="actor actor-7 first-show" data-actor="한상훈">한상훈</span></td>
+<td><span class="actor actor-8 first-show" data-actor="이한솔">이한솔</span></td>
+<td><span class="actor actor-9 first-show" data-actor="김방언">김방언</span></td>
+<td><span class="actor actor-10 first-show" data-actor="김지웅">김지웅</span></td>
+<td><span class="actor actor-1 first-show" data-actor="최기정">최기정</span></td>
+<td><span class="actor actor-2 first-show" data-actor="이형훈">이형훈</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>7월 25일</td><td>토</td><td>14:00</td>
-<td><span class="actor actor-3" data-actor="황순종">황순종<span class="fb">첫공</span></span></div>
-<td><span class="actor actor-4" data-actor="강병훈">강병훈<span class="fb">첫공</span></span></div>
-<td><span class="actor actor-5" data-actor="김준식">김준식<span class="fb">첫공</span></span></div>
-<td><span class="actor actor-6" data-actor="황건우">황건우<span class="fb">첫공</span></span></div>
-<td><span class="actor actor-7" data-actor="김도민">김도민<span class="fb">첫공</span></span></div>
-<td><span class="actor actor-8" data-actor="고철순">고철순<span class="fb">첫공</span></span></div>
+<td><span class="actor actor-3 first-show" data-actor="황순종">황순종</span></td>
+<td><span class="actor actor-4 first-show" data-actor="강병훈">강병훈</span></td>
+<td><span class="actor actor-5 first-show" data-actor="김준식">김준식</span></td>
+<td><span class="actor actor-6 first-show" data-actor="황건우">황건우</span></td>
+<td><span class="actor actor-7 first-show" data-actor="김도민">김도민</span></td>
+<td><span class="actor actor-8 first-show" data-actor="고철순">고철순</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>7월 25일</td><td>토</td><td>18:30</td>
@@ -130,9 +352,7 @@ th,td{border:1px solid #ddd;padding:8px;text-align:center}
 <td><span class="actor actor-6" data-actor="황건우">황건우</span></td>
 <td><span class="actor actor-7" data-actor="김도민">김도민</span></td>
 <td><span class="actor actor-8" data-actor="고철순">고철순</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr>
- 
- <tr class="month-divider"><td colspan="10">8월</td></tr><tr class="schedule-row">
+<td><button class="copy-btn">⚔️</button></td></tr><tr class="month-divider"><td colspan="10">8월</td></tr><tr class="schedule-row">
 
 <td>8월 1일</td><td>토</td><td>14:00</td>
 <td><span class="actor actor-7" data-actor="한상훈">한상훈</span></td>
@@ -359,7 +579,7 @@ th,td{border:1px solid #ddd;padding:8px;text-align:center}
 <td><span class="actor actor-8" data-actor="고철순">고철순</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
-<td>8월 20일</td><td>목</td><td>19:30</td>
+<td>8::20일</td><td>목</td><td>19:30</td>
 <td><span class="actor actor-7" data-actor="한상훈">한상훈</span></td>
 <td><span class="actor actor-8" data-actor="이한솔">이한솔</span></td>
 <td><span class="actor actor-9" data-actor="김방언">김방언</span></td>
@@ -494,22 +714,58 @@ th,td{border:1px solid #ddd;padding:8px;text-align:center}
 <td><span class="actor actor-6" data-actor="김보현">김보현</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr>
 </tbody></table>
+
+</div>
+
 <script>
-function filterActor(name){
- document.querySelectorAll('.schedule-row').forEach(r=>{
-  r.style.display=r.innerText.includes(name)?'':'none';
- });
+// 활성화된 필터들을 기준으로 and(교집합) 필터링하는 함수
+function applyFilters() {
+  const activeActors = Array.from(document.querySelectorAll('.actor-filter.active'))
+                            .map(btn => btn.dataset.actor);
+
+  document.querySelectorAll('.schedule-row').forEach(row => {
+    if (activeActors.length === 0) {
+      row.style.display = '';
+      return;
+    }
+
+    // 선택된 모든 배우가 해당 행(row)의 텍스트에 포함되는지 검사
+    const hasAllActors = activeActors.every(actorName => row.innerText.includes(actorName));
+    row.style.display = hasAllActors ? '' : 'none';
+  });
 }
-document.querySelectorAll('.actor-filter').forEach(b=>{
- b.onclick=()=>filterActor(b.dataset.actor);
+
+// 상단 필터 버튼 클릭 이벤트
+document.querySelectorAll('.actor-filter').forEach(button => {
+  button.onclick = () => {
+    button.classList.toggle('active');
+    applyFilters();
+  };
 });
-document.getElementById('showAll').onclick=()=>{
- document.querySelectorAll('.schedule-row').forEach(r=>r.style.display='');
+
+// 표 안의 배우 이름을 클릭했을 때도 필터 연동
+document.querySelectorAll('.actor').forEach(actorSpan => {
+  actorSpan.onclick = () => {
+    const actorName = actorSpan.dataset.actor;
+    const targetFilter = Array.from(document.querySelectorAll('.actor-filter'))
+                              .find(btn => btn.dataset.actor === actorName);
+    
+    if (targetFilter) {
+      targetFilter.classList.toggle('active');
+      applyFilters();
+    }
+  };
+});
+
+// 전체보기 버튼 클릭 시 필터 초기화
+document.getElementById('showAll').onclick = () => {
+  document.querySelectorAll('.actor-filter').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('.schedule-row').forEach(row => row.style.display = '');
 };
-document.querySelectorAll('.actor').forEach(a=>{
- a.onclick=()=>filterActor(a.dataset.actor);
+
+// 클립보드 복사 버튼 기능
+document.querySelectorAll('.copy-btn').forEach(b => {
+  b.onclick = () => navigator.clipboard.writeText(b.closest('tr').innerText);
 });
-document.querySelectorAll('.copy-btn').forEach(b=>{
- b.onclick=()=>navigator.clipboard.writeText(b.closest('tr').innerText);
-});
-</script></body></html>
+</script>
+</body></html>
