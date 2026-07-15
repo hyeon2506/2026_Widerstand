@@ -152,6 +152,7 @@ th {
 
 /* 첫공 표시 스타일 */
 .actor.first-show::after {
+.actor.first-show::after {
   content: '첫공';
   display: inline-block;
   margin-top: 3px;
@@ -178,13 +179,24 @@ th {
   opacity: 0.7;
 }
 
-/* 각 배우별 고유 배경색 */
-.actor-1{background:#e7f0ff} .actor-2{background:#ffe8ef}
-.actor-3{background:#e8f8ec} .actor-4{background:#fff1e6}
-.actor-5{background:#f1e8ff} .actor-6{background:#fff7d9}
-.actor-7{background:#e9f7ff} .actor-8{background:#ffecec}
-.actor-9{background:#eefaea} .actor-10{background:#f4ecff}
-</style></head><body>
+/* 역할별 고유 배경색 지정 */
+.role-magnus { background: #ffe8ef; } /* 매그너스 볼커 */
+.role-abel   { background: #fff1e6; } /* 아벨 루터 */
+.role-fred   { background: #fff7d9; } /* 프레드릭 칼 */
+.role-hagen  { background: #e8f8ec; } /* 하겐 악스만 */
+.role-jasper { background: #e7f0ff; } /* 재스퍼 뮬러 */
+.role-reinh  { background: #f1e8ff; } /* 라인하르트 클레어 */
+
+.actor {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+  color: #222;
+}
+</style>
+</head>
+<body>
 
 <div class="container">
 
@@ -247,7 +259,7 @@ th {
       </div>
     </div>
 
-    <!-- 라인하르트 클레어 (오타 수정 반영) -->
+    <!-- 라인하르트 클레어 -->
     <div class="filter-group">
       <div class="group-title">라인하르트 클레어</div>
       <div class="group-buttons">
@@ -265,456 +277,459 @@ th {
 <tbody>
 <tr class="month-divider"><td colspan="10">7월</td></tr>
 <tr class="schedule-row"><td>7월 23일</td><td>목</td><td>19:30</td>
-<td><span class="actor actor-1 first-show" data-actor="최석진">최석진</span></td>
-<td><span class="actor actor-2 first-show" data-actor="박정원">박정원</span></td>
-<td><span class="actor actor-3 first-show" data-actor="김도현">김도현</span></td>
-<td><span class="actor actor-4 first-show" data-actor="조모세">조모세</span></td>
-<td><span class="actor actor-5 first-show" data-actor="김태환">김태환</span></td>
-<td><span class="actor actor-6 first-show" data-actor="김보현">김보현</span></td>
+<td><span class="actor role-magnus first-show" data-actor="최석진">최석진</span></td>
+<td><span class="actor role-abel first-show" data-actor="박정원">박정원</span></td>
+<td><span class="actor role-fred first-show" data-actor="김도현">김도현</span></td>
+<td><span class="actor role-hagen first-show" data-actor="조모세">조모세</span></td>
+<td><span class="actor role-jasper first-show" data-actor="김태환">김태환</span></td>
+<td><span class="actor role-reinh first-show" data-actor="김보현">김보현</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>7월 24일</td><td>금</td><td>19:30</td>
-<td><span class="actor actor-7 first-show" data-actor="한상훈">한상훈</span></td>
-<td><span class="actor actor-8 first-show" data-actor="이한솔">이한솔</span></td>
-<td><span class="actor actor-9 first-show" data-actor="김방언">김방언</span></td>
-<td><span class="actor actor-10 first-show" data-actor="김지웅">김지웅</span></td>
-<td><span class="actor actor-1 first-show" data-actor="최기정">최기정</span></td>
-<td><span class="actor actor-2 first-show" data-actor="이형훈">이형훈</span></td>
+<td><span class="actor role-magnus first-show" data-actor="한상훈">한상훈</span></td>
+<td><span class="actor role-abel first-show" data-actor="이한솔">이한솔</span></td>
+<td><span class="actor role-fred first-show" data-actor="김방언">김방언</span></td>
+<td><span class="actor role-hagen first-show" data-actor="김지웅">김지웅</span></td>
+<td><span class="actor role-jasper first-show" data-actor="최기정">최기정</span></td>
+<td><span class="actor role-reinh first-show" data-actor="이형훈">이형훈</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>7월 25일</td><td>토</td><td>14:00</td>
-<td><span class="actor actor-3 first-show" data-actor="황순종">황순종</span></td>
-<td><span class="actor actor-4 first-show" data-actor="강병훈">강병훈</span></td>
-<td><span class="actor actor-5 first-show" data-actor="김준식">김준식</span></td>
-<td><span class="actor actor-6 first-show" data-actor="황건우">황건우</span></td>
-<td><span class="actor actor-7 first-show" data-actor="김도민">김도민</span></td>
-<td><span class="actor actor-8 first-show" data-actor="고철순">고철순</span></td>
+<td><span class="actor role-magnus first-show" data-actor="황순종">황순종</span></td>
+<td><span class="actor role-abel first-show" data-actor="강병훈">강병훈</span></td>
+<td><span class="actor role-fred first-show" data-actor="김준식">김준식</span></td>
+<td><span class="actor role-hagen first-show" data-actor="황건우">황건우</span></td>
+<td><span class="actor role-jasper first-show" data-actor="김도민">김도민</span></td>
+<td><span class="actor role-reinh first-show" data-actor="고철순">고철순</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>7월 25일</td><td>토</td><td>18:30</td>
-<td><span class="actor actor-1" data-actor="최석진">최석진</span></td>
-<td><span class="actor actor-2" data-actor="박정원">박정원</span></td>
-<td><span class="actor actor-9" data-actor="김방언">김방언</span></td>
-<td><span class="actor actor-10" data-actor="김지웅">김지웅</span></td>
-<td><span class="actor actor-5" data-actor="김태환">김태환</span></td>
-<td><span class="actor actor-8" data-actor="고철순">고철순</span></td>
+<td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
+<td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
+<td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
+<td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
+<td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
+<td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>7월 26일</td><td>일</td><td>14:00</td>
-<td><span class="actor actor-7" data-actor="한상훈">한상훈</span></td>
-<td><span class="actor actor-8" data-actor="이한솔">이한솔</span></td>
-<td><span class="actor actor-3" data-actor="김도현">김도현</span></td>
-<td><span class="actor actor-4" data-actor="조모세">조모세</span></td>
-<td><span class="actor actor-1" data-actor="최기정">최기정</span></td>
-<td><span class="actor actor-6" data-actor="김보현">김보현</span></td>
+<td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
+<td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
+<td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
+<td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
+<td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
+<td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>7월 28일</td><td>화</td><td>19:30</td>
-<td><span class="actor actor-7" data-actor="한상훈">한상훈</span></td>
-<td><span class="actor actor-8" data-actor="이한솔">이한솔</span></td>
-<td><span class="actor actor-9" data-actor="김방언">김방언</span></td>
-<td><span class="actor actor-4" data-actor="조모세">조모세</span></td>
-<td><span class="actor actor-1" data-actor="최기정">최기정</span></td>
-<td><span class="actor actor-2" data-actor="이형훈">이형훈</span></td>
+<td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
+<td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
+<td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
+<td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
+<td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
+<td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>7월 29일</td><td>수</td><td>15:00</td>
-<td><span class="actor actor-1" data-actor="최석진">최석진</span></td>
-<td><span class="actor actor-2" data-actor="박정원">박정원</span></td>
-<td><span class="actor actor-3" data-actor="김도현">김도현</span></td>
-<td><span class="actor actor-10" data-actor="김지웅">김지웅</span></td>
-<td><span class="actor actor-5" data-actor="김태환">김태환</span></td>
-<td><span class="actor actor-6" data-actor="김보현">김보현</span></td>
+<td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
+<td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
+<td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
+<td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
+<td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
+<td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>7월 29일</td><td>수</td><td>19:30</td>
-<td><span class="actor actor-3" data-actor="황순종">황순종</span></td>
-<td><span class="actor actor-4" data-actor="강병훈">강병훈</span></td>
-<td><span class="actor actor-5" data-actor="김준식">김준식</span></td>
-<td><span class="actor actor-6" data-actor="황건우">황건우</span></td>
-<td><span class="actor actor-7" data-actor="김도민">김도민</span></td>
-<td><span class="actor actor-8" data-actor="고철순">고철순</span></td>
+<td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
+<td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
+<td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
+<td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
+<td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
+<td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>7월 30일</td><td>목</td><td>19:30</td>
-<td><span class="actor actor-1" data-actor="최석진">최석진</span></td>
-<td><span class="actor actor-2" data-actor="박정원">박정원</span></td>
-<td><span class="actor actor-9" data-actor="김방언">김방언</span></td>
-<td><span class="actor actor-4" data-actor="조모세">조모세</span></td>
-<td><span class="actor actor-5" data-actor="김태환">김태환</span></td>
-<td><span class="actor actor-6" data-actor="김보현">김보현</span></td>
+<td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
+<td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
+<td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
+<td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
+<td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
+<td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>7월 31일</td><td>금</td><td>19:30</td>
-<td><span class="actor actor-3" data-actor="황순종">황순종</span></td>
-<td><span class="actor actor-4" data-actor="강병훈">강병훈</span></td>
-<td><span class="actor actor-5" data-actor="김준식">김준식</span></td>
-<td><span class="actor actor-6" data-actor="황건우">황건우</span></td>
-<td><span class="actor actor-7" data-actor="김도민">김도민</span></td>
-<td><span class="actor actor-8" data-actor="고철순">고철순</span></td>
+<td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
+<td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
+<td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
+<td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
+<td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
+<td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="month-divider"><td colspan="10">8월</td></tr><tr class="schedule-row">
 
 <td>8월 1일</td><td>토</td><td>14:00</td>
-<td><span class="actor actor-7" data-actor="한상훈">한상훈</span></td>
-<td><span class="actor actor-2" data-actor="박정원">박정원</span></td>
-<td><span class="actor actor-3" data-actor="김도현">김도현</span></td>
-<td><span class="actor actor-10" data-actor="김지웅">김지웅</span></td>
-<td><span class="actor actor-1" data-actor="최기정">최기정</span></td>
-<td><span class="actor actor-2" data-actor="이형훈">이형훈</span></td>
+<td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
+<td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
+<td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
+<td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
+<td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
+<td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 1일</td><td>토</td><td>18:30</td>
-<td><span class="actor actor-1" data-actor="최석진">최석진</span></td>
-<td><span class="actor actor-2" data-actor="박정원">박정원</span></td>
-<td><span class="actor actor-3" data-actor="김도현">김도현</span></td>
-<td><span class="actor actor-4" data-actor="조모세">조모세</span></td>
-<td><span class="actor actor-5" data-actor="김태환">김태환</span></td>
-<td><span class="actor actor-2" data-actor="이형훈">이형훈</span></td>
+<td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
+<td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
+<td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
+<td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
+<td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
+<td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 2일</td><td>일</td><td>14:00</td>
-<td><span class="actor actor-3" data-actor="황순종">황순종</span></td>
-<td><span class="actor actor-4" data-actor="강병훈">강병훈</span></td>
-<td><span class="actor actor-5" data-actor="김준식">김준식</span></td>
-<td><span class="actor actor-6" data-actor="황건우">황건우</span></td>
-<td><span class="actor actor-7" data-actor="김도민">김도민</span></td>
-<td><span class="actor actor-8" data-actor="고철순">고철순</span></td>
+<td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
+<td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
+<td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
+<td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
+<td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
+<td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 2일</td><td>일</td><td>18:30</td>
-<td><span class="actor actor-7" data-actor="한상훈">한상훈</span></td>
-<td><span class="actor actor-8" data-actor="이한솔">이한솔</span></td>
-<td><span class="actor actor-9" data-actor="김방언">김방언</span></td>
-<td><span class="actor actor-10" data-actor="김지웅">김지웅</span></td>
-<td><span class="actor actor-1" data-actor="최기정">최기정</span></td>
-<td><span class="actor actor-6" data-actor="김보현">김보현</span></td>
+<td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
+<td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
+<td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
+<td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
+<td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
+<td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 4일</td><td>화</td><td>19:30</td>
-<td><span class="actor actor-3" data-actor="황순종">황순종</span></td>
-<td><span class="actor actor-4" data-actor="강병훈">강병훈</span></td>
-<td><span class="actor actor-5" data-actor="김준식">김준식</span></td>
-<td><span class="actor actor-6" data-actor="황건우">황건우</span></td>
-<td><span class="actor actor-7" data-actor="김도민">김도민</span></td>
-<td><span class="actor actor-8" data-actor="고철순">고철순</span></td>
+<td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
+<td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
+<td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
+<td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
+<td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
+<td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 5일</td><td>수</td><td>15:00</td>
-<td><span class="actor actor-1" data-actor="최석진">최석진</span></td>
-<td><span class="actor actor-2" data-actor="박정원">박정원</span></td>
-<td><span class="actor actor-3" data-actor="김도현">김도현</span></td>
-<td><span class="actor actor-4" data-actor="조모세">조모세</span></td>
-<td><span class="actor actor-5" data-actor="김태환">김태환</span></td>
-<td><span class="actor actor-6" data-actor="김보현">김보현</span></td>
+<td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
+<td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
+<td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
+<td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
+<td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
+<td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 5일</td><td>수</td><td>19:30</td>
-<td><span class="actor actor-7" data-actor="한상훈">한상훈</span></td>
-<td><span class="actor actor-8" data-actor="이한솔">이한솔</span></td>
-<td><span class="actor actor-3" data-actor="김도현">김도현</span></td>
-<td><span class="actor actor-10" data-actor="김지웅">김지웅</span></td>
-<td><span class="actor actor-1" data-actor="최기정">최기정</span></td>
-<td><span class="actor actor-2" data-actor="이형훈">이형훈</span></td>
+<td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
+<td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
+<td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
+<td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
+<td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
+<td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 6일</td><td>목</td><td>19:30</td>
-<td><span class="actor actor-3" data-actor="황순종">황순종</span></td>
-<td><span class="actor actor-4" data-actor="강병훈">강병훈</span></td>
-<td><span class="actor actor-9" data-actor="김방언">김방언</span></td>
-<td><span class="actor actor-6" data-actor="황건우">황건우</span></td>
-<td><span class="actor actor-7" data-actor="김도민">김도민</span></td>
-<td><span class="actor actor-8" data-actor="고철순">고철순</span></td>
+<td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
+<td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
+<td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
+<td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
+<td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
+<td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 7일</td><td>금</td><td>19:30</td>
-<td><span class="actor actor-1" data-actor="최석진">최석진</span></td>
-<td><span class="actor actor-2" data-actor="박정원">박정원</span></td>
-<td><span class="actor actor-5" data-actor="김준식">김준식</span></td>
-<td><span class="actor actor-10" data-actor="김지웅">김지웅</span></td>
-<td><span class="actor actor-5" data-actor="김태환">김태환</span></td>
-<td><span class="actor actor-2" data-actor="이형훈">이형훈</span></td>
+<td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
+<td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
+<td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
+<td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
+<td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
+<td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 8일</td><td>토</td><td>14:00</td>
-<td><span class="actor actor-7" data-actor="한상훈">한상훈</span></td>
-<td><span class="actor actor-8" data-actor="이한솔">이한솔</span></td>
-<td><span class="actor actor-9" data-actor="김방언">김방언</span></td>
-<td><span class="actor actor-4" data-actor="조모세">조모세</span></td>
-<td><span class="actor actor-1" data-actor="최기정">최기정</span></td>
-<td><span class="actor actor-8" data-actor="고철순">고철순</span></td>
+<td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
+<td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
+<td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
+<td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
+<td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
+<td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 8일</td><td>토</td><td>18:30</td>
-<td><span class="actor actor-3" data-actor="황순종">황순종</span></td>
-<td><span class="actor actor-8" data-actor="이한솔">이한솔</span></td>
-<td><span class="actor actor-9" data-actor="김방언">김방언</span></td>
-<td><span class="actor actor-10" data-actor="김지웅">김지웅</span></td>
-<td><span class="actor actor-5" data-actor="김태환">김태환</span></td>
-<td><span class="actor actor-6" data-actor="김보현">김보현</span></td>
+<td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
+<td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
+<td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
+<td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
+<td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
+<td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 9일</td><td>일</td><td>14:00</td>
-<td><span class="actor actor-7" data-actor="한상훈">한상훈</span></td>
-<td><span class="actor actor-4" data-actor="강병훈">강병훈</span></td>
-<td><span class="actor actor-5" data-actor="김준식">김준식</span></td>
-<td><span class="actor actor-6" data-actor="황건우">황건우</span></td>
-<td><span class="actor actor-7" data-actor="김도민">김도민</span></td>
-<td><span class="actor actor-2" data-actor="이형훈">이형훈</span></td>
+<td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
+<td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
+<td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
+<td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
+<td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
+<td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 11일</td><td>화</td><td>19:30</td>
-<td><span class="actor actor-3" data-actor="황순종">황순종</span></td>
-<td><span class="actor actor-2" data-actor="박정원">박정원</span></td>
-<td><span class="actor actor-5" data-actor="김준식">김준식</span></td>
-<td><span class="actor actor-4" data-actor="조모세">조모세</span></td>
-<td><span class="actor actor-7" data-actor="김도민">김도민</span></td>
-<td><span class="actor actor-8" data-actor="고철순">고철순</span></td>
+<td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
+<td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
+<td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
+<td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
+<td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
+<td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 12일</td><td>수</td><td>15:00</td>
-<td><span class="actor actor-1" data-actor="최석진">최석진</span></td>
-<td><span class="actor actor-4" data-actor="강병훈">강병훈</span></td>
-<td><span class="actor actor-9" data-actor="김방언">김방언</span></td>
-<td><span class="actor actor-6" data-actor="황건우">황건우</span></td>
-<td><span class="actor actor-5" data-actor="김태환">김태환</span></td>
-<td><span class="actor actor-6" data-actor="김보현">김보현</span></td>
+<td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
+<td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
+<td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
+<td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
+<td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
+<td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 12일</td><td>수</td><td>19:30</td>
-<td><span class="actor actor-7" data-actor="한상훈">한상훈</span></td>
-<td><span class="actor actor-8" data-actor="이한솔">이한솔</span></td>
-<td><span class="actor actor-9" data-actor="김방언">김방언</span></td>
-<td><span class="actor actor-10" data-actor="김지웅">김지웅</span></td>
-<td><span class="actor actor-1" data-actor="최기정">최기정</span></td>
-<td><span class="actor actor-6" data-actor="김보현">김보현</span></td>
+<td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
+<td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
+<td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
+<td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
+<td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
+<td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 13일</td><td>목</td><td>19:30</td>
-<td><span class="actor actor-3" data-actor="황순종">황순종</span></td>
-<td><span class="actor actor-4" data-actor="강병훈">강병훈</span></td>
-<td><span class="actor actor-3" data-actor="김도현">김도현</span></td>
-<td><span class="actor actor-10" data-actor="김지웅">김지웅</span></td>
-<td><span class="actor actor-1" data-actor="최기정">최기정</span></td>
-<td><span class="actor actor-8" data-actor="고철순">고철순</span></td>
+<td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
+<td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
+<td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
+<td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
+<td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
+<td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 14일</td><td>금</td><td>15:00</td>
-<td><span class="actor actor-7" data-actor="한상훈">한상훈</span></td>
-<td><span class="actor actor-8" data-actor="이한솔">이한솔</span></td>
-<td><span class="actor actor-5" data-actor="김준식">김준식</span></td>
-<td><span class="actor actor-6" data-actor="황건우">황건우</span></td>
-<td><span class="actor actor-7" data-actor="김도민">김도민</span></td>
-<td><span class="actor actor-6" data-actor="김보현">김보현</span></td>
+<td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
+<td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
+<td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
+<td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
+<td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
+<td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 14일</td><td>금</td><td>19:30</td>
-<td><span class="actor actor-1" data-actor="최석진">최석진</span></td>
-<td><span class="actor actor-2" data-actor="박정원">박정원</span></td>
-<td><span class="actor actor-3" data-actor="김도현">김도현</span></td>
-<td><span class="actor actor-4" data-actor="조모세">조모세</span></td>
-<td><span class="actor actor-5" data-actor="김태환">김태환</span></td>
-<td><span class="actor actor-6" data-actor="김보현">김보현</span></td>
+<td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
+<td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
+<td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
+<td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
+<td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
+<td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 15일</td><td>토</td><td>14:00</td>
-<td><span class="actor actor-7" data-actor="한상훈">한상훈</span></td>
-<td><span class="actor actor-8" data-actor="이한솔">이한솔</span></td>
-<td><span class="actor actor-9" data-actor="김방언">김방언</span></td>
-<td><span class="actor actor-10" data-actor="김지웅">김지웅</span></td>
-<td><span class="actor actor-1" data-actor="최기정">최기정</span></td>
-<td><span class="actor actor-8" data-actor="고철순">고철순</span></td>
+<td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
+<td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
+<td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
+<td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
+<td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
+<td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 15일</td><td>토</td><td>18:30</td>
-<td><span class="actor actor-3" data-actor="황순종">황순종</span></td>
-<td><span class="actor actor-4" data-actor="강병훈">강병훈</span></td>
-<td><span class="actor actor-9" data-actor="김방언">김방언</span></td>
-<td><span class="actor actor-6" data-actor="황건우">황건우</span></td>
-<td><span class="actor actor-7" data-actor="김도민">김도민</span></td>
-<td><span class="actor actor-8" data-actor="고철순">고철순</span></td>
+<td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
+<td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
+<td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
+<td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
+<td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
+<td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 16일</td><td>일</td><td>14:00</td>
-<td><span class="actor actor-1" data-actor="최석진">최석진</span></td>
-<td><span class="actor actor-2" data-actor="박정원">박정원</span></td>
-<td><span class="actor actor-3" data-actor="김도현">김도현</span></td>
-<td><span class="actor actor-4" data-actor="조모세">조모세</span></td>
-<td><span class="actor actor-5" data-actor="김태환">김태환</span></td>
-<td><span class="actor actor-2" data-actor="이형훈">이형훈</span></td>
+<td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
+<td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
+<td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
+<td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
+<td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
+<td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 16일</td><td>일</td><td>18:30</td>
-<td><span class="actor actor-3" data-actor="황순종">황순종</span></td>
-<td><span class="actor actor-4" data-actor="강병훈">강병훈</span></td>
-<td><span class="actor actor-5" data-actor="김준식">김준식</span></td>
-<td><span class="actor actor-6" data-actor="황건우">황건우</span></td>
-<td><span class="actor actor-7" data-actor="김도민">김도민</span></td>
-<td><span class="actor actor-2" data-actor="이형훈">이형훈</span></td>
+<td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
+<td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
+<td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
+<td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
+<td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
+<td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 18일</td><td>화</td><td>19:30</td>
-<td><span class="actor actor-7" data-actor="한상훈">한상훈</span></td>
-<td><span class="actor actor-8" data-actor="이한솔">이한솔</span></td>
-<td><span class="actor actor-5" data-actor="김준식">김준식</span></td>
-<td><span class="actor actor-4" data-actor="조모세">조모세</span></td>
-<td><span class="actor actor-1" data-actor="최기정">최기정</span></td>
-<td><span class="actor actor-6" data-actor="김보현">김보현</span></td>
+<td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
+<td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
+<td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
+<td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
+<td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
+<td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 19일</td><td>수</td><td>15:00</td>
-<td><span class="actor actor-3" data-actor="황순종">황순종</span></td>
-<td><span class="actor actor-4" data-actor="강병훈">강병훈</span></td>
-<td><span class="actor actor-3" data-actor="김도현">김도현</span></td>
-<td><span class="actor actor-6" data-actor="황건우">황건우</span></td>
-<td><span class="actor actor-7" data-actor="김도민">김도민</span></td>
-<td><span class="actor actor-8" data-actor="고철순">고철순</span></td>
+<td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
+<td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
+<td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
+<td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
+<td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
+<td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 19일</td><td>수</td><td>19:30</td>
-<td><span class="actor actor-1" data-actor="최석진">최석진</span></td>
-<td><span class="actor actor-4" data-actor="강병훈">강병훈</span></td>
-<td><span class="actor actor-3" data-actor="김도현">김도현</span></td>
-<td><span class="actor actor-10" data-actor="김지웅">김지웅</span></td>
-<td><span class="actor actor-5" data-actor="김태환">김태환</span></td>
-<td><span class="actor actor-8" data-actor="고철순">고철순</span></td>
+<td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
+<td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
+<td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
+<td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
+<td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
+<td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
-<td>8::20일</td><td>목</td><td>19:30</td>
-<td><span class="actor actor-7" data-actor="한상훈">한상훈</span></td>
-<td><span class="actor actor-8" data-actor="이한솔">이한솔</span></td>
-<td><span class="actor actor-9" data-actor="김방언">김방언</span></td>
-<td><span class="actor actor-10" data-actor="김지웅">김지웅</span></td>
-<td><span class="actor actor-1" data-actor="최기정">최기정</span></td>
-<td><span class="actor actor-2" data-actor="이형훈">이형훈</span></td>
+<td>8월 20일</td><td>목</td><td>19:30</td>
+<td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
+<td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
+<td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
+<td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
+<td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
+<td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 21일</td><td>금</td><td>19:30</td>
-<td><span class="actor actor-1" data-actor="최석진">최석진</span></td>
-<td><span class="actor actor-2" data-actor="박정원">박정원</span></td>
-<td><span class="actor actor-3" data-actor="김도현">김도현</span></td>
-<td><span class="actor actor-4" data-actor="조모세">조모세</span></td>
-<td><span class="actor actor-5" data-actor="김태환">김태환</span></td>
-<td><span class="actor actor-6" data-actor="김보현">김보현</span></td>
+<td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
+<td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
+<td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
+<td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
+<td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
+<td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 22일</td><td>토</td><td>14:00</td>
-<td><span class="actor actor-3" data-actor="황순종">황순종</span></td>
-<td><span class="actor actor-8" data-actor="이한솔">이한솔</span></td>
-<td><span class="actor actor-5" data-actor="김준식">김준식</span></td>
-<td><span class="actor actor-6" data-actor="황건우">황건우</span></td>
-<td><span class="actor actor-7" data-actor="김도민">김도민</span></td>
-<td><span class="actor actor-8" data-actor="고철순">고철순</span></td>
+<td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
+<td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
+<td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
+<td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
+<td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
+<td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 22일</td><td>토</td><td>18:30</td>
-<td><span class="actor actor-7" data-actor="한상훈">한상훈</span></td>
-<td><span class="actor actor-8" data-actor="이한솔">이한솔</span></td>
-<td><span class="actor actor-5" data-actor="김준식">김준식</span></td>
-<td><span class="actor actor-10" data-actor="김지웅">김지웅</span></td>
-<td><span class="actor actor-1" data-actor="최기정">최기정</span></td>
-<td><span class="actor actor-2" data-actor="이형훈">이형훈</span></td>
+<td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
+<td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
+<td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
+<td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
+<td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
+<td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 23일</td><td>일</td><td>14:00</td>
-<td><span class="actor actor-3" data-actor="황순종">황순종</span></td>
-<td><span class="actor actor-4" data-actor="강병훈">강병훈</span></td>
-<td><span class="actor actor-9" data-actor="김방언">김방언</span></td>
-<td><span class="actor actor-6" data-actor="황건우">황건우</span></td>
-<td><span class="actor actor-5" data-actor="김태환">김태환</span></td>
-<td><span class="actor actor-6" data-actor="김보현">김보현</span></td>
+<td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
+<td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
+<td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
+<td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
+<td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
+<td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 23일</td><td>일</td><td>18:30</td>
-<td><span class="actor actor-1" data-actor="최석진">최석진</span></td>
-<td><span class="actor actor-2" data-actor="박정원">박정원</span></td>
-<td><span class="actor actor-9" data-actor="김방언">김방언</span></td>
-<td><span class="actor actor-4" data-actor="조모세">조모세</span></td>
-<td><span class="actor actor-7" data-actor="김도민">김도민</span></td>
-<td><span class="actor actor-6" data-actor="김보현">김보현</span></td>
+<td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
+<td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
+<td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
+<td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
+<td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
+<td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 25일</td><td>화</td><td>19:30</td>
-<td><span class="actor actor-1" data-actor="최석진">최석진</span></td>
-<td><span class="actor actor-2" data-actor="박정원">박정원</span></td>
-<td><span class="actor actor-5" data-actor="김준식">김준식</span></td>
-<td><span class="actor actor-4" data-actor="조모세">조모세</span></td>
-<td><span class="actor actor-5" data-actor="김태환">김태환</span></td>
-<td><span class="actor actor-8" data-actor="고철순">고철순</span></td>
+<td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
+<td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
+<td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
+<td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
+<td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
+<td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 26일</td><td>수</td><td>15:00</td>
-<td><span class="actor actor-7" data-actor="한상훈">한상훈</span></td>
-<td><span class="actor actor-8" data-actor="이한솔">이한솔</span></td>
-<td><span class="actor actor-3" data-actor="김도현">김도현</span></td>
-<td><span class="actor actor-6" data-actor="황건우">황건우</span></td>
-<td><span class="actor actor-7" data-actor="김도민">김도민</span></td>
-<td><span class="actor actor-2" data-actor="이형훈">이형훈</span></td>
+<td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
+<td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
+<td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
+<td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
+<td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
+<td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 26일</td><td>수</td><td>19:30</td>
-<td><span class="actor actor-3" data-actor="황순종">황순종</span></td>
-<td><span class="actor actor-4" data-actor="강병훈">강병훈</span></td>
-<td><span class="actor actor-3" data-actor="김도현">김도현</span></td>
-<td><span class="actor actor-4" data-actor="조모세">조모세</span></td>
-<td><span class="actor actor-5" data-actor="김태환">김태환</span></td>
-<td><span class="actor actor-2" data-actor="이형훈">이형훈</span></td>
+<td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
+<td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
+<td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
+<td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
+<td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
+<td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 27일</td><td>목</td><td>19:30</td>
-<td><span class="actor actor-3" data-actor="황순종">황순종</span></td>
-<td><span class="actor actor-4" data-actor="강병훈">강병훈</span></td>
-<td><span class="actor actor-9" data-actor="김방언">김방언</span></td>
-<td><span class="actor actor-10" data-actor="김지웅">김지웅</span></td>
-<td><span class="actor actor-1" data-actor="최기정">최기정</span></td>
-<td><span class="actor actor-8" data-actor="고철순">고철순</span></td>
+<td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
+<td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
+<td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
+<td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
+<td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
+<td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 28일</td><td>금</td><td>19:30</td>
-<td><span class="actor actor-1" data-actor="최석진">최석진</span></td>
-<td><span class="actor actor-2" data-actor="박정원">박정원</span></td>
-<td><span class="actor actor-5" data-actor="김준식">김준식</span></td>
-<td><span class="actor actor-6" data-actor="황건우">황건우</span></td>
-<td><span class="actor actor-7" data-actor="김도민">김도민</span></td>
-<td><span class="actor actor-6" data-actor="김보현">김보현</span></td>
+<td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
+<td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
+<td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
+<td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
+<td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
+<td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 29일</td><td>토</td><td>14:00</td>
-<td><span class="actor actor-7" data-actor="한상훈">한상훈</span></td>
-<td><span class="actor actor-4" data-actor="강병훈">강병훈</span></td>
-<td><span class="actor actor-9" data-actor="김방언">김방언</span></td>
-<td><span class="actor actor-10" data-actor="김지웅">김지웅</span></td>
-<td><span class="actor actor-1" data-actor="최기정">최기정</span></td>
-<td><span class="actor actor-2" data-actor="이형훈">이형훈</span></td>
+<td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
+<td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
+<td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
+<td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
+<td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
+<td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 28일</td><td>토</td><td>18:30</td>
-<td><span class="actor actor-1" data-actor="최석진">최석진</span></td>
-<td><span class="actor actor-8" data-actor="이한솔">이한솔</span></td>
-<td><span class="actor actor-5" data-actor="김준식">김준식</span></td>
-<td><span class="actor actor-6" data-actor="황건우">황건우</span></td>
-<td><span class="actor actor-7" data-actor="김도민">김도민</span></td>
-<td><span class="actor actor-2" data-actor="이형훈">이형훈</span></td>
+<td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
+<td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
+<td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
+<td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
+<td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
+<td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 30일</td><td>일</td><td>14:00</td>
-<td><span class="actor actor-3" data-actor="황순종">황순종</span></td>
-<td><span class="actor actor-2" data-actor="박정원">박정원</span></td>
-<td><span class="actor actor-3" data-actor="김도현">김도현</span></td>
-<td><span class="actor actor-4" data-actor="조모세">조모세</span></td>
-<td><span class="actor actor-5" data-actor="김태환">김태환</span></td>
-<td><span class="actor actor-8" data-actor="고철순">고철순</span></td>
+<td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
+<td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
+<td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
+<td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
+<td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
+<td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
 
 <td>8월 30일</td><td>일</td><td>18:30</td>
-<td><span class="actor actor-7" data-actor="한상훈">한상훈</span></td>
-<td><span class="actor actor-2" data-actor="박정원">박정원</span></td>
-<td><span class="actor actor-9" data-actor="김방언">김방언</span></td>
-<td><span class="actor actor-10" data-actor="김지웅">김지웅</span></td>
-<td><span class="actor actor-1" data-actor="최기정">최기정</span></td>
-<td><span class="actor actor-6" data-actor="김보현">김보현</span></td>
+<td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
+<td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
+<td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
+<td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
+<td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
+<td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
 <td><button class="copy-btn">⚔️</button></td></tr>
 </tbody></table>
 
+</div>
+</body>
+</html>
 </div>
 
 <script>
