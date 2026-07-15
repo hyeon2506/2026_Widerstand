@@ -1,4 +1,7 @@
-<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8">
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>뮤지컬 〈비더슈탄트〉 CASTING SCHEDULE</title>
 <style>
@@ -142,16 +145,17 @@ th {
   align-items: center;
   justify-content: center;
   padding: 4px 8px;
-  border-radius: 8px;
+  border-radius: 4px; /* 아래의 border-radius와 충돌 방지를 위해 4px로 통일 */
   cursor: pointer;
   vertical-align: middle;
   font-size: 12px;
   min-height: 18px;
   box-sizing: border-box;
+  font-weight: bold;
+  color: #222;
 }
 
-/* 첫공 표시 스타일 */
-.actor.first-show::after {
+/* 첫공 표시 스타일 (중복 열림 오류 수정 완료) */
 .actor.first-show::after {
   content: '첫공';
   display: inline-block;
@@ -179,21 +183,13 @@ th {
   opacity: 0.7;
 }
 
-/* 역할별 고유 배경색 지정 */
+/* 역할별 고유 배경색 지정 (깨진 공백 문자 정제 완료) */
 .role-magnus { background: #ffe8ef; } /* 매그너스 볼커 */
 .role-abel   { background: #fff1e6; } /* 아벨 루터 */
 .role-fred   { background: #fff7d9; } /* 프레드릭 칼 */
 .role-hagen  { background: #e8f8ec; } /* 하겐 악스만 */
 .role-jasper { background: #e7f0ff; } /* 재스퍼 뮬러 */
 .role-reinh  { background: #f1e8ff; } /* 라인하르트 클레어 */
-
-.actor {
-  display: inline-block;
-  padding: 3px 8px;
-  border-radius: 4px;
-  font-weight: bold;
-  color: #222;
-}
 </style>
 </head>
 <body>
@@ -783,4 +779,5 @@ document.querySelectorAll('.copy-btn').forEach(b => {
   b.onclick = () => navigator.clipboard.writeText(b.closest('tr').innerText);
 });
 </script>
-</body></html>
+</body>
+</html>
