@@ -12,7 +12,7 @@ body {
   margin: 0;
 }
 
-/* 1. 테이블 폭을 적당하게 줄여주는 가운데 정렬 컨테이너 */
+/* 테이블 폭을 적당하게 줄여주는 가운데 정렬 컨테이너 */
 .container {
   max-width: 900px; /* 표의 최대 가로 폭 */
   margin: 0 auto;   /* 화면 중앙 정렬 */
@@ -34,12 +34,24 @@ body {
   margin-bottom: 20px;
 }
 
-/* 전체보기 버튼 영역 */
+/* 전체보기 버튼 및 검색 결과 카운터 영역 */
 .global-actions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between; /* 양쪽 끝 정렬로 변경 */
+  align-items: center;
   margin-bottom: 12px;
 }
+
+/* 실시간 검색 결과 카운터 스타일 */
+.filter-counter {
+  font-size: 14px;
+  font-weight: bold;
+  color: #7a6046;
+}
+.filter-counter span {
+  color: #222
+}
+
 #showAll {
   padding: 6px 14px;
   font-size: 13px;
