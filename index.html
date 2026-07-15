@@ -741,21 +741,36 @@ th {
 </div>
 
 <script>
+// 전체 일정 행의 총 개수를 저장할 변수
+const totalRowsCount = document.querySelectorAll('.schedule-row').length;
+document.getElementById('totalCount').innerText = totalRowsCount;
+
 // 활성화된 필터들을 기준으로 and(교집합) 필터링하는 함수
 function applyFilters() {
   const activeActors = Array.from(document.querySelectorAll('.actor-filter.active'))
                             .map(btn => btn.dataset.actor);
 
+  let matchCount = 0;
+
   document.querySelectorAll('.schedule-row').forEach(row => {
     if (activeActors.length === 0) {
       row.style.display = '';
+      matchCount++; // 필터가 없을 때는 전체 행이 노출되므로 세어줌
       return;
     }
 
     // 선택된 모든 배우가 해당 행(row)의 텍스트에 포함되는지 검사
     const hasAllActors = activeActors.every(actorName => row.innerText.includes(actorName));
-    row.style.display = hasAllActors ? '' : 'none';
+    if (hasAllActors) {
+      row.style.display = '';
+      matchCount++; // 필터에 맞는 행만 세어줌
+    } else {
+      row.style.display = 'none';
+    }
   });
+
+  // 실시간 노출 개수 업데이트
+  document.getElementById('matchCount').innerText = matchCount;
 }
 
 // 상단 필터 버튼 클릭 이벤트
@@ -784,12 +799,16 @@ document.querySelectorAll('.actor').forEach(actorSpan => {
 document.getElementById('showAll').onclick = () => {
   document.querySelectorAll('.actor-filter').forEach(btn => btn.classList.remove('active'));
   document.querySelectorAll('.schedule-row').forEach(row => row.style.display = '');
+  applyFilters(); // 숫자 카운트 초기화
 };
 
 // 클립보드 복사 버튼 기능
 document.querySelectorAll('.copy-btn').forEach(b => {
   b.onclick = () => navigator.clipboard.writeText(b.closest('tr').innerText);
 });
+
+// 페이지 초기 로드 시 카운터 세팅
+applyFilters();
 </script>
 </body>
 </html>
