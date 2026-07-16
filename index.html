@@ -1,7 +1,4 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>뮤지컬 〈비더슈탄트〉 CASTING SCHEDULE</title>
 <style>
@@ -12,7 +9,7 @@ body {
   margin: 0;
 }
 
-/* 테이블 폭을 적당하게 줄여주는 가운데 정렬 컨테이너 */
+/* 1. 테이블 폭을 적당하게 줄여주는 가운데 정렬 컨테이너 */
 .container {
   max-width: 900px; /* 표의 최대 가로 폭 */
   margin: 0 auto;   /* 화면 중앙 정렬 */
@@ -49,7 +46,7 @@ body {
   color: #7a6046;
 }
 .filter-counter span {
-  color: #222
+  color: #d9534f; /* 강조 색상 (빨간색 계열) */
 }
 
 #showAll {
@@ -157,7 +154,7 @@ th {
   align-items: center;
   justify-content: center;
   padding: 4px 8px;
-  border-radius: 4px; /* 아래의 border-radius와 충돌 방지를 위해 4px로 통일 */
+  border-radius: 4px;
   cursor: pointer;
   vertical-align: middle;
   font-size: 12px;
@@ -167,7 +164,7 @@ th {
   color: #222;
 }
 
-/* 첫공 표시 스타일 (중복 열림 오류 수정 완료) */
+/* 첫공 표시 스타일 */
 .actor.first-show::after {
   content: '첫공';
   display: inline-block;
@@ -195,7 +192,7 @@ th {
   opacity: 0.7;
 }
 
-/* 역할별 고유 배경색 지정 (깨진 공백 문자 정제 완료) */
+/* 역할별 고유 배경색 지정 */
 .role-magnus { background: #ffe8ef; } /* 매그너스 볼커 */
 .role-abel   { background: #fff1e6; } /* 아벨 루터 */
 .role-fred   { background: #fff7d9; } /* 프레드릭 칼 */
@@ -213,6 +210,8 @@ th {
 <!-- 정리된 역할별 필터 영역 시작 -->
 <div class="filters-container">
   <div class="global-actions">
+    <!-- 실시간 개수 표시 카운터 추가 -->
+    <div class="filter-counter">검색 결과: <span id="matchCount">0</span>건 / 총 <span id="totalCount">0</span>건</div>
     <button id="showAll">전체보기 (초기화)</button>
   </div>
   
