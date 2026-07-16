@@ -4,17 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>뮤지컬 〈비더슈탄트〉 CASTING SCHEDULE</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 body {
   background: #f4efe7;
-  font-family: sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   padding: 20px;
   margin: 0;
 }
 
 /* 테이블 폭을 적당하게 줄여주는 가운데 정렬 컨테이너 */
 .container {
-  max-width: 900px; /* 표의 최대 가로 폭 */
+  max-width: 1000px; /* 좌석표와 좌석입력창 추가로 가로폭을 살짝 넓혀 안정감을 줍니다 */
   margin: 0 auto;   /* 화면 중앙 정렬 */
 }
 
@@ -37,7 +38,7 @@ body {
 /* 전체보기 버튼 및 검색 결과 카운터 영역 */
 .global-actions {
   display: flex;
-  justify-content: space-between; /* 양쪽 끝 정렬로 변경 */
+  justify-content: space-between; /* 양쪽 끝 정렬 */
   align-items: center;
   margin-bottom: 12px;
 }
@@ -49,21 +50,40 @@ body {
   color: #7a6046;
 }
 .filter-counter span {
-  color: #222
+  color: #222;
 }
 
-#showAll {
+/* 백업/복구 액션 버튼 레이아웃 */
+.backup-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.action-btn {
   padding: 6px 14px;
   font-size: 13px;
   font-weight: bold;
   cursor: pointer;
-  background-color: #7a6046;
-  color: #fff;
   border: none;
   border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+#showAll {
+  background-color: #7a6046;
+  color: #fff;
 }
 #showAll:hover {
   background-color: #5c4834;
+}
+
+.btn-secondary {
+  background-color: #e0d8cd;
+  color: #5c4834;
+}
+.btn-secondary:hover {
+  background-color: #cdbfb0;
 }
 
 /* 역할별 필터 그리드 레이아웃 */
@@ -123,12 +143,13 @@ body {
   font-weight: bold;
 }
 
-/* 테이블 크기 및 폰트 축소로 슬림화 */
+/* 테이블 스타일 */
 table {
   width: 100%;
   border-collapse: collapse;
   background: #fff;
   font-size: 13px;
+  margin-bottom: 30px;
 }
 
 th, td {
@@ -142,6 +163,7 @@ th {
   background-color: #fcfbf9;
 }
 
+/* 테이블의 colspan을 11개(좌석 추가) 기준으로 설정 */
 .month-divider td {
   background: #7a6046;
   color: #fff;
@@ -150,14 +172,14 @@ th {
   padding: 8px;
 }
 
-/* 배우 이름을 감싸는 기본 상자 스타일 */
+/* 배우 이름을 감싸는 기본 상자 스타일 - 기존 디자인 복구 */
 .actor {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 4px 8px;
-  border-radius: 4px; /* 아래의 border-radius와 충돌 방지를 위해 4px로 통일 */
+  border-radius: 4px;
   cursor: pointer;
   vertical-align: middle;
   font-size: 12px;
@@ -167,7 +189,7 @@ th {
   color: #222;
 }
 
-/* 첫공 표시 스타일 (중복 열림 오류 수정 완료) */
+/* 첫공 표시 스타일 - 기존 디자인 복구 */
 .actor.first-show::after {
   content: '첫공';
   display: inline-block;
@@ -182,6 +204,33 @@ th {
   line-height: 1.1;
 } 
 
+/* 좌석 입력 칸 스타일 */
+.seat-input {
+  width: 90%;
+  padding: 4px;
+  font-size: 11px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  text-align: center;
+  background-color: #fff;
+  transition: all 0.2s ease;
+}
+.seat-input:focus {
+  border-color: #7a6046;
+  outline: none;
+  background-color: #fffdfa;
+}
+
+/* [추가] 확정 상태에서의 좌석 입력 칸 비활성화 스타일 (수정불가 네모칸) */
+.seat-input:disabled {
+  background-color: #eae5dc !important;
+  color: #555 !important;
+  border: 1px solid #bdae9c !important;
+  font-weight: bold;
+  cursor: not-allowed;
+}
+
 /* 복사 버튼 스타일 */
 .copy-btn {
   background: none;
@@ -195,13 +244,138 @@ th {
   opacity: 0.7;
 }
 
-/* 역할별 고유 배경색 지정 (깨진 공백 문자 정제 완료) */
+/* 역할별 고유 배경색 */
 .role-magnus { background: #ffe8ef; } /* 매그너스 볼커 */
 .role-abel   { background: #fff1e6; } /* 아벨 루터 */
 .role-fred   { background: #fff7d9; } /* 프레드릭 칼 */
 .role-hagen  { background: #e8f8ec; } /* 하겐 악스만 */
 .role-jasper { background: #e7f0ff; } /* 재스퍼 뮬러 */
 .role-reinh  { background: #f1e8ff; } /* 라인하르트 클레어 */
+
+/* ==========================================
+   하단 좌석표 영역 스타일링 (이미지 완벽 구현)
+   ========================================== */
+.seatmap-container {
+  background: #eae2d5;
+  border: 1px solid #c8beaf;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 30px;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+}
+
+.stage-title {
+  background: #3a2212;
+  color: #fff;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 5px;
+  padding: 8px 0;
+  margin-bottom: 25px;
+  border-radius: 4px;
+}
+
+.floor-section {
+  margin-bottom: 30px;
+}
+
+.floor-title {
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  color: #5c4834;
+  margin-bottom: 15px;
+}
+
+/* 좌석 레이아웃 그리드 */
+.seat-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+}
+
+.seat-row {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+/* 행 알파벳 표시 */
+.row-label {
+  width: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #1a5276;
+  text-align: center;
+  margin-right: 8px;
+}
+
+/* 좌석 개별 박스 스타일 */
+.seat-node {
+  width: 18px;
+  height: 18px;
+  font-size: 9px;
+  font-weight: bold;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  user-select: none;
+}
+
+/* 기본 좌석 배경색상 (전달 이미지 기반 매칭) */
+.seat-node.bg-blue { background-color: #1f557a; }   /* 기본 블루 */
+.seat-node.bg-grey { background-color: #8c9398; }   /* 사이드 그레이 */
+.seat-node.bg-green { background-color: #2ecc71; }  /* OP 구역 그린 */
+.seat-node.bg-orange { background-color: #d39e73; } /* 2층 오렌지 */
+
+/* 통로(빈칸) 스타일 */
+.seat-gap {
+  width: 12px;
+}
+
+/* 연동 하이라이트 효과 (매칭 성공 시 붉은색) */
+.seat-node.highlighted {
+  background-color: #e74c3c !important;
+  transform: scale(1.15);
+  box-shadow: 0 0 5px rgba(231, 76, 60, 0.8);
+  transition: all 0.2s ease-in-out;
+}
+
+/* 도면 기본 좌석 스타일: 무조건 회색으로 시작 */
+.seat-node {
+  background-color: #e0e0e0 !important;
+  border: 1px solid #cccccc !important;
+  color: #666666 !important;
+  transition: all 0.2s ease-in-out;
+}
+
+/* 마우스를 올렸을 때 살짝 반응하는 효과 */
+.seat-node:hover {
+  filter: brightness(0.9);
+}
+
+/* 확정(☑) 및 취소(❌) 버튼 스타일 커스텀 */
+.seat-confirm-btn, .seat-delete-btn {
+  background: none;
+  border: none;
+  font-size: 16px; /* 이모지/특수문자 크기를 키워 시인성 확보 */
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: #7300e6; /* 버튼의 테마색을 보라색으로 포인트 주기 */
+  transition: transform 0.1s ease;
+}
+
+.seat-confirm-btn:hover {
+  transform: scale(1.2);
+}
+
+.seat-delete-btn:hover {
+  transform: scale(1.2);
+}
 </style>
 </head>
 <body>
@@ -210,10 +384,16 @@ th {
 
 <h1 class="title"><strong>뮤지컬 〈비더슈탄트〉</strong><br>CASTING SCHEDULE</h1>
 
-<!-- 정리된 역할별 필터 영역 시작 -->
+<!-- 정리된 역할별 필터 영역 -->
 <div class="filters-container">
   <div class="global-actions">
-    <button id="showAll">전체보기 (초기화)</button>
+    <div class="filter-counter">검색 결과: <span id="matchCount">50</span>건 / 총 <span id="totalCount">50</span>건</div>
+    <div class="backup-actions">
+      <button class="action-btn btn-secondary" onclick="exportData()">내보내기 (백업)</button>
+      <button class="action-btn btn-secondary" onclick="document.getElementById('fileInput').click()">가져오기 (복구)</button>
+      <input type="file" id="fileInput" style="display: none;" onchange="importData(event)">
+      <button id="showAll" class="action-btn">전체보기 (초기화)</button>
+    </div>
   </div>
   
   <div class="filters-grid">
@@ -280,468 +460,988 @@ th {
 </div>
 <!-- 필터 영역 끝 -->
 
+<!-- 스케줄 테이블 시작 (좌석 열 추가: 총 11개 열 구조) -->
 <table>
-<thead><tr><th>날짜</th><th>요일</th><th>시간</th><th>매그너스 볼커</th><th>아벨 루터</th><th>프레드릭 칼</th><th>하겐 악스만</th><th>재스퍼 뮬러</th><th>라인하르트 클레어</th><th>복사</th></tr></thead>
+<thead>
+  <tr>
+    <th>날짜</th>
+    <th>요일</th>
+    <th>시간</th>
+    <th>매그너스 볼커</th>
+    <th>아벨 루터</th>
+    <th>프레드릭 칼</th>
+    <th>하겐 악스만</th>
+    <th>재스퍼 뮬러</th>
+    <th>라인하르트 클레어</th>
+    <th>좌석</th>
+    <th>복사</th>
+  </tr>
+</thead>
 <tbody>
-<tr class="month-divider"><td colspan="10">7월</td></tr>
-<tr class="schedule-row"><td>7월 23일</td><td>목</td><td>19:30</td>
-<td><span class="actor role-magnus first-show" data-actor="최석진">최석진</span></td>
-<td><span class="actor role-abel first-show" data-actor="박정원">박정원</span></td>
-<td><span class="actor role-fred first-show" data-actor="김도현">김도현</span></td>
-<td><span class="actor role-hagen first-show" data-actor="조모세">조모세</span></td>
-<td><span class="actor role-jasper first-show" data-actor="김태환">김태환</span></td>
-<td><span class="actor role-reinh first-show" data-actor="김보현">김보현</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="month-divider"><td colspan="11">7월</td></tr>
+  
+  <tr class="schedule-row" data-sid="20260723_1930">
+    <td>7월 23일</td><td>목</td><td>19:30</td>
+    <td><span class="actor role-magnus first-show" data-actor="최석진">최석진</span></td>
+    <td><span class="actor role-abel first-show" data-actor="박정원">박정원</span></td>
+    <td><span class="actor role-fred first-show" data-actor="김도현">김도현</span></td>
+    <td><span class="actor role-hagen first-show" data-actor="조모세">조모세</span></td>
+    <td><span class="actor role-jasper first-show" data-actor="김태환">김태환</span></td>
+    <td><span class="actor role-reinh first-show" data-actor="김보현">김보현</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>7월 24일</td><td>금</td><td>19:30</td>
-<td><span class="actor role-magnus first-show" data-actor="한상훈">한상훈</span></td>
-<td><span class="actor role-abel first-show" data-actor="이한솔">이한솔</span></td>
-<td><span class="actor role-fred first-show" data-actor="김방언">김방언</span></td>
-<td><span class="actor role-hagen first-show" data-actor="김지웅">김지웅</span></td>
-<td><span class="actor role-jasper first-show" data-actor="최기정">최기정</span></td>
-<td><span class="actor role-reinh first-show" data-actor="이형훈">이형훈</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+<tr class="schedule-row" data-sid="20260724_1930">
+    <td>7월 24일</td><td>금</td><td>19:30</td>
+    <td><span class="actor role-magnus first-show" data-actor="한상훈">한상훈</span></td>
+    <td><span class="actor role-abel first-show" data-actor="이한솔">이한솔</span></td>
+    <td><span class="actor role-fred first-show" data-actor="김방언">김방언</span></td>
+    <td><span class="actor role-hagen first-show" data-actor="김지웅">김지웅</span></td>
+    <td><span class="actor role-jasper first-show" data-actor="최기정">최기정</span></td>
+    <td><span class="actor role-reinh first-show" data-actor="이형훈">이형훈</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>7월 25일</td><td>토</td><td>14:00</td>
-<td><span class="actor role-magnus first-show" data-actor="황순종">황순종</span></td>
-<td><span class="actor role-abel first-show" data-actor="강병훈">강병훈</span></td>
-<td><span class="actor role-fred first-show" data-actor="김준식">김준식</span></td>
-<td><span class="actor role-hagen first-show" data-actor="황건우">황건우</span></td>
-<td><span class="actor role-jasper first-show" data-actor="김도민">김도민</span></td>
-<td><span class="actor role-reinh first-show" data-actor="고철순">고철순</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260725_1400">
+    <td>7월 25일</td><td>토</td><td>14:00</td>
+    <td><span class="actor role-magnus first-show" data-actor="황순종">황순종</span></td>
+    <td><span class="actor role-abel first-show" data-actor="강병훈">강병훈</span></td>
+    <td><span class="actor role-fred first-show" data-actor="김준식">김준식</span></td>
+    <td><span class="actor role-hagen first-show" data-actor="황건우">황건우</span></td>
+    <td><span class="actor role-jasper first-show" data-actor="김도민">김도민</span></td>
+    <td><span class="actor role-reinh first-show" data-actor="고철순">고철순</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>7월 25일</td><td>토</td><td>18:30</td>
-<td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
-<td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
-<td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
-<td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
-<td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
-<td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+<tr class="schedule-row" data-sid="20260725_1830">
+    <td>7월 25일</td><td>토</td><td>18:30</td>
+    <td><span class="actor role-magnus first-show" data-actor="최석진">최석진</span></td>
+    <td><span class="actor role-abel first-show" data-actor="박정원">박정원</span></td>
+    <td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
+    <td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
+    <td><span class="actor role-jasper first-show" data-actor="김태환">김태환</span></td>
+    <td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>7월 26일</td><td>일</td><td>14:00</td>
-<td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
-<td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
-<td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
-<td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
-<td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
-<td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260726_1400">
+    <td>7월 26일</td><td>일</td><td>14:00</td>
+    <td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
+    <td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
+    <td><span class="actor role-fred first-show" data-actor="김도현">김도현</span></td>
+    <td><span class="actor role-hagen first-show" data-actor="조모세">조모세</span></td>
+    <td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
+    <td><span class="actor role-reinh first-show" data-actor="김보현">김보현</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>7월 28일</td><td>화</td><td>19:30</td>
-<td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
-<td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
-<td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
-<td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
-<td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
-<td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260728_1930">
+    <td>7월 28일</td><td>화</td><td>19:30</td>
+    <td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
+    <td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
+    <td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
+    <td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
+    <td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
+    <td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>7월 29일</td><td>수</td><td>15:00</td>
-<td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
-<td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
-<td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
-<td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
-<td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
-<td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260729_1500">
+    <td>7월 29일</td><td>수</td><td>15:00</td>
+    <td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
+    <td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
+    <td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
+    <td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
+    <td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
+    <td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>7월 29일</td><td>수</td><td>19:30</td>
-<td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
-<td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
-<td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
-<td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
-<td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
-<td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260729_1930">
+    <td>7월 29일</td><td>수</td><td>19:30</td>
+    <td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
+    <td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
+    <td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
+    <td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
+    <td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
+    <td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>7월 30일</td><td>목</td><td>19:30</td>
-<td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
-<td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
-<td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
-<td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
-<td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
-<td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260730_1930">
+    <td>7월 30일</td><td>목</td><td>19:30</td>
+    <td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
+    <td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
+    <td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
+    <td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
+    <td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
+    <td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>7월 31일</td><td>금</td><td>19:30</td>
-<td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
-<td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
-<td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
-<td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
-<td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
-<td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="month-divider"><td colspan="10">8월</td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260731_1930">
+    <td>7월 31일</td><td>금</td><td>19:30</td>
+    <td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
+    <td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
+    <td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
+    <td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
+    <td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
+    <td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 1일</td><td>토</td><td>14:00</td>
-<td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
-<td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
-<td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
-<td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
-<td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
-<td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="month-divider"><td colspan="11">8월</td></tr>
 
-<td>8월 1일</td><td>토</td><td>18:30</td>
-<td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
-<td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
-<td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
-<td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
-<td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
-<td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260801_1400">
+    <td>8월 1일</td><td>토</td><td>14:00</td>
+    <td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
+    <td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
+    <td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
+    <td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
+    <td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
+    <td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 2일</td><td>일</td><td>14:00</td>
-<td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
-<td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
-<td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
-<td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
-<td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
-<td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260801_1830">
+    <td>8월 1일</td><td>토</td><td>18:30</td>
+    <td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
+    <td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
+    <td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
+    <td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
+    <td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
+    <td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 2일</td><td>일</td><td>18:30</td>
-<td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
-<td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
-<td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
-<td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
-<td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
-<td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260802_1400">
+    <td>8월 2일</td><td>일</td><td>14:00</td>
+    <td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
+    <td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
+    <td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
+    <td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
+    <td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
+    <td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 4일</td><td>화</td><td>19:30</td>
-<td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
-<td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
-<td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
-<td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
-<td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
-<td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260802_1830">
+    <td>8월 2일</td><td>일</td><td>18:30</td>
+    <td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
+    <td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
+    <td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
+    <td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
+    <td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
+    <td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 5일</td><td>수</td><td>15:00</td>
-<td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
-<td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
-<td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
-<td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
-<td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
-<td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260804_1930">
+    <td>8월 4일</td><td>화</td><td>19:30</td>
+    <td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
+    <td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
+    <td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
+    <td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
+    <td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
+    <td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 5일</td><td>수</td><td>19:30</td>
-<td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
-<td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
-<td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
-<td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
-<td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
-<td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260805_1500">
+    <td>8월 5일</td><td>수</td><td>15:00</td>
+    <td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
+    <td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
+    <td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
+    <td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
+    <td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
+    <td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 6일</td><td>목</td><td>19:30</td>
-<td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
-<td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
-<td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
-<td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
-<td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
-<td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260805_1930">
+    <td>8월 5일</td><td>수</td><td>19:30</td>
+    <td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
+    <td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
+    <td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
+    <td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
+    <td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
+    <td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 7일</td><td>금</td><td>19:30</td>
-<td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
-<td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
-<td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
-<td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
-<td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
-<td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260806_1930">
+    <td>8월 6일</td><td>목</td><td>19:30</td>
+    <td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
+    <td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
+    <td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
+    <td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
+    <td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
+    <td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 8일</td><td>토</td><td>14:00</td>
-<td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
-<td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
-<td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
-<td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
-<td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
-<td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260807_1930">
+    <td>8월 7일</td><td>금</td><td>19:30</td>
+    <td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
+    <td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
+    <td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
+    <td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
+    <td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
+    <td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 8일</td><td>토</td><td>18:30</td>
-<td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
-<td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
-<td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
-<td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
-<td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
-<td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260808_1400">
+    <td>8월 8일</td><td>토</td><td>14:00</td>
+    <td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
+    <td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
+    <td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
+    <td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
+    <td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
+    <td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 9일</td><td>일</td><td>14:00</td>
-<td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
-<td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
-<td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
-<td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
-<td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
-<td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260808_1830">
+    <td>8월 8일</td><td>토</td><td>18:30</td>
+    <td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
+    <td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
+    <td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
+    <td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
+    <td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
+    <td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 11일</td><td>화</td><td>19:30</td>
-<td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
-<td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
-<td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
-<td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
-<td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
-<td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260809_1400">
+    <td>8월 9일</td><td>일</td><td>14:00</td>
+    <td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
+    <td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
+    <td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
+    <td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
+    <td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
+    <td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 12일</td><td>수</td><td>15:00</td>
-<td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
-<td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
-<td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
-<td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
-<td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
-<td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260811_1930">
+    <td>8월 11일</td><td>화</td><td>19:30</td>
+    <td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
+    <td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
+    <td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
+    <td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
+    <td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
+    <td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 12일</td><td>수</td><td>19:30</td>
-<td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
-<td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
-<td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
-<td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
-<td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
-<td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260812_1500">
+    <td>8월 12일</td><td>수</td><td>15:00</td>
+    <td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
+    <td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
+    <td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
+    <td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
+    <td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
+    <td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 13일</td><td>목</td><td>19:30</td>
-<td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
-<td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
-<td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
-<td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
-<td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
-<td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260812_1930">
+    <td>8월 12일</td><td>수</td><td>19:30</td>
+    <td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
+    <td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
+    <td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
+    <td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
+    <td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
+    <td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 14일</td><td>금</td><td>15:00</td>
-<td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
-<td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
-<td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
-<td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
-<td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
-<td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260813_1930">
+    <td>8월 13일</td><td>목</td><td>19:30</td>
+    <td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
+    <td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
+    <td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
+    <td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
+    <td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
+    <td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 14일</td><td>금</td><td>19:30</td>
-<td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
-<td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
-<td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
-<td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
-<td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
-<td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260814_1500">
+    <td>8월 14일</td><td>금</td><td>15:00</td>
+    <td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
+    <td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
+    <td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
+    <td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
+    <td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
+    <td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 15일</td><td>토</td><td>14:00</td>
-<td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
-<td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
-<td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
-<td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
-<td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
-<td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260814_1930">
+    <td>8월 14일</td><td>금</td><td>19:30</td>
+    <td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
+    <td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
+    <td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
+    <td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
+    <td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
+    <td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 15일</td><td>토</td><td>18:30</td>
-<td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
-<td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
-<td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
-<td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
-<td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
-<td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260815_1400">
+    <td>8월 15일</td><td>토</td><td>14:00</td>
+    <td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
+    <td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
+    <td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
+    <td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
+    <td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
+    <td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 16일</td><td>일</td><td>14:00</td>
-<td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
-<td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
-<td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
-<td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
-<td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
-<td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260815_1830">
+    <td>8월 15일</td><td>토</td><td>18:30</td>
+    <td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
+    <td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
+    <td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
+    <td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
+    <td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
+    <td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 16일</td><td>일</td><td>18:30</td>
-<td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
-<td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
-<td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
-<td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
-<td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
-<td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260816_1400">
+    <td>8월 16일</td><td>일</td><td>14:00</td>
+    <td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
+    <td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
+    <td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
+    <td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
+    <td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
+    <td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 18일</td><td>화</td><td>19:30</td>
-<td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
-<td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
-<td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
-<td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
-<td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
-<td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260816_1830">
+    <td>8월 16일</td><td>일</td><td>18:30</td>
+    <td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
+    <td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
+    <td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
+    <td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
+    <td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
+    <td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 19일</td><td>수</td><td>15:00</td>
-<td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
-<td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
-<td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
-<td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
-<td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
-<td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260818_1930">
+    <td>8월 18일</td><td>화</td><td>19:30</td>
+    <td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
+    <td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
+    <td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
+    <td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
+    <td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
+    <td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 19일</td><td>수</td><td>19:30</td>
-<td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
-<td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
-<td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
-<td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
-<td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
-<td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260819_1500">
+    <td>8월 19일</td><td>수</td><td>15:00</td>
+    <td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
+    <td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
+    <td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
+    <td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
+    <td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
+    <td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 20일</td><td>목</td><td>19:30</td>
-<td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
-<td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
-<td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
-<td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
-<td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
-<td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260819_1930">
+    <td>8월 19일</td><td>수</td><td>19:30</td>
+    <td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
+    <td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
+    <td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
+    <td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
+    <td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
+    <td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 21일</td><td>금</td><td>19:30</td>
-<td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
-<td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
-<td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
-<td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
-<td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
-<td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260820_1930">
+    <td>8월 20일</td><td>목</td><td>19:30</td>
+    <td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
+    <td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
+    <td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
+    <td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
+    <td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
+    <td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 22일</td><td>토</td><td>14:00</td>
-<td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
-<td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
-<td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
-<td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
-<td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
-<td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260821_1930">
+    <td>8월 21일</td><td>금</td><td>19:30</td>
+    <td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
+    <td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
+    <td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
+    <td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
+    <td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
+    <td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 22일</td><td>토</td><td>18:30</td>
-<td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
-<td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
-<td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
-<td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
-<td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
-<td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260822_1400">
+    <td>8월 22일</td><td>토</td><td>14:00</td>
+    <td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
+    <td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
+    <td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
+    <td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
+    <td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
+    <td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 23일</td><td>일</td><td>14:00</td>
-<td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
-<td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
-<td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
-<td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
-<td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
-<td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260822_1830">
+    <td>8월 22일</td><td>토</td><td>18:30</td>
+    <td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
+    <td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
+    <td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
+    <td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
+    <td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
+    <td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 23일</td><td>일</td><td>18:30</td>
-<td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
-<td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
-<td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
-<td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
-<td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
-<td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260823_1400">
+    <td>8월 23일</td><td>일</td><td>14:00</td>
+    <td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
+    <td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
+    <td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
+    <td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
+    <td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
+    <td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 25일</td><td>화</td><td>19:30</td>
-<td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
-<td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
-<td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
-<td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
-<td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
-<td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260823_1830">
+    <td>8월 23일</td><td>일</td><td>18:30</td>
+    <td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
+    <td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
+    <td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
+    <td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
+    <td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
+    <td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 26일</td><td>수</td><td>15:00</td>
-<td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
-<td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
-<td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
-<td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
-<td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
-<td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260825_1930">
+    <td>8월 25일</td><td>화</td><td>19:30</td>
+    <td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
+    <td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
+    <td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
+    <td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
+    <td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
+    <td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 26일</td><td>수</td><td>19:30</td>
-<td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
-<td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
-<td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
-<td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
-<td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
-<td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260826_1500">
+    <td>8월 26일</td><td>수</td><td>15:00</td>
+    <td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
+    <td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
+    <td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
+    <td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
+    <td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
+    <td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 27일</td><td>목</td><td>19:30</td>
-<td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
-<td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
-<td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
-<td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
-<td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
-<td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260826_1930">
+    <td>8월 26일</td><td>수</td><td>19:30</td>
+    <td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
+    <td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
+    <td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
+    <td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
+    <td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
+    <td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 28일</td><td>금</td><td>19:30</td>
-<td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
-<td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
-<td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
-<td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
-<td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
-<td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260827_1930">
+    <td>8월 27일</td><td>목</td><td>19:30</td>
+    <td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
+    <td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
+    <td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
+    <td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
+    <td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
+    <td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 29일</td><td>토</td><td>14:00</td>
-<td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
-<td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
-<td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
-<td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
-<td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
-<td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260828_1930">
+    <td>8월 28일</td><td>금</td><td>19:30</td>
+    <td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
+    <td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
+    <td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
+    <td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
+    <td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
+    <td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 28일</td><td>토</td><td>18:30</td>
-<td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
-<td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
-<td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
-<td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
-<td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
-<td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260829_1400">
+    <td>8월 29일</td><td>토</td><td>14:00</td>
+    <td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
+    <td><span class="actor role-abel" data-actor="강병훈">강병훈</span></td>
+    <td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
+    <td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
+    <td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
+    <td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 30일</td><td>일</td><td>14:00</td>
-<td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
-<td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
-<td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
-<td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
-<td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
-<td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr><tr class="schedule-row">
+  <tr class="schedule-row" data-sid="20260829_1830">
+    <td>8월 29일</td><td>토</td><td>18:30</td>
+    <td><span class="actor role-magnus" data-actor="최석진">최석진</span></td>
+    <td><span class="actor role-abel" data-actor="이한솔">이한솔</span></td>
+    <td><span class="actor role-fred" data-actor="김준식">김준식</span></td>
+    <td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
+    <td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
+    <td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
 
-<td>8월 30일</td><td>일</td><td>18:30</td>
-<td><span class="actor role-magnus" data-actor="한상훈">한상훈</span></td>
-<td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
-<td><span class="actor role-fred" data-actor="김방언">김방언</span></td>
-<td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
-<td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
-<td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
-<td><button class="copy-btn">⚔️</button></td></tr>
-</tbody></table>
+  <tr class="schedule-row" data-sid="20260830_1400">
+    <td>8월 30일</td><td>일</td><td>14:00</td>
+    <td><span class="actor role-magnus" data-actor="황순종">황순종</span></td>
+    <td><span class="actor role-abel" data-actor="박정원">박정원</span></td>
+    <td><span class="actor role-fred" data-actor="김도현">김도현</span></td>
+    <td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
+    <td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
+    <td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
+    <td><button class="copy-btn">⚔️</button></td>
+  </tr>
+</tbody>
+</table>
 
+<!-- ==========================================
+      하단 좌석표 영역 시작 (전달된 도면 구조 완벽 이식)
+      ========================================== -->
+<div class="seatmap-container">
+  <div class="stage-title">STAGE</div>
+  
+  <!-- 객석 1층 -->
+  <div class="floor-section">
+    <div class="floor-title">[객석 1층]</div>
+    <div class="seat-grid" id="floor1">
+      <!-- JS가 여기에 이미지 도면과 같은 좌석들을 동적으로 생성합니다. -->
+    </div>
+  </div>
+  
+  <!-- 객석 2층 -->
+  <div class="floor-section">
+    <div class="floor-title">[객석 2층]</div>
+    <div class="seat-grid" id="floor2">
+      <!-- JS가 여기에 2층 좌석을 동적으로 생성합니다. -->
+    </div>
+  </div>
 </div>
-</body>
-</html>
+
 </div>
 
 <script>
-// 활성화된 필터들을 기준으로 and(교집합) 필터링하는 함수
+// ==========================================
+// 1. 좌석 도면 데이터 구성 및 생성 엔진 (완결본)
+// ==========================================
+
+const floor1Config = [
+  { row: 'A', pattern: ['bg-grey', 'bg-grey', 'bg-blue', 'bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue', 'gap', 'bg-blue','bg-blue','bg-grey','bg-grey'] },
+  { row: 'B', pattern: ['bg-blue', 'bg-blue', 'bg-blue', 'bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue', 'gap', 'bg-blue','bg-blue','bg-grey','bg-grey'] },
+  { row: 'C', pattern: ['bg-blue', 'bg-blue', 'bg-blue', 'bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue', 'gap', 'bg-blue','bg-blue','bg-grey','bg-grey'] },
+  { row: 'D', pattern: ['bg-blue', 'bg-blue', 'bg-blue', 'bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue', 'gap', 'bg-blue','bg-blue','bg-grey'] },
+  { row: 'E', pattern: ['bg-green','bg-green','bg-green', 'gap', 'gap', 'gap', 'gap', 'gap', 'gap', 'gap', 'gap', 'gap', 'gap', 'gap', 'gap', 'gap', 'gap'] },
+  { row: 'F', pattern: ['gap', 'gap', 'gap', 'gap', 'gap', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue'] },
+  { row: 'G', pattern: ['gap', 'gap', 'gap', 'bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue'] },
+  { row: 'H', pattern: ['gap', 'gap', 'gap', 'bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue'] },
+  { row: 'I', pattern: ['gap', 'gap', 'gap', 'bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue'] },
+  { row: 'J', pattern: ['bg-blue', 'bg-blue', 'gap', 'bg-blue', 'bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue'] },
+  { row: 'K', pattern: ['bg-blue', 'bg-blue', 'gap', 'bg-blue', 'bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue'] },
+  { row: 'L', pattern: ['bg-blue', 'bg-blue', 'gap', 'bg-blue', 'bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue'] },
+  { row: 'M', pattern: ['bg-blue', 'bg-blue', 'gap', 'bg-blue', 'bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue'] },
+  { row: 'N', pattern: ['bg-blue', 'bg-blue', 'gap', 'bg-blue', 'bg-blue', 'bg-blue','bg-blue','bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue', 'gap', 'bg-blue','bg-blue'] }
+];
+
+const floor2Config = [
+  { row: 'B', pattern: ['bg-orange','bg-orange','bg-orange','bg-orange','bg-orange', 'gap', 'bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange', 'gap', 'bg-orange','bg-orange','bg-orange','bg-orange'] },
+  { row: 'C', pattern: ['gap', 'bg-orange','bg-orange','bg-orange','bg-orange', 'gap', 'bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange', 'gap', 'bg-orange','bg-orange','bg-orange','bg-grey'] },
+  { row: 'D', pattern: ['gap', 'bg-orange','bg-orange','bg-orange','bg-orange', 'gap', 'bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange', 'gap', 'bg-orange','bg-orange','bg-orange','bg-grey'] },
+  { row: 'E', pattern: ['gap', 'bg-orange','bg-orange','bg-orange','bg-orange', 'gap', 'bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange', 'gap', 'bg-orange','bg-orange','bg-orange','bg-grey'] },
+  { row: 'F', pattern: ['gap', 'bg-orange','bg-orange','bg-orange','bg-orange', 'gap', 'bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange', 'gap', 'bg-orange','bg-orange','bg-orange','bg-grey'] },
+  { row: 'G', pattern: ['gap', 'bg-orange','bg-orange','bg-orange','bg-orange','bg-orange', 'gap', 'bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange', 'gap', 'bg-orange','bg-orange'] }
+];
+
+function renderSeats(containerId, config, floorLabel) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  container.innerHTML = ''; 
+  
+  config.forEach(rowData => {
+    const rowDiv = document.createElement('div');
+    rowDiv.className = 'seat-row';
+    
+    const label = document.createElement('div');
+    label.className = 'row-label';
+    label.textContent = rowData.row;
+    rowDiv.appendChild(label);
+    
+    let seatNum = 1;
+    
+    rowData.pattern.forEach(type => {
+      if (type === 'gap') {
+        const gap = document.createElement('div');
+        gap.className = 'seat-gap';
+        rowDiv.appendChild(gap);
+      } else {
+        const seat = document.createElement('div');
+        seat.className = `seat-node ${type}`;
+        seat.textContent = seatNum;
+        
+        // 고유 매칭 ID (예: "1층 A열 3번")
+        seat.dataset.seatId = `${floorLabel} ${rowData.row}열 ${seatNum}번`;
+        rowDiv.appendChild(seat);
+        seatNum++;
+      }
+    });
+    container.appendChild(rowDiv);
+  });
+}
+
+
+const COLORS = [
+  { bg: '#f5f0ff', border: '#e1d0ff', text: '#5900b3' }, // 1회 등록 
+  { bg: '#d6b3ff', border: '#b380ff', text: '#390073' }, // 2회 등록 
+  { bg: '#a64dff', border: '#8000ff', text: '#ffffff' }, // 3회 등록 
+  { bg: '#7300e6', border: '#5900b3', text: '#ffffff' }, // 4회 등록 
+  { bg: '#390073', border: '#200040', text: '#ffffff' }  // 5회 이상 
+];
+
+// 로컬 스토리지 데이터 동기화
+var showSeats = JSON.parse(localStorage.getItem('6pm_tickets_v1') || '{}');
+var SHOW_INFO = {};
+
+function saveSeats() { 
+  localStorage.setItem('6pm_tickets_v1', JSON.stringify(showSeats)); 
+}
+
+/**
+ * 텍스트 분석 정규식 엔진 (한글 입력을 분석하여 도면용 ID 포맷 "1층 A열 3번"으로 반환합니다)
+ */
+function parseSeatText(text) {
+  if (!text) return null;
+  
+  const cleaned = text.replace(/\s+/g, '').toUpperCase(); // 공백 제거, 대문자화
+  
+  const floorMatch = cleaned.match(/([12])층/);
+  const rowMatch = cleaned.match(/([A-N])열?/);
+  const numMatch = cleaned.match(/(\d+)번?/);
+
+  if (rowMatch && numMatch) {
+    const row = rowMatch[1]; // 행 (A-N)
+    let num = numMatch[1]; // 열 번호
+    
+    // 열 문자와 중복 매칭되는 현상 방지 보정
+    const afterRowMatch = cleaned.match(new RegExp(row + '열?(\\d+)'));
+    if (afterRowMatch) {
+      num = afterRowMatch[1];
+    }
+
+    let floor = floorMatch ? floorMatch[1] : '';
+
+    // 층수 무기입 시 자동 보정 규칙
+    if (!floor) {
+      if (['A','H','I','J','K','L','M','N'].includes(row)) {
+        floor = '1';
+      } else if (['B','C','D','E','F','G'].includes(row)) {
+        // E열 혹은 2층 언급이 있을 때는 2층, 기본은 1층
+        floor = text.includes('2층') ? '2' : '1';
+      }
+    }
+
+    // "1층 A열 3번" 형태로 조립하여 반환
+    return `${floor}층 ${row}열 ${num}번`;
+  }
+  
+  return null;
+}
+
+/**
+ * 좌석표 도면 색상 실시간 업데이트
+ */
+function updateAllMaps() {
+  // 1. 도면의 모든 좌석 상태 회색으로 초기화
+  document.querySelectorAll('.seat-node').forEach(node => {
+    node.style.backgroundColor = '#e0e0e0'; 
+    node.style.borderColor = '#cccccc';     
+    node.style.color = '#666666';           
+    node.classList.remove('has-tickets');
+    node.removeAttribute('title');
+  });
+
+  // 2. 데이터 수집 및 각 행 컨트롤 배치
+  var seatCounts = {};
+  
+  document.querySelectorAll('.schedule-row').forEach(row => {
+    const sid = row.dataset.sid;
+    if (!sid) return;
+
+    const seatValue = showSeats[sid] || "";
+    const inputEl = row.querySelector('.seat-input');
+    
+    // 입력창 오른쪽에 생겨야 하는 X 버튼 등 레이아웃을 확실하게 그려줍니다.
+    renderRowControls(row, seatValue);
+
+    // 사용자가 입력한 값이 있을 때만 연동 로직 실행
+    if (seatValue.trim()) {
+      // 비활성화 설정 적용
+      if (inputEl) {
+        inputEl.disabled = true;
+      }
+
+      // 한글 텍스트 정밀 파싱 (예: "1층 A열 3" -> "1층 A열 3번")
+      const seatKey = parseSeatText(seatValue); 
+      
+      if (seatKey) {
+        seatCounts[seatKey] = (seatCounts[seatKey] || 0) + 1;
+      }
+    } else {
+      // 값이 비어있을 때는 다시 활성화
+      if (inputEl) {
+        inputEl.disabled = false;
+      }
+    }
+  });
+
+  // 3. 수집된 카운트를 바탕으로 도면 좌석에 색 입히기
+  Object.keys(seatCounts).forEach(seatKey => {
+    const count = seatCounts[seatKey];
+    
+    const targetSeat = document.querySelector(`.seat-node[data-seat-id="${seatKey}"]`) || 
+                       document.querySelector(`.seat-node[data-seat-id="${seatKey.toUpperCase()}"]`) ||
+                       document.querySelector(`.seat-node[data-seat-id="${seatKey.toLowerCase()}"]`);
+    
+    if (targetSeat) {
+      // 5단계(COLORS.length)에 맞춰 인덱스 계산 (5회 이상은 마지막 '#390073' 고정)
+      const colorIndex = Math.min(count - 1, COLORS.length - 1);
+      const style = COLORS[colorIndex];
+
+      // 정의된 예쁜 보라색 스타일 실시간 주입
+      targetSeat.style.backgroundColor = style.bg;
+      targetSeat.style.borderColor = style.border;
+      targetSeat.style.color = style.text; // 배경이 어두워지면 글자색이 흰색(#ffffff)으로 자동 변경됩니다!
+      
+      targetSeat.classList.add('has-tickets');
+      targetSeat.setAttribute('title', `확정 등록: ${count}개`);
+    }
+  });
+}
+
+/**
+ * 좌석 입력창 우측에 체크 및 X 버튼을 깨짐 없이 정밀하게 렌더링
+ */
+function renderRowControls(row, seatValue) {
+  const inputEl = row.querySelector('.seat-input');
+  if (!inputEl) return;
+
+  const parentCell = inputEl.parentElement; 
+  if (!parentCell) return;
+
+  // 테이블 셀 내부를 플렉스 컨테이너 레이아웃으로 변경하여 깨짐을 원천 방지합니다.
+  parentCell.style.display = 'flex';
+  parentCell.style.alignItems = 'center';
+  parentCell.style.gap = '6px';
+  parentCell.style.justifyContent = 'center';
+
+  // 컨트롤 그릇 찾거나 생성
+  let ctrlContainer = parentCell.querySelector('.ctrl-container');
+  if (!ctrlContainer) {
+    ctrlContainer = document.createElement('div');
+    ctrlContainer.className = 'ctrl-container';
+    ctrlContainer.style.display = 'inline-flex';
+    ctrlContainer.style.alignItems = 'center';
+    ctrlContainer.style.gap = '4px';
+    parentCell.appendChild(ctrlContainer);
+  }
+
+  ctrlContainer.innerHTML = '';
+
+  if (seatValue) {
+    // 1. 이미 저장된 값이 있는 경우 -> 삭제(❌)
+    const deleteBtn = document.createElement('button');
+    deleteBtn.className = 'seat-delete-btn';
+    deleteBtn.innerHTML = '❌';
+    deleteBtn.title = '좌석 확정 취소';
+    deleteBtn.style.cursor = 'pointer';
+    deleteBtn.style.background = 'none';
+    deleteBtn.style.border = 'none';
+    deleteBtn.style.fontSize = '14px';
+    
+    deleteBtn.onclick = function() {
+      const sid = row.dataset.sid;
+      if (sid) {
+        showSeats[sid] = ""; 
+        saveSeats();         // 스토리지 저장 완료
+        inputEl.value = "";  
+        inputEl.disabled = false; // 다시 입력가능하도록 활성화
+        updateAllMaps();     // 즉시 새로고침
+      }
+    };
+    ctrlContainer.appendChild(deleteBtn);
+  } else {
+    // 2. 비어 있는 경우 -> 확정(☑)
+    const confirmBtn = document.createElement('button');
+    confirmBtn.className = 'seat-confirm-btn';
+    confirmBtn.innerHTML = '☑';
+    confirmBtn.title = '이 좌석으로 도면 확정';
+    confirmBtn.style.cursor = 'pointer';
+    confirmBtn.style.background = 'none';
+    confirmBtn.style.border = 'none';
+    confirmBtn.style.fontSize = '18px'; // 체크가 잘 보이도록 조금 크게 지정
+    confirmBtn.style.color = '#7300e6';
+    
+    confirmBtn.onclick = function() {
+      const sid = row.dataset.sid;
+      if (sid) {
+        const val = inputEl.value.trim();
+        if (!val) {
+          alert('확정할 좌석 정보를 입력해 주세요!');
+          return;
+        }
+        
+        // 입력값 정합성 간이 검증
+        if(!parseSeatText(val)) {
+          alert('올바른 좌석 형식으로 입력해 주세요!\n(예: 1층 A열 3 또는 2층 B열 15)');
+          return;
+        }
+
+        showSeats[sid] = val; 
+        saveSeats();         // 스토리지 저장 완료
+        updateAllMaps();     // 즉시 새로고침
+      }
+    };
+    ctrlContainer.appendChild(confirmBtn);
+  }
+}
+
+/**
+ * 초기 바인딩 실행기
+ */
+function initSeatingSystem() {
+  renderSeats('floor1', floor1Config, '1층');
+  renderSeats('floor2', floor2Config, '2층');
+
+  // 스케줄 행 정보를 기반으로 쇼 정보 임시 구성
+  document.querySelectorAll('.schedule-row[data-sid]').forEach(function(r) {
+    SHOW_INFO[r.dataset.sid] = SHOW_INFO[r.dataset.sid] || {};
+  });
+
+  // 복원 및 입력 이벤트 적용
+  document.querySelectorAll('.seat-input').forEach(input => {
+    const row = input.closest('.schedule-row');
+    if (row && row.dataset.sid) {
+      const savedVal = showSeats[row.dataset.sid] || "";
+      input.value = savedVal;
+    }
+
+    // 엔터키 누르면 확정 동작
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const row = this.closest('.schedule-row');
+        const confirmBtn = row.querySelector('.seat-confirm-btn');
+        if (confirmBtn) {
+          confirmBtn.click();
+        } else {
+          // 이미 저장된 상태에서 엔터 누를 시에도 저장 유도 처리
+          const sid = row.dataset.sid;
+          if (sid) {
+            showSeats[sid] = this.value.trim();
+            saveSeats();
+            updateAllMaps();
+          }
+        }
+      }
+    });
+  });
+
+  updateAllMaps();
+}
+
+// 브라우저 렌더링 상황에 맞게 안전 실행 보장
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initSeatingSystem);
+} else {
+  initSeatingSystem();
+}
+
+
+function updateCounters() {
+  const total = document.querySelectorAll('.schedule-row').length;
+  const visible = Array.from(document.querySelectorAll('.schedule-row'))
+                       .filter(row => row.style.display !== 'none').length;
+  const matchEl = document.getElementById('matchCount');
+  const totalEl = document.getElementById('totalCount');
+  if (matchEl) matchEl.textContent = visible;
+  if (totalEl) totalEl.textContent = total;
+}
+
 function applyFilters() {
   const activeActors = Array.from(document.querySelectorAll('.actor-filter.active'))
                             .map(btn => btn.dataset.actor);
@@ -752,10 +1452,13 @@ function applyFilters() {
       return;
     }
 
-    // 선택된 모든 배우가 해당 행(row)의 텍스트에 포함되는지 검사
-    const hasAllActors = activeActors.every(actorName => row.innerText.includes(actorName));
+    const rowActors = Array.from(row.querySelectorAll('.actor')).map(span => span.dataset.actor);
+    const hasAllActors = activeActors.every(actorName => rowActors.includes(actorName));
+    
     row.style.display = hasAllActors ? '' : 'none';
   });
+  
+  updateCounters();
 }
 
 // 상단 필터 버튼 클릭 이벤트
@@ -781,15 +1484,70 @@ document.querySelectorAll('.actor').forEach(actorSpan => {
 });
 
 // 전체보기 버튼 클릭 시 필터 초기화
-document.getElementById('showAll').onclick = () => {
-  document.querySelectorAll('.actor-filter').forEach(btn => btn.classList.remove('active'));
-  document.querySelectorAll('.schedule-row').forEach(row => row.style.display = '');
-};
+const showAllBtn = document.getElementById('showAll');
+if (showAllBtn) {
+  showAllBtn.onclick = () => {
+    document.querySelectorAll('.actor-filter').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.schedule-row').forEach(row => row.style.display = '');
+    updateCounters();
+  };
+}
 
-// 클립보드 복사 버튼 기능
+// 클립보드 복사 버튼 기능 (기존 텍스트 구조로 정밀 매핑)
 document.querySelectorAll('.copy-btn').forEach(b => {
-  b.onclick = () => navigator.clipboard.writeText(b.closest('tr').innerText);
+  b.onclick = () => {
+    const row = b.closest('tr');
+    const cells = Array.from(row.querySelectorAll('td')).map((td, idx) => {
+      if (idx === 9) { // 좌석 열 위치
+        const input = td.querySelector('input');
+        return input ? input.value : '';
+      }
+      if (idx === 10) return ''; // 복사버튼 열 제외
+      return td.innerText.trim();
+    });
+    navigator.clipboard.writeText(cells.filter(v => v !== '').join('\t'));
+  };
 });
+
+// 데이터 내보내기/가져오기 함수 전역 선언
+window.exportData = exportData;
+window.importData = importData;
+
+function exportData() {
+  var blob = new Blob([JSON.stringify(showSeats, null, 2)], { type: 'application/json' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a'); a.href = url; a.download = '비더슈탄트_내좌석.json'; a.click();
+  URL.revokeObjectURL(url);
+}
+
+function importData(e) {
+  var file = e.target.files[0]; if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(ev) {
+    try {
+      var data = JSON.parse(ev.target.result);
+      Object.keys(data).forEach(function(sid) { showSeats[sid] = data[sid]; });
+      saveSeats();
+      
+      document.querySelectorAll('.schedule-row').forEach(row => {
+        const sid = row.dataset.sid;
+        const input = row.querySelector('.seat-input');
+        if (sid && input) {
+          input.value = showSeats[sid] || "";
+        }
+      });
+
+      updateAllMaps(); 
+      alert('좌석 데이터를 성공적으로 불러왔습니다! ⚔️');
+    } catch (err) { 
+      alert('올바르지 않은 파일 형식입니다.'); 
+    }
+  };
+  reader.readAsText(file); e.target.value = '';
+}
+
+// 초기화 시 카운터 업데이트
+updateCounters();
 </script>
 </body>
 </html>
