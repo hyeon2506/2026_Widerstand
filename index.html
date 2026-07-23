@@ -1038,6 +1038,7 @@ th {
 </div>
 
 <script>
+// 1. 좌석 도면 구성 데이터 (1층, 2층)
 const floor1Config = [
   { row: 'A', pattern: ['bg-grey', 'bg-grey', 'bg-blue', 'bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue', 'gap', 'bg-blue','bg-blue','bg-grey','bg-grey'] },
   { row: 'B', pattern: ['bg-blue', 'bg-blue', 'bg-blue', 'bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue', 'gap', 'bg-blue','bg-blue','bg-grey','bg-grey'] },
@@ -1064,6 +1065,23 @@ const floor2Config = [
   { row: 'G', pattern: ['gap', 'bg-orange','bg-orange','bg-orange','bg-orange','bg-orange', 'gap', 'bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange', 'gap', 'bg-orange','bg-orange'] }
 ];
 
+// 2. 테마 색상 설정
+const COLORS = [
+  { bg: '#f5f0ff', border: '#e1d0ff', text: '#5900b3' },
+  { bg: '#d6b3ff', border: '#b380ff', text: '#390073' },
+  { bg: '#a64dff', border: '#8000ff', text: '#ffffff' },
+  { bg: '#7300e6', border: '#5900b3', text: '#ffffff' },
+  { bg: '#390073', border: '#200040', text: '#ffffff' } 
+];
+
+// 3. 로컬스토리지 연동
+var showSeats = JSON.parse(localStorage.getItem('widerstand_tickets_v1') || '{}');
+
+function saveSeats() { 
+  localStorage.setItem('widerstand_tickets_v1', JSON.stringify(showSeats)); 
+}
+
+// 4. 좌석 그리드 생성 함수
 function renderSeats(containerId, config, floorLabel) {
   const container = document.getElementById(containerId);
   if (!container) return;
@@ -1098,21 +1116,7 @@ function renderSeats(containerId, config, floorLabel) {
   });
 }
 
-const COLORS = [
-  { bg: '#f5f0ff', border: '#e1d0ff', text: '#5900b3' },
-  { bg: '#d6b3ff', border: '#b380ff', text: '#390073' },
-  { bg: '#a64dff', border: '#8000ff', text: '#ffffff' },
-  { bg: '#7300e6', border: '#5900b3', text: '#ffffff' },
-  { bg: '#390073', border: '#200040', text: '#ffffff' } 
-];
-
-var showSeats = JSON.parse(localStorage.getItem('widerstand_tickets_v1') || '{}');
-
-function saveSeats() { 
-  localStorage.setItem('widerstand_tickets_v1', JSON.stringify(showSeats)); 
-}
-
-// 개선된 한글 입력 분석 함수 (정규식 고도화)
+// 5. 한글 입력 파싱 함수
 function parseSeatText(text) {
   if (!text) return null;
   
@@ -1126,16 +1130,13 @@ function parseSeatText(text) {
     const row = rowMatch[1];
     let num = numMatch[1];
     
-    // 열 뒤에 등장하는 실제 좌석 번호 정교 추출
     const afterRowMatch = cleaned.match(new RegExp(row + '(?:열)?(\\d+)'));
     if (afterRowMatch) {
       num = afterRowMatch[1];
     }
 
     let floor = floorMatch ? floorMatch[1] : '';
-
     if (!floor) {
-      // 2층 문구가 있으면 2층, 기본은 1층 처리
       floor = text.includes('2층') ? '2' : '1';
     }
 
@@ -1145,6 +1146,7 @@ function parseSeatText(text) {
   return null;
 }
 
+// 6. 좌석도 상태 업데이트 함수
 function updateAllMaps() {
   document.querySelectorAll('.seat-node').forEach(node => {
     node.style.backgroundColor = '#e0e0e0'; 
@@ -1195,6 +1197,7 @@ function updateAllMaps() {
   });
 }
 
+// 7. 행별 [확정 / 삭제] 버튼 제어 함수
 function renderRowControls(row, seatValue) {
   const inputEl = row.querySelector('.seat-input');
   if (!inputEl) return;
@@ -1253,7 +1256,7 @@ function renderRowControls(row, seatValue) {
           return;
         }
         
-        if(!parseSeatText(val)) {
+        if (!parseSeatText(val)) {
           alert('올바른 좌석 형식으로 입력해 주세요!\n(예: 1층 A열 3 또는 2층 B열 15)');
           return;
         }
@@ -1267,6 +1270,75 @@ function renderRowControls(row, seatValue) {
   }
 }
 
+// 8. 필터링 및 카운팅 함수
+function updateCounters() {
+  const total = document.querySelectorAll('.schedule-row').length;
+  const visible = Array.from(document.querySelectorAll('.schedule-row'))
+                       .filter(row => row.style.display !== 'none').length;
+  const matchEl = document.getElementById('matchCount');
+  const totalEl = document.getElementById('totalCount');
+  if (matchEl) matchEl.textContent = visible;
+  if (totalEl) totalEl.textContent = total;
+}
+
+function applyFilters() {
+  const activeActors = Array.from(document.querySelectorAll('.actor-filter.active'))
+                             .map(btn => btn.dataset.actor);
+
+  document.querySelectorAll('.schedule-row').forEach(row => {
+    if (activeActors.length === 0) {
+      row.style.display = '';
+      return;
+    }
+
+    const rowActors = Array.from(row.querySelectorAll('.actor')).map(span => span.dataset.actor);
+    const hasAllActors = activeActors.every(actorName => rowActors.includes(actorName));
+    
+    row.style.display = hasAllActors ? '' : 'none';
+  });
+  
+  updateCounters();
+}
+
+// 9. 데이터 내보내기/불러오기 (전역 등록)
+window.exportData = function() {
+  var blob = new Blob([JSON.stringify(showSeats, null, 2)], { type: 'application/json' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a'); 
+  a.href = url; 
+  a.download = '비더슈탄트_내좌석.json'; 
+  a.click();
+  URL.revokeObjectURL(url);
+};
+
+window.importData = function(e) {
+  var file = e.target.files[0]; if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(ev) {
+    try {
+      var data = JSON.parse(ev.target.result);
+      Object.keys(data).forEach(function(sid) { showSeats[sid] = data[sid]; });
+      saveSeats();
+      
+      document.querySelectorAll('.schedule-row').forEach(row => {
+        const sid = row.dataset.sid;
+        const input = row.querySelector('.seat-input');
+        if (sid && input) {
+          input.value = showSeats[sid] || "";
+        }
+      });
+
+      updateAllMaps(); 
+      alert('좌석 데이터를 성공적으로 불러왔습니다! ⚔️');
+    } catch (err) { 
+      alert('올바르지 않은 파일 형식입니다.'); 
+    }
+  };
+  reader.readAsText(file); 
+  e.target.value = '';
+};
+
+// 10. 초기화 실행
 function initSeatingSystem() {
   renderSeats('floor1', floor1Config, '1층');
   renderSeats('floor2', floor2Config, '2층');
@@ -1297,7 +1369,52 @@ function initSeatingSystem() {
     });
   });
 
+  // 이벤트 바인딩
+  document.querySelectorAll('.actor-filter').forEach(button => {
+    button.onclick = () => {
+      button.classList.toggle('active');
+      applyFilters();
+    };
+  });
+
+  document.querySelectorAll('.actor').forEach(actorSpan => {
+    actorSpan.onclick = () => {
+      const actorName = actorSpan.dataset.actor;
+      const targetFilter = Array.from(document.querySelectorAll('.actor-filter'))
+                                  .find(btn => btn.dataset.actor === actorName);
+      if (targetFilter) {
+        targetFilter.classList.toggle('active');
+        applyFilters();
+      }
+    };
+  });
+
+  const showAllBtn = document.getElementById('showAll');
+  if (showAllBtn) {
+    showAllBtn.onclick = () => {
+      document.querySelectorAll('.actor-filter').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.schedule-row').forEach(row => row.style.display = '');
+      updateCounters();
+    };
+  }
+
+  document.querySelectorAll('.copy-btn').forEach(b => {
+    b.onclick = () => {
+      const row = b.closest('tr');
+      const cells = Array.from(row.querySelectorAll('td')).map((td, idx) => {
+        if (idx === 9) {
+          const input = td.querySelector('input');
+          return input ? input.value : '';
+        }
+        if (idx === 10) return '';
+        return td.innerText.trim();
+      });
+      navigator.clipboard.writeText(cells.filter(v => v !== '').join('\t'));
+    };
+  });
+
   updateAllMaps();
+  updateCounters();
 }
 
 if (document.readyState === 'loading') {
@@ -1305,117 +1422,6 @@ if (document.readyState === 'loading') {
 } else {
   initSeatingSystem();
 }
-
-function updateCounters() {
-  const total = document.querySelectorAll('.schedule-row').length;
-  const visible = Array.from(document.querySelectorAll('.schedule-row'))
-                       .filter(row => row.style.display !== 'none').length;
-  const matchEl = document.getElementById('matchCount');
-  const totalEl = document.getElementById('totalCount');
-  if (matchEl) matchEl.textContent = visible;
-  if (totalEl) totalEl.textContent = total;
-}
-
-function applyFilters() {
-  const activeActors = Array.from(document.querySelectorAll('.actor-filter.active'))
-                             .map(btn => btn.dataset.actor);
-
-  document.querySelectorAll('.schedule-row').forEach(row => {
-    if (activeActors.length === 0) {
-      row.style.display = '';
-      return;
-    }
-
-    const rowActors = Array.from(row.querySelectorAll('.actor')).map(span => span.dataset.actor);
-    const hasAllActors = activeActors.every(actorName => rowActors.includes(actorName));
-    
-    row.style.display = hasAllActors ? '' : 'none';
-  });
-  
-  updateCounters();
-}
-
-document.querySelectorAll('.actor-filter').forEach(button => {
-  button.onclick = () => {
-    button.classList.toggle('active');
-    applyFilters();
-  };
-});
-
-document.querySelectorAll('.actor').forEach(actorSpan => {
-  actorSpan.onclick = () => {
-    const actorName = actorSpan.dataset.actor;
-    const targetFilter = Array.from(document.querySelectorAll('.actor-filter'))
-                              .find(btn => btn.dataset.actor === actorName);
-    
-    if (targetFilter) {
-      targetFilter.classList.toggle('active');
-      applyFilters();
-    }
-  };
-});
-
-const showAllBtn = document.getElementById('showAll');
-if (showAllBtn) {
-  showAllBtn.onclick = () => {
-    document.querySelectorAll('.actor-filter').forEach(btn => btn.classList.remove('active'));
-    document.querySelectorAll('.schedule-row').forEach(row => row.style.display = '');
-    updateCounters();
-  };
-}
-
-document.querySelectorAll('.copy-btn').forEach(b => {
-  b.onclick = () => {
-    const row = b.closest('tr');
-    const cells = Array.from(row.querySelectorAll('td')).map((td, idx) => {
-      if (idx === 9) {
-        const input = td.querySelector('input');
-        return input ? input.value : '';
-      }
-      if (idx === 10) return '';
-      return td.innerText.trim();
-    });
-    navigator.clipboard.writeText(cells.filter(v => v !== '').join('\t'));
-  };
-});
-
-window.exportData = exportData;
-window.importData = importData;
-
-function exportData() {
-  var blob = new Blob([JSON.stringify(showSeats, null, 2)], { type: 'application/json' });
-  var url = URL.createObjectURL(blob);
-  var a = document.createElement('a'); a.href = url; a.download = '비더슈탄트_내좌석.json'; a.click();
-  URL.revokeObjectURL(url);
-}
-
-function importData(e) {
-  var file = e.target.files[0]; if (!file) return;
-  var reader = new FileReader();
-  reader.onload = function(ev) {
-    try {
-      var data = JSON.parse(ev.target.result);
-      Object.keys(data).forEach(function(sid) { showSeats[sid] = data[sid]; });
-      saveSeats();
-      
-      document.querySelectorAll('.schedule-row').forEach(row => {
-        const sid = row.dataset.sid;
-        const input = row.querySelector('.seat-input');
-        if (sid && input) {
-          input.value = showSeats[sid] || "";
-        }
-      });
-
-      updateAllMaps(); 
-      alert('좌석 데이터를 성공적으로 불러왔습니다! ⚔️');
-    } catch (err) { 
-      alert('올바르지 않은 파일 형식입니다.'); 
-    }
-  };
-  reader.readAsText(file); e.target.value = '';
-}
-
-updateCounters();
 </script>
 </body>
 </html>
