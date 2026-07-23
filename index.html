@@ -189,17 +189,8 @@ th {
   line-height: 1.1;
 } 
 
-.seat-cell-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  padding: 0 2px;
-}
-
 .seat-input {
-  width: 100%;
-  flex: 1;
+  width: 90%;
   padding: 4px;
   font-size: 11px;
   border: 1px solid #ccc;
@@ -324,20 +315,11 @@ th {
 .seat-confirm-btn, .seat-delete-btn {
   background: none;
   border: none;
-  font-size: 14px;
-  padding: 2px 4px;
+  font-size: 16px;
+  padding: 2px 6px;
   border-radius: 4px;
-  cursor: pointer;
+  color: #7300e6;
   transition: transform 0.1s ease;
-  line-height: 1;
-}
-
-.seat-confirm-btn {
-  color: #7a6046;
-}
-
-.seat-delete-btn {
-  color: #d32f2f;
 }
 
 .seat-confirm-btn:hover, .seat-delete-btn:hover {
@@ -427,7 +409,7 @@ th {
 </div>
 <!-- 필터 영역 끝 -->
 
-<!-- 스케줄 테이블 시작 -->
+<!-- 스케줄 테이블 시작 (좌석 열 추가: 총 11개 열 구조) -->
 <table>
 <thead>
   <tr>
@@ -455,7 +437,7 @@ th {
     <td><span class="actor role-hagen first-show" data-actor="조모세">조모세</span></td>
     <td><span class="actor role-jasper first-show" data-actor="김태환">김태환</span></td>
     <td><span class="actor role-reinh first-show" data-actor="김보현">김보현</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></div></td>
+    <td><input type="text" class="seat-input" placeholder="예: 1층 A열 3"></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -467,7 +449,7 @@ th {
     <td><span class="actor role-hagen first-show" data-actor="김지웅">김지웅</span></td>
     <td><span class="actor role-jasper first-show" data-actor="최기정">최기정</span></td>
     <td><span class="actor role-reinh first-show" data-actor="이형훈">이형훈</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input"></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -479,7 +461,7 @@ th {
     <td><span class="actor role-hagen first-show" data-actor="황건우">황건우</span></td>
     <td><span class="actor role-jasper first-show" data-actor="김도민">김도민</span></td>
     <td><span class="actor role-reinh first-show" data-actor="고철순">고철순</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -491,7 +473,7 @@ th {
     <td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
     <td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
     <td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -503,7 +485,7 @@ th {
     <td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
     <td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
     <td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -515,7 +497,7 @@ th {
     <td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
     <td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
     <td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -527,7 +509,7 @@ th {
     <td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
     <td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
     <td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -539,7 +521,7 @@ th {
     <td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
     <td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
     <td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -551,7 +533,7 @@ th {
     <td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
     <td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
     <td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -563,7 +545,7 @@ th {
     <td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
     <td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
     <td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -577,7 +559,7 @@ th {
     <td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
     <td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
     <td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -589,7 +571,7 @@ th {
     <td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
     <td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
     <td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -601,7 +583,7 @@ th {
     <td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
     <td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
     <td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -613,7 +595,7 @@ th {
     <td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
     <td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
     <td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -625,7 +607,7 @@ th {
     <td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
     <td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
     <td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -637,7 +619,7 @@ th {
     <td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
     <td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
     <td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -649,7 +631,7 @@ th {
     <td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
     <td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
     <td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -661,7 +643,7 @@ th {
     <td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
     <td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
     <td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -673,7 +655,7 @@ th {
     <td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
     <td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
     <td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -685,7 +667,7 @@ th {
     <td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
     <td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
     <td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -697,7 +679,7 @@ th {
     <td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
     <td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
     <td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -709,7 +691,7 @@ th {
     <td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
     <td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
     <td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -721,7 +703,7 @@ th {
     <td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
     <td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
     <td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -733,7 +715,7 @@ th {
     <td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
     <td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
     <td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -745,7 +727,7 @@ th {
     <td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
     <td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
     <td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -757,7 +739,7 @@ th {
     <td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
     <td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
     <td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -769,7 +751,7 @@ th {
     <td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
     <td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
     <td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -781,7 +763,7 @@ th {
     <td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
     <td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
     <td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -793,7 +775,7 @@ th {
     <td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
     <td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
     <td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -805,7 +787,7 @@ th {
     <td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
     <td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
     <td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -817,7 +799,7 @@ th {
     <td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
     <td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
     <td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -829,7 +811,7 @@ th {
     <td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
     <td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
     <td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -841,7 +823,7 @@ th {
     <td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
     <td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
     <td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -853,7 +835,7 @@ th {
     <td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
     <td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
     <td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -865,7 +847,7 @@ th {
     <td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
     <td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
     <td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -877,7 +859,7 @@ th {
     <td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
     <td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
     <td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -889,7 +871,7 @@ th {
     <td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
     <td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
     <td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -901,7 +883,7 @@ th {
     <td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
     <td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
     <td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -913,7 +895,7 @@ th {
     <td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
     <td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
     <td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -925,7 +907,7 @@ th {
     <td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
     <td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
     <td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -937,7 +919,7 @@ th {
     <td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
     <td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
     <td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -949,7 +931,7 @@ th {
     <td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
     <td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
     <td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -961,7 +943,7 @@ th {
     <td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
     <td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
     <td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -973,7 +955,7 @@ th {
     <td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
     <td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
     <td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -985,7 +967,7 @@ th {
     <td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
     <td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
     <td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -997,7 +979,7 @@ th {
     <td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
     <td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
     <td><span class="actor role-reinh" data-actor="김보현">김보현</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -1009,7 +991,7 @@ th {
     <td><span class="actor role-hagen" data-actor="김지웅">김지웅</span></td>
     <td><span class="actor role-jasper" data-actor="최기정">최기정</span></td>
     <td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -1021,7 +1003,7 @@ th {
     <td><span class="actor role-hagen" data-actor="황건우">황건우</span></td>
     <td><span class="actor role-jasper" data-actor="김도민">김도민</span></td>
     <td><span class="actor role-reinh" data-actor="이형훈">이형훈</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 
@@ -1033,7 +1015,7 @@ th {
     <td><span class="actor role-hagen" data-actor="조모세">조모세</span></td>
     <td><span class="actor role-jasper" data-actor="김태환">김태환</span></td>
     <td><span class="actor role-reinh" data-actor="고철순">고철순</span></td>
-    <td><div class="seat-cell-wrapper"><input type="text" class="seat-input"></div></td>
+    <td><input type="text" class="seat-input" ></td>
     <td><button class="copy-btn">⚔️</button></td>
   </tr>
 </tbody>
@@ -1083,7 +1065,7 @@ const floor2Config = [
   { row: 'G', pattern: ['gap', 'bg-orange','bg-orange','bg-orange','bg-orange','bg-orange', 'gap', 'bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange', 'gap', 'bg-orange','bg-orange'] }
 ];
 
-// 2. 테마 색상 설정 (중복 및 개수에 따른 강조)
+// 2. 테마 색상 설정
 const COLORS = [
   { bg: '#f5f0ff', border: '#e1d0ff', text: '#5900b3' },
   { bg: '#d6b3ff', border: '#b380ff', text: '#390073' },
@@ -1164,7 +1146,7 @@ function parseSeatText(text) {
   return null;
 }
 
-// 6. 좌석도 상태 및 행 제어 버튼 업데이트 함수
+// 6. 좌석도 상태 업데이트 함수
 function updateAllMaps() {
   document.querySelectorAll('.seat-node').forEach(node => {
     node.style.backgroundColor = '#e0e0e0'; 
@@ -1186,19 +1168,14 @@ function updateAllMaps() {
     renderRowControls(row, seatValue);
 
     if (seatValue.trim()) {
-      if (inputEl) {
-        inputEl.value = seatValue;
-        inputEl.disabled = true;
-      }
+      if (inputEl) inputEl.disabled = true;
 
       const seatKey = parseSeatText(seatValue); 
       if (seatKey) {
         seatCounts[seatKey] = (seatCounts[seatKey] || 0) + 1;
       }
     } else {
-      if (inputEl) {
-        inputEl.disabled = false;
-      }
+      if (inputEl) inputEl.disabled = false;
     }
   });
 
@@ -1220,22 +1197,27 @@ function updateAllMaps() {
   });
 }
 
-// 7. 행별 [확정 / 삭제] 버튼 랜더링 함수
+// 7. 행별 [확정 / 삭제] 버튼 제어 함수
 function renderRowControls(row, seatValue) {
-  const wrapper = row.querySelector('.seat-cell-wrapper');
-  if (!wrapper) return;
-
-  const inputEl = wrapper.querySelector('.seat-input');
+  const inputEl = row.querySelector('.seat-input');
   if (!inputEl) return;
 
-  let ctrlContainer = wrapper.querySelector('.ctrl-container');
+  const parentCell = inputEl.parentElement; 
+  if (!parentCell) return;
+
+  parentCell.style.display = 'flex';
+  parentCell.style.alignItems = 'center';
+  parentCell.style.gap = '6px';
+  parentCell.style.justifyContent = 'center';
+
+  let ctrlContainer = parentCell.querySelector('.ctrl-container');
   if (!ctrlContainer) {
     ctrlContainer = document.createElement('div');
     ctrlContainer.className = 'ctrl-container';
     ctrlContainer.style.display = 'inline-flex';
     ctrlContainer.style.alignItems = 'center';
-    ctrlContainer.style.flexShrink = '0';
-    wrapper.appendChild(ctrlContainer);
+    ctrlContainer.style.gap = '4px';
+    parentCell.appendChild(ctrlContainer);
   }
 
   ctrlContainer.innerHTML = '';
@@ -1245,6 +1227,7 @@ function renderRowControls(row, seatValue) {
     deleteBtn.className = 'seat-delete-btn';
     deleteBtn.innerHTML = '❌';
     deleteBtn.title = '좌석 확정 취소';
+    deleteBtn.style.cursor = 'pointer';
     
     deleteBtn.onclick = function() {
       const sid = row.dataset.sid;
@@ -1262,6 +1245,7 @@ function renderRowControls(row, seatValue) {
     confirmBtn.className = 'seat-confirm-btn';
     confirmBtn.innerHTML = '☑';
     confirmBtn.title = '이 좌석으로 도면 확정';
+    confirmBtn.style.cursor = 'pointer';
     
     confirmBtn.onclick = function() {
       const sid = row.dataset.sid;
@@ -1373,6 +1357,13 @@ function initSeatingSystem() {
         const confirmBtn = row.querySelector('.seat-confirm-btn');
         if (confirmBtn) {
           confirmBtn.click();
+        } else {
+          const sid = row.dataset.sid;
+          if (sid) {
+            showSeats[sid] = this.value.trim();
+            saveSeats();
+            updateAllMaps();
+          }
         }
       }
     });
