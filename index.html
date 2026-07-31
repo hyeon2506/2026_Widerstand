@@ -12,29 +12,139 @@
   --red:#900C3F;--red2:#581845;
   --ink:#111111;--ink2:#444;--ink3:#888;
   --border:rgba(17,17,17,0.1);
+  --primary-brown: #5a4234;
+  --light-beige: #f3efe6;
 }
 body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;padding:0 0 60px;}
 
 /* 헤더 */
 .hero{background:white;border-bottom:3px solid var(--red);}
-.hero-inner{max-width:980px;margin:0 auto;padding:22px 16px 18px;position:relative;}
+.hero-inner{max-width:980px;margin:0 auto;padding:22px 16px 18px;position:relative;text-align:center;}
 .hero-eyebrow{font-size:10px;letter-spacing:6px;color:var(--red);font-weight:900;margin-bottom:4px;text-transform:uppercase;}
 .hero-title {font-family:'Noto Sans KR', sans-serif;font-weight:900;font-size:clamp(28px, 5vw, 42px);color:#581845;letter-spacing:-1.5px;line-height:1.15;}
-.hero-sub{font-size:11px;color:var(--ink3);margin-top:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
-.hero-sub-dot{width:4px;height:4px;background:var(--red);border-radius:50%;display:inline-block;flex-shrink:0;}
+.hero-sub{font-size:11px;color:var(--ink3);margin-top:10px;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;}
+
+/* 상단 툴바 */
+.toolbar {
+  max-width:980px;
+  margin:16px auto 0;
+  padding:0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.result-count {
+  font-size: 13px;
+  color: var(--ink2);
+  font-weight: 500;
+}
+
+.result-count strong {
+  color: var(--red);
+  font-weight: 700;
+}
+
+.btn-group {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background-color: white;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  background-color: #eee;
+}
+
+.btn-primary {
+  background-color: var(--red);
+  color: #ffffff;
+  border-color: var(--red);
+}
+
+.btn-primary:hover {
+  background-color: var(--red2);
+}
 
 /* 필터 영역 */
 .legend-section{max-width:980px;margin:12px auto;background:white;padding:14px 16px;border-top:2px solid var(--red);border-bottom:1px solid var(--border);}
 .legend-title{font-size:10px;letter-spacing:4px;color:var(--red);font-weight:900;margin-bottom:10px;text-transform:uppercase;}
 .legend-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:10px;}
-.legend-group{display:flex;align-items:center;gap:8px;}
-.legend-role{font-size:10px;font-weight:900;color:var(--ink2);min-width:95px;flex-shrink:0;}
-.legend-actors{display:flex;flex-wrap:wrap;gap:4px;}
-.actor-chip{font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:3px;cursor:pointer;border:1px solid transparent;transition:all .12s;white-space:nowrap;background:#f1f3f5;color:#333;}
-.actor-chip:hover{filter:brightness(0.95);}
-.actor-chip.active{outline:2px solid var(--ink);outline-offset:1px;}
 
-/* 역할별 배지 색상 */
+.role-card {
+  background-color: #faf8f5;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.role-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--red2);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.role-title::before {
+  content: '';
+  display: inline-block;
+  width: 3px;
+  height: 12px;
+  background-color: var(--red);
+  border-radius: 2px;
+}
+
+.actor-list {
+  display: flex;
+  gap: 6px;
+}
+
+.actor-btn {
+  flex: 1;
+  padding: 6px 0;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink);
+  background-color: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.actor-btn:hover {
+  border-color: var(--red);
+  color: var(--red);
+}
+
+.actor-btn.active {
+  background-color: var(--red);
+  color: #ffffff;
+  border-color: var(--red);
+  font-weight: 700;
+}
+
+/* 역할별 배지 색상 (필터용) */
+.actor-chip{font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:3px;cursor:pointer;border:1px solid transparent;transition:all .12s;white-space:nowrap;background:#f1f3f5;color:#333;}
+.actor-chip.active{outline:2px solid var(--ink);outline-offset:1px;}
 .badge-magnus{background:#ffebee;color:#c62828;border:1px solid #ef9a9a;}
 .badge-abel{background:#e3f2fd;color:#1565c0;border:1px solid #90caf9;}
 .badge-friedrich{background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8;}
@@ -42,19 +152,13 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink)
 .badge-jasper{background:#fff3e0;color:#ef6c00;border:1px solid #ffcc80;}
 .badge-reinhardt{background:#e0f2f1;color:#00695c;border:1px solid #80cbc4;}
 
-.filter-row-top{display:flex;justify-content:center;margin:12px auto 8px;max-width:980px;padding:0 16px;}
-.btn-all{padding:6px 20px;border-radius:2px;font-size:11px;font-weight:900;cursor:pointer;border:2px solid var(--ink);background:white;color:var(--ink);letter-spacing:1px;}
-.btn-all.active{background:var(--red);border-color:var(--red);color:white;}
-
+/* 테이블 및 좌석 도면 */
 .count-info{text-align:center;font-size:12px;color:var(--ink3);margin-bottom:12px;}
-
-/* 테이블 */
 .table-wrap{max-width:980px;margin:0 auto;background:white;border-top:2px solid var(--red);border-bottom:2px solid var(--red);overflow-x:auto;-webkit-overflow-scrolling:touch;}
 .table-header{display:grid;grid-template-columns:42px 24px 38px repeat(6, 1fr) 75px 28px;background:#111;padding:8px 6px;gap:2px;align-items:center;min-width:760px;}
-.th{font-size:9px;font-weight:900;color:white;text-align:center;letter-spacing:0px;}
+.th{font-size:9px;font-weight:900;color:white;text-align:center;}
 .row{display:grid;grid-template-columns:42px 24px 38px repeat(6, 1fr) 75px 28px;padding:6px 6px;gap:2px;border-top:1px solid rgba(0,0,0,0.06);align-items:center;min-width:760px;}
 .row.hidden{display:none;}
-
 .cell{font-size:10px;color:var(--ink);text-align:center;line-height:1.4;}
 .cell.date{font-weight:700;font-size:10.5px;text-align:left;}
 .day-sat{color:#1a3a8a;font-weight:900;}
@@ -63,32 +167,23 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink)
 .cell.time{font-size:9px;color:var(--ink3);}
 
 .actor-badge{font-size:9.5px;font-weight:700;padding:2px 4px;border-radius:2px;display:inline-block;line-height:1.2;white-space:nowrap;text-align:center;}
-.month-divider{padding:8px 12px;background:var(--red);font-size:11px;font-weight:900;color:white;letter-spacing:2px;min-width:760px;}
-
 .copy-btn{background:none;border:none;cursor:pointer;font-size:12px;padding:2px;display:flex;align-items:center;justify-content:center;width:100%;}
 .seat-input{width:100%;font-size:9px;padding:3px;border:1px solid #ccc;border-radius:2px;background:white;color:var(--ink);text-align:center;}
 .seat-input:focus{outline:none;border-color:var(--red);}
 
-/* 좌석 도면 섹션 */
 .seating-section{max-width:980px;margin:30px auto 0;background:white;padding:20px 16px;border-top:3px solid var(--red);border-bottom:1px solid var(--border);}
 .seating-title{font-size:14px;font-weight:900;color:var(--red2);margin-bottom:6px;text-align:center;letter-spacing:1px;}
 .seating-desc{font-size:11px;color:var(--ink3);text-align:center;margin-bottom:12px;}
-
-/* 범례 (Legend) 스타일 */
 .seat-legend{display:flex;justify-content:center;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap;}
 .legend-item{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--ink2);font-weight:500;}
 .legend-box{width:14px;height:14px;border-radius:2px;border:1px solid rgba(0,0,0,0.15);}
-
 .stage{width:220px;height:24px;background:#333;color:white;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;border-radius:2px;letter-spacing:4px;}
-
 .floor-title{font-size:11px;font-weight:900;color:var(--ink);margin:15px 0 8px;text-align:center;border-bottom:1px solid #eee;padding-bottom:4px;}
-
 .seat-map-container{display:flex;flex-direction:column;align-items:center;gap:3px;overflow-x:auto;padding-bottom:10px;}
 .seat-row{display:flex;align-items:center;gap:2px;}
 .row-label{font-size:9px;font-weight:900;width:16px;text-align:center;color:var(--ink3);}
 .seat-grid{display:flex;gap:2px;}
 
-/* 기본 좌석 스타일 (디폴트: 회색) */
 .seat{
   width:14px;height:14px;font-size:7px;display:flex;align-items:center;justify-content:center;
   border-radius:2px;background:#e2e8f0;color:#64748b;font-weight:700;user-select:none;
@@ -96,7 +191,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink)
 }
 .gap{width:14px;height:14px;visibility:hidden;}
 
-/* 관람 횟수별 누적 색상 정의 */
+/* 관람 횟수별 색상 */
 .seat.count-1 { background: #f5f0ff !important; color: #4a154b !important; }
 .seat.count-2 { background: #d6b3ff !important; color: #3a0066 !important; }
 .seat.count-3 { background: #a64dff !important; color: #ffffff !important; font-weight: 900; }
@@ -114,85 +209,98 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink)
 </style>
 </head>
 <body>
-
-<div class="hero">
-  <div class="hero-inner">
-    <div class="hero-eyebrow">MUSICAL</div>
-    <div class="hero-title">뮤지컬 비더슈탄트</div>
-    <div class="hero-sub">
-      <span>2026.07.23 ~ 2026.10.11</span><span class="hero-sub-dot"></span>
-      <span>링크아트센터드림 드림1관</span>
-    </div>
-  </div>
-</div>
-
-<div class="legend-section">
-  <div class="legend-title">Cast Filter</div>
-  <div class="legend-grid">
-    <div class="legend-group">
-      <div class="legend-role">매그너스 볼커</div>
-      <div class="legend-actors">
-        <button class="actor-chip" onclick="filterActor('magnus', '최석진', this)">최석진</button>
-        <button class="actor-chip" onclick="filterActor('magnus', '한상훈', this)">한상훈</button>
-        <button class="actor-chip" onclick="filterActor('magnus', '황순종', this)">황순종</button>
-      </div>
-    </div>
-    <div class="legend-group">
-      <div class="legend-role">아벨 루터</div>
-      <div class="legend-actors">
-        <button class="actor-chip" onclick="filterActor('abel', '박정원', this)">박정원</button>
-        <button class="actor-chip" onclick="filterActor('abel', '이한솔', this)">이한솔</button>
-        <button class="actor-chip" onclick="filterActor('abel', '강병훈', this)">강병훈</button>
-      </div>
-    </div>
-    <div class="legend-group">
-      <div class="legend-role">프레드릭 칼</div>
-      <div class="legend-actors">
-        <button class="actor-chip" onclick="filterActor('friedrich', '김도현', this)">김도현</button>
-        <button class="actor-chip" onclick="filterActor('friedrich', '김방언', this)">김방언</button>
-        <button class="actor-chip" onclick="filterActor('friedrich', '김준식', this)">김준식</button>
-      </div>
-    </div>
-    <div class="legend-group">
-      <div class="legend-role">하겐 악스만</div>
-      <div class="legend-actors">
-        <button class="actor-chip" onclick="filterActor('hagen', '조모세', this)">조모세</button>
-        <button class="actor-chip" onclick="filterActor('hagen', '김지웅', this)">김지웅</button>
-        <button class="actor-chip" onclick="filterActor('hagen', '황건우', this)">황건우</button>
-      </div>
-    </div>
-    <div class="legend-group">
-      <div class="legend-role">재스퍼 뮬러</div>
-      <div class="legend-actors">
-        <button class="actor-chip" onclick="filterActor('jasper', '김태환', this)">김태환</button>
-        <button class="actor-chip" onclick="filterActor('jasper', '최기정', this)">최기정</button>
-        <button class="actor-chip" onclick="filterActor('jasper', '김도민', this)">김도민</button>
-      </div>
-    </div>
-    <div class="legend-group">
-      <div class="legend-role">라인하르트 클레어</div>
-      <div class="legend-actors">
-        <button class="actor-chip" onclick="filterActor('reinhardt', '김보현', this)">김보현</button>
-        <button class="actor-chip" onclick="filterActor('reinhardt', '이형훈', this)">이형훈</button>
-        <button class="actor-chip" onclick="filterActor('reinhardt', '고철순', this)">고철순</button>
+<!-- 헤더 -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">MUSICAL</div>
+      <div class="hero-title">뮤지컬 비더슈탄트</div>
+      <div class="hero-sub">
+        <span>2026.07.23 ~ 2026.10.11</span><span class="hero-sub-dot"></span>
+        <span>링크아트센터드림 드림1관</span>
       </div>
     </div>
   </div>
-</div>
 
-<div class="filter-row-top">
-  <button class="btn-all active" id="btnAll" onclick="resetFilter()">전체 보기</button>
-</div>
-
-<div class="count-info" id="countInfo">전체 공연 스케줄</div>
-
-<div class="table-wrap">
-  <div class="table-header">
-    <div class="th">날짜</div><div class="th">요일</div><div class="th">시간</div>
-    <div class="th">매그너스</div><div class="th">아벨</div><div class="th">프레드릭</div>
-    <div class="th">하겐</div><div class="th">재스퍼</div><div class="th">클레어</div>
-    <div class="th">내 좌석</div><div class="th">복사</div>
+  <!-- 필터 & 백업 툴바 -->
+  <div class="toolbar">
+    <div class="result-count">
+      선택된 검색 결과: <strong id="selected-count">전체</strong>
+    </div>
+    <div class="btn-group">
+      <button class="btn" id="btn-export">내보내기 (백업)</button>
+      <button class="btn" id="btn-import">가져오기 (복구)</button>
+    </div>
   </div>
+
+  <!-- Cast Filter (다중 선택 지원) -->
+  <div class="legend-section">
+    <div class="legend-title">Cast Filter (배우를 여러 명 클릭하여 조합 검색 가능)</div>
+    <div class="legend-grid">
+      <div class="legend-group">
+        <div class="legend-role">매그너스 볼커</div>
+        <div class="legend-actors">
+          <button class="actor-chip badge-magnus" data-role="magnus" data-actor="최석진" onclick="toggleActorFilter(this)">최석진</button>
+          <button class="actor-chip badge-magnus" data-role="magnus" data-actor="한상훈" onclick="toggleActorFilter(this)">한상훈</button>
+          <button class="actor-chip badge-magnus" data-role="magnus" data-actor="황순종" onclick="toggleActorFilter(this)">황순종</button>
+        </div>
+      </div>
+      <div class="legend-group">
+        <div class="legend-role">아벨 루터</div>
+        <div class="legend-actors">
+          <button class="actor-chip badge-abel" data-role="abel" data-actor="박정원" onclick="toggleActorFilter(this)">박정원</button>
+          <button class="actor-chip badge-abel" data-role="abel" data-actor="이한솔" onclick="toggleActorFilter(this)">이한솔</button>
+          <button class="actor-chip badge-abel" data-role="abel" data-actor="강병훈" onclick="toggleActorFilter(this)">강병훈</button>
+        </div>
+      </div>
+      <div class="legend-group">
+        <div class="legend-role">프레드릭 칼</div>
+        <div class="legend-actors">
+          <button class="actor-chip badge-friedrich" data-role="friedrich" data-actor="김도현" onclick="toggleActorFilter(this)">김도현</button>
+          <button class="actor-chip badge-friedrich" data-role="friedrich" data-actor="김방언" onclick="toggleActorFilter(this)">김방언</button>
+          <button class="actor-chip badge-friedrich" data-role="friedrich" data-actor="김준식" onclick="toggleActorFilter(this)">김준식</button>
+        </div>
+      </div>
+      <div class="legend-group">
+        <div class="legend-role">하겐 악스만</div>
+        <div class="legend-actors">
+          <button class="actor-chip badge-hagen" data-role="hagen" data-actor="조모세" onclick="toggleActorFilter(this)">조모세</button>
+          <button class="actor-chip badge-hagen" data-role="hagen" data-actor="김지웅" onclick="toggleActorFilter(this)">김지웅</button>
+          <button class="actor-chip badge-hagen" data-role="hagen" data-actor="황건우" onclick="toggleActorFilter(this)">황건우</button>
+        </div>
+      </div>
+      <div class="legend-group">
+        <div class="legend-role">재스퍼 뮬러</div>
+        <div class="legend-actors">
+          <button class="actor-chip badge-jasper" data-role="jasper" data-actor="김태환" onclick="toggleActorFilter(this)">김태환</button>
+          <button class="actor-chip badge-jasper" data-role="jasper" data-actor="최기정" onclick="toggleActorFilter(this)">최기정</button>
+          <button class="actor-chip badge-jasper" data-role="jasper" data-actor="김도민" onclick="toggleActorFilter(this)">김도민</button>
+        </div>
+      </div>
+      <div class="legend-group">
+        <div class="legend-role">라인하르트 클레어</div>
+        <div class="legend-actors">
+          <button class="actor-chip badge-reinhardt" data-role="reinhardt" data-actor="김보현" onclick="toggleActorFilter(this)">김보현</button>
+          <button class="actor-chip badge-reinhardt" data-role="reinhardt" data-actor="이형훈" onclick="toggleActorFilter(this)">이형훈</button>
+          <button class="actor-chip badge-reinhardt" data-role="reinhardt" data-actor="고철순" onclick="toggleActorFilter(this)">고철순</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="filter-row-top">
+    <button class="btn-all active" id="btnAll" onclick="resetFilter()">전체 보기</button>
+  </div>
+
+  <div class="count-info" id="countInfo">전체 공연 스케줄</div>
+
+  <!-- 스케줄 테이블 시작 -->
+  <div class="table-wrap">
+    <div class="table-header">
+      <div class="th">날짜</div><div class="th">요일</div><div class="th">시간</div>
+      <div class="th">매그너스</div><div class="th">아벨</div><div class="th">프레드릭</div>
+      <div class="th">하겐</div><div class="th">재스퍼</div><div class="th">클레어</div>
+      <div class="th">내 좌석</div><div class="th">복사</div>
+    </div>
 
   <div class="month-divider">2026년 7월</div>
 
@@ -555,11 +663,10 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink)
 <!-- 좌석 도면 영역 -->
 <div class="seating-section">
   <div class="seating-title">링크아트센터드림 드림1관 좌석 배치도</div>
-  <div class="seating-desc">표의 '내 좌석' 칸에 동일한 자리를 입력할수록 방문 횟수가 누적되어 보라색이 점점 진해집니다.</div>
+  <div class="seating-desc">내 좌석을 입력하면 도면에 관람 횟수별 색상이 자동으로 표시됩니다.</div>
   
   <!-- 범례 추가 -->
   <div class="seat-legend">
-    <div class="legend-item"><div class="legend-box" style="background:#e2e8f0;"></div> 미선택</div>
     <div class="legend-item"><div class="legend-box" style="background:#f5f0ff;"></div> 1회</div>
     <div class="legend-item"><div class="legend-box" style="background:#d6b3ff;"></div> 2회</div>
     <div class="legend-item"><div class="legend-box" style="background:#a64dff;"></div> 3회</div>
@@ -577,7 +684,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink)
 </div>
 
 <script>
-// 1. 좌석 도면 구성 데이터
+// 1. 좌석 도면 데이터
 const floor1Config = [
   { row: 'A', pattern: ['gap', 'gap', 'seat', 'seat', 'gap', 'seat','seat','seat','seat','seat','seat','seat','seat','seat','seat','seat','seat', 'gap', 'seat','seat','gap','gap'] },
   { row: 'B', pattern: ['seat', 'seat', 'seat', 'seat', 'gap', 'seat','seat','seat','seat','seat','seat','seat','seat','seat','seat','seat','seat', 'gap', 'seat','seat','gap','gap'] },
@@ -604,9 +711,10 @@ const floor2Config = [
   { row: 'G', pattern: ['gap', 'seat','seat','seat','seat','seat', 'gap', 'seat','seat','seat','seat','seat','seat','seat','seat','seat', 'gap', 'seat','seat'] }
 ];
 
-// 좌석 도면 랜더링 (디폴트: 회색)
+// 2. 도면 생성
 function renderSeatMap(config, containerId, floorNumber) {
   const container = document.getElementById(containerId);
+  if (!container) return;
   container.innerHTML = '';
 
   config.forEach(rowData => {
@@ -629,7 +737,6 @@ function renderSeatMap(config, containerId, floorNumber) {
       } else {
         seatDiv.className = 'seat';
         seatDiv.innerText = seatNum;
-        // ID 형식: seat-1-A-5
         seatDiv.id = `seat-${floorNumber}-${rowData.row}-${seatNum}`;
         seatNum++;
       }
@@ -647,14 +754,12 @@ function renderSeatMap(config, containerId, floorNumber) {
   });
 }
 
-// 입력된 전체 좌석 파싱 및 카운팅 업데이트
+// 3. 입력 좌석 색상 카운트 반영
 function updateAllSeats() {
-  // 1. 모든 좌석 색상 클래스 초기화
   document.querySelectorAll('.seat').forEach(seat => {
     seat.classList.remove('count-1', 'count-2', 'count-3', 'count-4', 'count-5');
   });
 
-  // 2. 입력된 모든 seat-input 값 수집 후 좌석별 카운트 계산
   const seatCounts = {};
   const inputs = document.querySelectorAll('.seat-input');
 
@@ -663,12 +768,7 @@ function updateAllSeats() {
     if (!val) return;
 
     const str = val.replace(/\s+/g, '').toUpperCase();
-    
-    // 층 판별 (2층 명시시 2층, 기본은 1층)
-    let floor = 1;
-    if (str.includes('2층') || str.startsWith('2')) {
-      floor = 2;
-    }
+    let floor = (str.includes('2층') || str.startsWith('2')) ? 2 : 1;
 
     const rowMatch = str.match(/[A-Z]/);
     const numMatch = str.match(/\d+/g);
@@ -678,14 +778,10 @@ function updateAllSeats() {
       const num = numMatch[numMatch.length - 1];
       const seatId = `seat-${floor}-${row}-${num}`;
 
-      if (!seatCounts[seatId]) {
-        seatCounts[seatId] = 0;
-      }
-      seatCounts[seatId]++;
+      seatCounts[seatId] = (seatCounts[seatId] || 0) + 1;
     }
   });
 
-  // 3. 누적 횟수에 맞춰 색상 클래스 적용
   for (const [seatId, count] of Object.entries(seatCounts)) {
     const targetSeat = document.getElementById(seatId);
     if (targetSeat) {
@@ -698,66 +794,141 @@ function updateAllSeats() {
   }
 }
 
-// 배우 필터 기능
-function filterActor(role, actorName, btn) {
-  document.querySelectorAll('.actor-chip').forEach(c => c.classList.remove('active'));
-  document.getElementById('btnAll').classList.remove('active');
-  btn.classList.add('active');
+// 4. 배우 필터 다중 선택 처리 (2명 이상 조합 선택)
+function toggleActorFilter(btn) {
+  btn.classList.toggle('active');
+  const btnAll = document.getElementById('btnAll');
+  if (btnAll) btnAll.classList.remove('active');
 
+  applyFilters();
+}
+
+function applyFilters() {
+  const activeChips = document.querySelectorAll('.actor-chip.active');
   const rows = document.querySelectorAll('.row');
+
+  // 역할별로 선택된 배우 조합 수집
+  const selectedFilters = {};
+  activeChips.forEach(chip => {
+    const role = chip.getAttribute('data-role');
+    const actor = chip.getAttribute('data-actor');
+    if (!selectedFilters[role]) selectedFilters[role] = [];
+    selectedFilters[role].push(actor);
+  });
+
   let visibleCount = 0;
 
-  rows.forEach(r => {
-    if (r.getAttribute(`data-${role}`) === actorName) {
-      r.classList.remove('hidden');
+  rows.forEach(row => {
+    let matchesAllRoles = true;
+
+    for (const [role, actors] of Object.entries(selectedFilters)) {
+      const rowActor = row.getAttribute(`data-${role}`);
+      if (!actors.includes(rowActor)) {
+        matchesAllRoles = false;
+        break;
+      }
+    }
+
+    if (matchesAllRoles) {
+      row.classList.remove('hidden');
       visibleCount++;
     } else {
-      r.classList.add('hidden');
+      row.classList.add('hidden');
     }
   });
 
-  document.getElementById('countInfo').innerText = `[${actorName}] 배우 출연 회차 (${visibleCount}회)`;
+  const activeActorsList = Array.from(activeChips).map(c => c.getAttribute('data-actor'));
+  const countInfo = document.getElementById('countInfo');
+  const selectedCount = document.getElementById('selected-count');
+
+  if (activeChips.length === 0) {
+    resetFilter();
+  } else {
+    if (countInfo) countInfo.innerText = `선택 배우 [${activeActorsList.join(', ')}] 출연 회차 (${visibleCount}회)`;
+    if (selectedCount) selectedCount.innerText = `${visibleCount}건`;
+  }
 }
 
 function resetFilter() {
   document.querySelectorAll('.actor-chip').forEach(c => c.classList.remove('active'));
-  document.getElementById('btnAll').classList.add('active');
+  const btnAll = document.getElementById('btnAll');
+  if (btnAll) btnAll.classList.add('active');
 
   const rows = document.querySelectorAll('.row');
   rows.forEach(r => r.classList.remove('hidden'));
-  document.getElementById('countInfo').innerText = '전체 공연 스케줄';
+
+  const countInfo = document.getElementById('countInfo');
+  const selectedCount = document.getElementById('selected-count');
+  if (countInfo) countInfo.innerText = '전체 공연 스케줄';
+  if (selectedCount) selectedCount.innerText = `전체`;
 }
 
-// 회차 정보 복사
+// 5. 회차 정보 클립보드 복사
 function copyRow(btn) {
   const row = btn.closest('.row');
-  const date = row.querySelector('.date').innerText;
-  const day = row.querySelector('.day').innerText;
-  const time = row.querySelector('.time').innerText;
-  const seat = row.querySelector('.seat-input').value;
+  const date = row.querySelector('.date') ? row.querySelector('.date').innerText : '';
+  const day = row.querySelector('.day') ? row.querySelector('.day').innerText : '';
+  const time = row.querySelector('.time') ? row.querySelector('.time').innerText : '';
+  const seatInput = row.querySelector('.seat-input');
+  const seat = seatInput ? seatInput.value : '';
 
-  const magnus = row.getAttribute('data-magnus');
-  const abel = row.getAttribute('data-abel');
-  const friedrich = row.getAttribute('data-friedrich');
-  const hagen = row.getAttribute('data-hagen');
-  const jasper = row.getAttribute('data-jasper');
-  const reinhardt = row.getAttribute('data-reinhardt');
+  const magnus = row.getAttribute('data-magnus') || '';
+  const abel = row.getAttribute('data-abel') || '';
+  const friedrich = row.getAttribute('data-friedrich') || '';
+  const hagen = row.getAttribute('data-hagen') || '';
+  const jasper = row.getAttribute('data-jasper') || '';
+  const reinhardt = row.getAttribute('data-reinhardt') || '';
 
   let text = `[뮤지컬 비더슈탄트] ${date}(${day}) ${time}\n`;
   text += `· 매그너스: ${magnus}\n· 아벨: ${abel}\n· 프레드릭: ${friedrich}\n· 하겐: ${hagen}\n· 재스퍼: ${jasper}\n· 클레어: ${reinhardt}`;
-  if(seat) text += `\n· 내 좌석: ${seat}`;
+  if (seat) text += `\n· 내 좌석: ${seat}`;
 
   navigator.clipboard.writeText(text).then(() => {
     alert('해당 회차 정보가 복사되었습니다!\n\n' + text);
   });
 }
 
-// 초기 배치도 생성
-window.onload = function() {
+// 6. 초기 실행 및 백업/복구 기능
+document.addEventListener('DOMContentLoaded', () => {
   renderSeatMap(floor1Config, 'floor1Map', 1);
   renderSeatMap(floor2Config, 'floor2Map', 2);
-};
-</script>
 
+  // 내보내기 (백업)
+  const btnExport = document.getElementById('btn-export');
+  if (btnExport) {
+    btnExport.addEventListener('click', () => {
+      const seatsData = [];
+      document.querySelectorAll('.seat-input').forEach((input, index) => {
+        if (input.value.trim()) {
+          seatsData.push({ index, value: input.value.trim() });
+        }
+      });
+      localStorage.setItem('vbw_seat_backup', JSON.stringify(seatsData));
+      alert('입력된 좌석 정보가 백업(저장)되었습니다.');
+    });
+  }
+
+  // 가져오기 (복구)
+  const btnImport = document.getElementById('btn-import');
+  if (btnImport) {
+    btnImport.addEventListener('click', () => {
+      const data = localStorage.getItem('vbw_seat_backup');
+      if (!data) {
+        alert('저장된 백업 데이터가 없습니다.');
+        return;
+      }
+      const seatsData = JSON.parse(data);
+      const inputs = document.querySelectorAll('.seat-input');
+      seatsData.forEach(item => {
+        if (inputs[item.index]) {
+          inputs[item.index].value = item.value;
+        }
+      });
+      updateAllSeats();
+      alert('백업된 좌석 데이터를 성공적으로 복구했습니다.');
+    });
+  }
+});
+</script>
 </body>
 </html>
