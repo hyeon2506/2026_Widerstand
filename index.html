@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>2026 뮤지컬 비더슈탄트 일정 & 좌석 배치도</title>
+<title>2026 뮤지컬 비더슈탄트 일정</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -64,7 +64,6 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink)
 
 .actor-badge{font-size:9.5px;font-weight:700;padding:2px 4px;border-radius:2px;display:inline-block;line-height:1.2;white-space:nowrap;text-align:center;}
 .month-divider{padding:8px 12px;background:var(--red);font-size:11px;font-weight:900;color:white;letter-spacing:2px;min-width:760px;}
-.no-show{padding:8px 12px;background:rgba(0,0,0,.02);font-size:10px;color:#999;text-align:center;border-top:1px solid rgba(0,0,0,.04);font-style:italic;min-width:760px;}
 
 .copy-btn{background:none;border:none;cursor:pointer;font-size:12px;padding:2px;display:flex;align-items:center;justify-content:center;width:100%;}
 .seat-input{width:100%;font-size:9px;padding:3px;border:1px solid #ccc;border-radius:2px;background:white;color:var(--ink);text-align:center;}
@@ -73,7 +72,12 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink)
 /* 좌석 도면 섹션 */
 .seating-section{max-width:980px;margin:30px auto 0;background:white;padding:20px 16px;border-top:3px solid var(--red);border-bottom:1px solid var(--border);}
 .seating-title{font-size:14px;font-weight:900;color:var(--red2);margin-bottom:6px;text-align:center;letter-spacing:1px;}
-.seating-desc{font-size:11px;color:var(--ink3);text-align:center;margin-bottom:16px;}
+.seating-desc{font-size:11px;color:var(--ink3);text-align:center;margin-bottom:12px;}
+
+/* 범례 (Legend) 스타일 */
+.seat-legend{display:flex;justify-content:center;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap;}
+.legend-item{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--ink2);font-weight:500;}
+.legend-box{width:14px;height:14px;border-radius:2px;border:1px solid rgba(0,0,0,0.15);}
 
 .stage{width:220px;height:24px;background:#333;color:white;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;border-radius:2px;letter-spacing:4px;}
 
@@ -84,24 +88,20 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink)
 .row-label{font-size:9px;font-weight:900;width:16px;text-align:center;color:var(--ink3);}
 .seat-grid{display:flex;gap:2px;}
 
-.seat{width:14px;height:14px;font-size:7px;display:flex;align-items:center;justify-content:center;border-radius:2px;color:white;font-weight:700;user-select:none;}
-.bg-blue{background:#4a90e2;}
-.bg-green{background:#2ecc71;}
-.bg-orange{background:#e67e22;}
-.bg-grey{background:#bdc3c7;}
+/* 기본 좌석 스타일 (디폴트: 회색) */
+.seat{
+  width:14px;height:14px;font-size:7px;display:flex;align-items:center;justify-content:center;
+  border-radius:2px;background:#e2e8f0;color:#64748b;font-weight:700;user-select:none;
+  transition:all 0.2s ease;border:1px solid rgba(0,0,0,0.05);
+}
 .gap{width:14px;height:14px;visibility:hidden;}
 
-/* 선택(입력)된 좌석 강조 스타일 */
-.seat.selected{
-  background:#e74c3c !important;
-  color:white !important;
-  font-weight:900;
-  transform:scale(1.3);
-  box-shadow:0 0 6px rgba(231,76,60,0.8);
-  z-index:10;
-  border:1px solid #fff;
-  transition:all 0.2s ease;
-}
+/* 관람 횟수별 누적 색상 정의 */
+.seat.count-1 { background: #f5f0ff !important; color: #4a154b !important; }
+.seat.count-2 { background: #d6b3ff !important; color: #3a0066 !important; }
+.seat.count-3 { background: #a64dff !important; color: #ffffff !important; font-weight: 900; }
+.seat.count-4 { background: #7300e6 !important; color: #ffffff !important; font-weight: 900; }
+.seat.count-5 { background: #390073 !important; color: #ffffff !important; font-weight: 900; box-shadow: 0 0 4px rgba(57,0,115,0.6); }
 
 @media(min-width:640px){
   .table-header{grid-template-columns:52px 28px 42px repeat(6, 1fr) 90px 28px;padding:9px 12px;gap:4px;}
@@ -129,7 +129,6 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink)
 <div class="legend-section">
   <div class="legend-title">Cast Filter</div>
   <div class="legend-grid">
-    
     <div class="legend-group">
       <div class="legend-role">매그너스 볼커</div>
       <div class="legend-actors">
@@ -138,7 +137,6 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink)
         <button class="actor-chip" onclick="filterActor('magnus', '황순종', this)">황순종</button>
       </div>
     </div>
-
     <div class="legend-group">
       <div class="legend-role">아벨 루터</div>
       <div class="legend-actors">
@@ -147,7 +145,6 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink)
         <button class="actor-chip" onclick="filterActor('abel', '강병훈', this)">강병훈</button>
       </div>
     </div>
-
     <div class="legend-group">
       <div class="legend-role">프레드릭 칼</div>
       <div class="legend-actors">
@@ -156,7 +153,6 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink)
         <button class="actor-chip" onclick="filterActor('friedrich', '김준식', this)">김준식</button>
       </div>
     </div>
-
     <div class="legend-group">
       <div class="legend-role">하겐 악스만</div>
       <div class="legend-actors">
@@ -165,7 +161,6 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink)
         <button class="actor-chip" onclick="filterActor('hagen', '황건우', this)">황건우</button>
       </div>
     </div>
-
     <div class="legend-group">
       <div class="legend-role">재스퍼 뮬러</div>
       <div class="legend-actors">
@@ -174,7 +169,6 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink)
         <button class="actor-chip" onclick="filterActor('jasper', '김도민', this)">김도민</button>
       </div>
     </div>
-
     <div class="legend-group">
       <div class="legend-role">라인하르트 클레어</div>
       <div class="legend-actors">
@@ -183,7 +177,6 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink)
         <button class="actor-chip" onclick="filterActor('reinhardt', '고철순', this)">고철순</button>
       </div>
     </div>
-
   </div>
 </div>
 
@@ -207,70 +200,70 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink)
   <div class="row" data-magnus="최석진" data-abel="박정원" data-friedrich="김도현" data-hagen="조모세" data-jasper="김태환" data-reinhardt="김보현">
     <div class="cell date">7/23</div><div class="cell day day-wkd">목</div><div class="cell time">19:30</div>
     <div class="cell"><span class="actor-badge badge-magnus">최석진</span></div><div class="cell"><span class="actor-badge badge-abel">박정원</span></div><div class="cell"><span class="actor-badge badge-friedrich">김도현</span></div><div class="cell"><span class="actor-badge badge-hagen">조모세</span></div><div class="cell"><span class="actor-badge badge-jasper">김태환</span></div><div class="cell"><span class="actor-badge badge-reinhardt">김보현</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="한상훈" data-abel="이한솔" data-friedrich="김방언" data-hagen="김지웅" data-jasper="최기정" data-reinhardt="이형훈">
     <div class="cell date">7/24</div><div class="cell day day-wkd">금</div><div class="cell time">19:30</div>
     <div class="cell"><span class="actor-badge badge-magnus">한상훈</span></div><div class="cell"><span class="actor-badge badge-abel">이한솔</span></div><div class="cell"><span class="actor-badge badge-friedrich">김방언</span></div><div class="cell"><span class="actor-badge badge-hagen">김지웅</span></div><div class="cell"><span class="actor-badge badge-jasper">최기정</span></div><div class="cell"><span class="actor-badge badge-reinhardt">이형훈</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="황순종" data-abel="강병훈" data-friedrich="김준식" data-hagen="황건우" data-jasper="김도민" data-reinhardt="고철순">
     <div class="cell date">7/25</div><div class="cell day day-sat">토</div><div class="cell time">14:00</div>
     <div class="cell"><span class="actor-badge badge-magnus">황순종</span></div><div class="cell"><span class="actor-badge badge-abel">강병훈</span></div><div class="cell"><span class="actor-badge badge-friedrich">김준식</span></div><div class="cell"><span class="actor-badge badge-hagen">황건우</span></div><div class="cell"><span class="actor-badge badge-jasper">김도민</span></div><div class="cell"><span class="actor-badge badge-reinhardt">고철순</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="최석진" data-abel="박정원" data-friedrich="김방언" data-hagen="김지웅" data-jasper="김태환" data-reinhardt="고철순">
     <div class="cell date">7/25</div><div class="cell day day-sat">토</div><div class="cell time">18:30</div>
     <div class="cell"><span class="actor-badge badge-magnus">최석진</span></div><div class="cell"><span class="actor-badge badge-abel">박정원</span></div><div class="cell"><span class="actor-badge badge-friedrich">김방언</span></div><div class="cell"><span class="actor-badge badge-hagen">김지웅</span></div><div class="cell"><span class="actor-badge badge-jasper">김태환</span></div><div class="cell"><span class="actor-badge badge-reinhardt">고철순</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="한상훈" data-abel="이한솔" data-friedrich="김도현" data-hagen="조모세" data-jasper="최기정" data-reinhardt="김보현">
     <div class="cell date">7/26</div><div class="cell day day-sun">일</div><div class="cell time">14:00</div>
     <div class="cell"><span class="actor-badge badge-magnus">한상훈</span></div><div class="cell"><span class="actor-badge badge-abel">이한솔</span></div><div class="cell"><span class="actor-badge badge-friedrich">김도현</span></div><div class="cell"><span class="actor-badge badge-hagen">조모세</span></div><div class="cell"><span class="actor-badge badge-jasper">최기정</span></div><div class="cell"><span class="actor-badge badge-reinhardt">김보현</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="한상훈" data-abel="이한솔" data-friedrich="김방언" data-hagen="조모세" data-jasper="최기정" data-reinhardt="이형훈">
     <div class="cell date">7/28</div><div class="cell day day-wkd">화</div><div class="cell time">19:30</div>
     <div class="cell"><span class="actor-badge badge-magnus">한상훈</span></div><div class="cell"><span class="actor-badge badge-abel">이한솔</span></div><div class="cell"><span class="actor-badge badge-friedrich">김방언</span></div><div class="cell"><span class="actor-badge badge-hagen">조모세</span></div><div class="cell"><span class="actor-badge badge-jasper">최기정</span></div><div class="cell"><span class="actor-badge badge-reinhardt">이형훈</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="최석진" data-abel="박정원" data-friedrich="김도현" data-hagen="김지웅" data-jasper="김태환" data-reinhardt="김보현">
     <div class="cell date">7/29</div><div class="cell day day-wkd">수</div><div class="cell time">15:00</div>
     <div class="cell"><span class="actor-badge badge-magnus">최석진</span></div><div class="cell"><span class="actor-badge badge-abel">박정원</span></div><div class="cell"><span class="actor-badge badge-friedrich">김도현</span></div><div class="cell"><span class="actor-badge badge-hagen">김지웅</span></div><div class="cell"><span class="actor-badge badge-jasper">김태환</span></div><div class="cell"><span class="actor-badge badge-reinhardt">김보현</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="황순종" data-abel="강병훈" data-friedrich="김준식" data-hagen="황건우" data-jasper="김도민" data-reinhardt="고철순">
     <div class="cell date">7/29</div><div class="cell day day-wkd">수</div><div class="cell time">19:30</div>
     <div class="cell"><span class="actor-badge badge-magnus">황순종</span></div><div class="cell"><span class="actor-badge badge-abel">강병훈</span></div><div class="cell"><span class="actor-badge badge-friedrich">김준식</span></div><div class="cell"><span class="actor-badge badge-hagen">황건우</span></div><div class="cell"><span class="actor-badge badge-jasper">김도민</span></div><div class="cell"><span class="actor-badge badge-reinhardt">고철순</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="최석진" data-abel="박정원" data-friedrich="김방언" data-hagen="조모세" data-jasper="김태환" data-reinhardt="김보현">
     <div class="cell date">7/30</div><div class="cell day day-wkd">목</div><div class="cell time">19:30</div>
     <div class="cell"><span class="actor-badge badge-magnus">최석진</span></div><div class="cell"><span class="actor-badge badge-abel">박정원</span></div><div class="cell"><span class="actor-badge badge-friedrich">김방언</span></div><div class="cell"><span class="actor-badge badge-hagen">조모세</span></div><div class="cell"><span class="actor-badge badge-jasper">김태환</span></div><div class="cell"><span class="actor-badge badge-reinhardt">김보현</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="황순종" data-abel="강병훈" data-friedrich="김준식" data-hagen="황건우" data-jasper="김도민" data-reinhardt="고철순">
     <div class="cell date">7/31</div><div class="cell day day-wkd">금</div><div class="cell time">19:30</div>
     <div class="cell"><span class="actor-badge badge-magnus">황순종</span></div><div class="cell"><span class="actor-badge badge-abel">강병훈</span></div><div class="cell"><span class="actor-badge badge-friedrich">김준식</span></div><div class="cell"><span class="actor-badge badge-hagen">황건우</span></div><div class="cell"><span class="actor-badge badge-jasper">김도민</span></div><div class="cell"><span class="actor-badge badge-reinhardt">고철순</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
@@ -280,280 +273,280 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink)
   <div class="row" data-magnus="한상훈" data-abel="박정원" data-friedrich="김도현" data-hagen="김지웅" data-jasper="최기정" data-reinhardt="이형훈">
     <div class="cell date">8/01</div><div class="cell day day-sat">토</div><div class="cell time">14:00</div>
     <div class="cell"><span class="actor-badge badge-magnus">한상훈</span></div><div class="cell"><span class="actor-badge badge-abel">박정원</span></div><div class="cell"><span class="actor-badge badge-friedrich">김도현</span></div><div class="cell"><span class="actor-badge badge-hagen">김지웅</span></div><div class="cell"><span class="actor-badge badge-jasper">최기정</span></div><div class="cell"><span class="actor-badge badge-reinhardt">이형훈</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="최석진" data-abel="박정원" data-friedrich="김도현" data-hagen="조모세" data-jasper="김태환" data-reinhardt="이형훈">
     <div class="cell date">8/01</div><div class="cell day day-sat">토</div><div class="cell time">18:30</div>
     <div class="cell"><span class="actor-badge badge-magnus">최석진</span></div><div class="cell"><span class="actor-badge badge-abel">박정원</span></div><div class="cell"><span class="actor-badge badge-friedrich">김도현</span></div><div class="cell"><span class="actor-badge badge-hagen">조모세</span></div><div class="cell"><span class="actor-badge badge-jasper">김태환</span></div><div class="cell"><span class="actor-badge badge-reinhardt">이형훈</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="황순종" data-abel="강병훈" data-friedrich="김준식" data-hagen="황건우" data-jasper="김도민" data-reinhardt="고철순">
     <div class="cell date">8/02</div><div class="cell day day-sun">일</div><div class="cell time">14:00</div>
     <div class="cell"><span class="actor-badge badge-magnus">황순종</span></div><div class="cell"><span class="actor-badge badge-abel">강병훈</span></div><div class="cell"><span class="actor-badge badge-friedrich">김준식</span></div><div class="cell"><span class="actor-badge badge-hagen">황건우</span></div><div class="cell"><span class="actor-badge badge-jasper">김도민</span></div><div class="cell"><span class="actor-badge badge-reinhardt">고철순</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="한상훈" data-abel="이한솔" data-friedrich="김방언" data-hagen="김지웅" data-jasper="최기정" data-reinhardt="김보현">
     <div class="cell date">8/02</div><div class="cell day day-sun">일</div><div class="cell time">18:30</div>
     <div class="cell"><span class="actor-badge badge-magnus">한상훈</span></div><div class="cell"><span class="actor-badge badge-abel">이한솔</span></div><div class="cell"><span class="actor-badge badge-friedrich">김방언</span></div><div class="cell"><span class="actor-badge badge-hagen">김지웅</span></div><div class="cell"><span class="actor-badge badge-jasper">최기정</span></div><div class="cell"><span class="actor-badge badge-reinhardt">김보현</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="황순종" data-abel="강병훈" data-friedrich="김준식" data-hagen="황건우" data-jasper="김도민" data-reinhardt="고철순">
     <div class="cell date">8/04</div><div class="cell day day-wkd">화</div><div class="cell time">19:30</div>
     <div class="cell"><span class="actor-badge badge-magnus">황순종</span></div><div class="cell"><span class="actor-badge badge-abel">강병훈</span></div><div class="cell"><span class="actor-badge badge-friedrich">김준식</span></div><div class="cell"><span class="actor-badge badge-hagen">황건우</span></div><div class="cell"><span class="actor-badge badge-jasper">김도민</span></div><div class="cell"><span class="actor-badge badge-reinhardt">고철순</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="최석진" data-abel="박정원" data-friedrich="김도현" data-hagen="조모세" data-jasper="김태환" data-reinhardt="김보현">
     <div class="cell date">8/05</div><div class="cell day day-wkd">수</div><div class="cell time">15:00</div>
     <div class="cell"><span class="actor-badge badge-magnus">최석진</span></div><div class="cell"><span class="actor-badge badge-abel">박정원</span></div><div class="cell"><span class="actor-badge badge-friedrich">김도현</span></div><div class="cell"><span class="actor-badge badge-hagen">조모세</span></div><div class="cell"><span class="actor-badge badge-jasper">김태환</span></div><div class="cell"><span class="actor-badge badge-reinhardt">김보현</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="한상훈" data-abel="이한솔" data-friedrich="김도현" data-hagen="김지웅" data-jasper="최기정" data-reinhardt="이형훈">
     <div class="cell date">8/05</div><div class="cell day day-wkd">수</div><div class="cell time">19:30</div>
     <div class="cell"><span class="actor-badge badge-magnus">한상훈</span></div><div class="cell"><span class="actor-badge badge-abel">이한솔</span></div><div class="cell"><span class="actor-badge badge-friedrich">김도현</span></div><div class="cell"><span class="actor-badge badge-hagen">김지웅</span></div><div class="cell"><span class="actor-badge badge-jasper">최기정</span></div><div class="cell"><span class="actor-badge badge-reinhardt">이형훈</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="황순종" data-abel="강병훈" data-friedrich="김방언" data-hagen="황건우" data-jasper="김도민" data-reinhardt="고철순">
     <div class="cell date">8/06</div><div class="cell day day-wkd">목</div><div class="cell time">19:30</div>
     <div class="cell"><span class="actor-badge badge-magnus">황순종</span></div><div class="cell"><span class="actor-badge badge-abel">강병훈</span></div><div class="cell"><span class="actor-badge badge-friedrich">김방언</span></div><div class="cell"><span class="actor-badge badge-hagen">황건우</span></div><div class="cell"><span class="actor-badge badge-jasper">김도민</span></div><div class="cell"><span class="actor-badge badge-reinhardt">고철순</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="최석진" data-abel="박정원" data-friedrich="김준식" data-hagen="김지웅" data-jasper="김태환" data-reinhardt="이형훈">
     <div class="cell date">8/07</div><div class="cell day day-wkd">금</div><div class="cell time">19:30</div>
     <div class="cell"><span class="actor-badge badge-magnus">최석진</span></div><div class="cell"><span class="actor-badge badge-abel">박정원</span></div><div class="cell"><span class="actor-badge badge-friedrich">김준식</span></div><div class="cell"><span class="actor-badge badge-hagen">김지웅</span></div><div class="cell"><span class="actor-badge badge-jasper">김태환</span></div><div class="cell"><span class="actor-badge badge-reinhardt">이형훈</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="한상훈" data-abel="이한솔" data-friedrich="김방언" data-hagen="조모세" data-jasper="최기정" data-reinhardt="고철순">
     <div class="cell date">8/08</div><div class="cell day day-sat">토</div><div class="cell time">14:00</div>
     <div class="cell"><span class="actor-badge badge-magnus">한상훈</span></div><div class="cell"><span class="actor-badge badge-abel">이한솔</span></div><div class="cell"><span class="actor-badge badge-friedrich">김방언</span></div><div class="cell"><span class="actor-badge badge-hagen">조모세</span></div><div class="cell"><span class="actor-badge badge-jasper">최기정</span></div><div class="cell"><span class="actor-badge badge-reinhardt">고철순</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="황순종" data-abel="이한솔" data-friedrich="김방언" data-hagen="김지웅" data-jasper="김태환" data-reinhardt="김보현">
     <div class="cell date">8/08</div><div class="cell day day-sat">토</div><div class="cell time">18:30</div>
     <div class="cell"><span class="actor-badge badge-magnus">황순종</span></div><div class="cell"><span class="actor-badge badge-abel">이한솔</span></div><div class="cell"><span class="actor-badge badge-friedrich">김방언</span></div><div class="cell"><span class="actor-badge badge-hagen">김지웅</span></div><div class="cell"><span class="actor-badge badge-jasper">김태환</span></div><div class="cell"><span class="actor-badge badge-reinhardt">김보현</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="한상훈" data-abel="강병훈" data-friedrich="김준식" data-hagen="황건우" data-jasper="김도민" data-reinhardt="이형훈">
     <div class="cell date">8/09</div><div class="cell day day-sun">일</div><div class="cell time">14:00</div>
     <div class="cell"><span class="actor-badge badge-magnus">한상훈</span></div><div class="cell"><span class="actor-badge badge-abel">강병훈</span></div><div class="cell"><span class="actor-badge badge-friedrich">김준식</span></div><div class="cell"><span class="actor-badge badge-hagen">황건우</span></div><div class="cell"><span class="actor-badge badge-jasper">김도민</span></div><div class="cell"><span class="actor-badge badge-reinhardt">이형훈</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="황순종" data-abel="박정원" data-friedrich="김준식" data-hagen="조모세" data-jasper="김도민" data-reinhardt="고철순">
     <div class="cell date">8/11</div><div class="cell day day-wkd">화</div><div class="cell time">19:30</div>
     <div class="cell"><span class="actor-badge badge-magnus">황순종</span></div><div class="cell"><span class="actor-badge badge-abel">박정원</span></div><div class="cell"><span class="actor-badge badge-friedrich">김준식</span></div><div class="cell"><span class="actor-badge badge-hagen">조모세</span></div><div class="cell"><span class="actor-badge badge-jasper">김도민</span></div><div class="cell"><span class="actor-badge badge-reinhardt">고철순</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="최석진" data-abel="강병훈" data-friedrich="김방언" data-hagen="황건우" data-jasper="김태환" data-reinhardt="김보현">
     <div class="cell date">8/12</div><div class="cell day day-wkd">수</div><div class="cell time">15:00</div>
     <div class="cell"><span class="actor-badge badge-magnus">최석진</span></div><div class="cell"><span class="actor-badge badge-abel">강병훈</span></div><div class="cell"><span class="actor-badge badge-friedrich">김방언</span></div><div class="cell"><span class="actor-badge badge-hagen">황건우</span></div><div class="cell"><span class="actor-badge badge-jasper">김태환</span></div><div class="cell"><span class="actor-badge badge-reinhardt">김보현</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="한상훈" data-abel="이한솔" data-friedrich="김방언" data-hagen="김지웅" data-jasper="최기정" data-reinhardt="김보현">
     <div class="cell date">8/12</div><div class="cell day day-wkd">수</div><div class="cell time">19:30</div>
     <div class="cell"><span class="actor-badge badge-magnus">한상훈</span></div><div class="cell"><span class="actor-badge badge-abel">이한솔</span></div><div class="cell"><span class="actor-badge badge-friedrich">김방언</span></div><div class="cell"><span class="actor-badge badge-hagen">김지웅</span></div><div class="cell"><span class="actor-badge badge-jasper">최기정</span></div><div class="cell"><span class="actor-badge badge-reinhardt">김보현</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="황순종" data-abel="강병훈" data-friedrich="김도현" data-hagen="김지웅" data-jasper="최기정" data-reinhardt="고철순">
     <div class="cell date">8/13</div><div class="cell day day-wkd">목</div><div class="cell time">19:30</div>
     <div class="cell"><span class="actor-badge badge-magnus">황순종</span></div><div class="cell"><span class="actor-badge badge-abel">강병훈</span></div><div class="cell"><span class="actor-badge badge-friedrich">김도현</span></div><div class="cell"><span class="actor-badge badge-hagen">김지웅</span></div><div class="cell"><span class="actor-badge badge-jasper">최기정</span></div><div class="cell"><span class="actor-badge badge-reinhardt">고철순</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="한상훈" data-abel="이한솔" data-friedrich="김준식" data-hagen="황건우" data-jasper="김도민" data-reinhardt="김보현">
     <div class="cell date">8/14</div><div class="cell day day-wkd">금</div><div class="cell time">15:00</div>
     <div class="cell"><span class="actor-badge badge-magnus">한상훈</span></div><div class="cell"><span class="actor-badge badge-abel">이한솔</span></div><div class="cell"><span class="actor-badge badge-friedrich">김준식</span></div><div class="cell"><span class="actor-badge badge-hagen">황건우</span></div><div class="cell"><span class="actor-badge badge-jasper">김도민</span></div><div class="cell"><span class="actor-badge badge-reinhardt">김보현</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="최석진" data-abel="박정원" data-friedrich="김도현" data-hagen="조모세" data-jasper="김태환" data-reinhardt="김보현">
     <div class="cell date">8/14</div><div class="cell day day-wkd">금</div><div class="cell time">19:30</div>
     <div class="cell"><span class="actor-badge badge-magnus">최석진</span></div><div class="cell"><span class="actor-badge badge-abel">박정원</span></div><div class="cell"><span class="actor-badge badge-friedrich">김도현</span></div><div class="cell"><span class="actor-badge badge-hagen">조모세</span></div><div class="cell"><span class="actor-badge badge-jasper">김태환</span></div><div class="cell"><span class="actor-badge badge-reinhardt">김보현</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="한상훈" data-abel="이한솔" data-friedrich="김방언" data-hagen="김지웅" data-jasper="최기정" data-reinhardt="고철순">
     <div class="cell date">8/15</div><div class="cell day day-sat">토</div><div class="cell time">14:00</div>
     <div class="cell"><span class="actor-badge badge-magnus">한상훈</span></div><div class="cell"><span class="actor-badge badge-abel">이한솔</span></div><div class="cell"><span class="actor-badge badge-friedrich">김방언</span></div><div class="cell"><span class="actor-badge badge-hagen">김지웅</span></div><div class="cell"><span class="actor-badge badge-jasper">최기정</span></div><div class="cell"><span class="actor-badge badge-reinhardt">고철순</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="황순종" data-abel="강병훈" data-friedrich="김방언" data-hagen="황건우" data-jasper="김도민" data-reinhardt="고철순">
     <div class="cell date">8/15</div><div class="cell day day-sat">토</div><div class="cell time">18:30</div>
     <div class="cell"><span class="actor-badge badge-magnus">황순종</span></div><div class="cell"><span class="actor-badge badge-abel">강병훈</span></div><div class="cell"><span class="actor-badge badge-friedrich">김방언</span></div><div class="cell"><span class="actor-badge badge-hagen">황건우</span></div><div class="cell"><span class="actor-badge badge-jasper">김도민</span></div><div class="cell"><span class="actor-badge badge-reinhardt">고철순</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="최석진" data-abel="박정원" data-friedrich="김도현" data-hagen="조모세" data-jasper="김태환" data-reinhardt="이형훈">
     <div class="cell date">8/16</div><div class="cell day day-sun">일</div><div class="cell time">14:00</div>
     <div class="cell"><span class="actor-badge badge-magnus">최석진</span></div><div class="cell"><span class="actor-badge badge-abel">박정원</span></div><div class="cell"><span class="actor-badge badge-friedrich">김도현</span></div><div class="cell"><span class="actor-badge badge-hagen">조모세</span></div><div class="cell"><span class="actor-badge badge-jasper">김태환</span></div><div class="cell"><span class="actor-badge badge-reinhardt">이형훈</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="황순종" data-abel="강병훈" data-friedrich="김준식" data-hagen="김지웅" data-jasper="김도민" data-reinhardt="이형훈">
     <div class="cell date">8/16</div><div class="cell day day-sun">일</div><div class="cell time">18:30</div>
     <div class="cell"><span class="actor-badge badge-magnus">황순종</span></div><div class="cell"><span class="actor-badge badge-abel">강병훈</span></div><div class="cell"><span class="actor-badge badge-friedrich">김준식</span></div><div class="cell"><span class="actor-badge badge-hagen">김지웅</span></div><div class="cell"><span class="actor-badge badge-jasper">김도민</span></div><div class="cell"><span class="actor-badge badge-reinhardt">이형훈</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="한상훈" data-abel="이한솔" data-friedrich="김준식" data-hagen="조모세" data-jasper="최기정" data-reinhardt="김보현">
     <div class="cell date">8/18</div><div class="cell day day-wkd">화</div><div class="cell time">19:30</div>
     <div class="cell"><span class="actor-badge badge-magnus">한상훈</span></div><div class="cell"><span class="actor-badge badge-abel">이한솔</span></div><div class="cell"><span class="actor-badge badge-friedrich">김준식</span></div><div class="cell"><span class="actor-badge badge-hagen">조모세</span></div><div class="cell"><span class="actor-badge badge-jasper">최기정</span></div><div class="cell"><span class="actor-badge badge-reinhardt">김보현</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="황순종" data-abel="강병훈" data-friedrich="김도현" data-hagen="황건우" data-jasper="김도민" data-reinhardt="고철순">
     <div class="cell date">8/19</div><div class="cell day day-wkd">수</div><div class="cell time">15:00</div>
     <div class="cell"><span class="actor-badge badge-magnus">황순종</span></div><div class="cell"><span class="actor-badge badge-abel">강병훈</span></div><div class="cell"><span class="actor-badge badge-friedrich">김도현</span></div><div class="cell"><span class="actor-badge badge-hagen">황건우</span></div><div class="cell"><span class="actor-badge badge-jasper">김도민</span></div><div class="cell"><span class="actor-badge badge-reinhardt">고철순</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="최석진" data-abel="강병훈" data-friedrich="김도현" data-hagen="김지웅" data-jasper="김태환" data-reinhardt="고철순">
     <div class="cell date">8/19</div><div class="cell day day-wkd">수</div><div class="cell time">19:30</div>
     <div class="cell"><span class="actor-badge badge-magnus">최석진</span></div><div class="cell"><span class="actor-badge badge-abel">강병훈</span></div><div class="cell"><span class="actor-badge badge-friedrich">김도현</span></div><div class="cell"><span class="actor-badge badge-hagen">김지웅</span></div><div class="cell"><span class="actor-badge badge-jasper">김태환</span></div><div class="cell"><span class="actor-badge badge-reinhardt">고철순</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="한상훈" data-abel="이한솔" data-friedrich="김방언" data-hagen="김지웅" data-jasper="최기정" data-reinhardt="이형훈">
     <div class="cell date">8/20</div><div class="cell day day-wkd">목</div><div class="cell time">19:30</div>
     <div class="cell"><span class="actor-badge badge-magnus">한상훈</span></div><div class="cell"><span class="actor-badge badge-abel">이한솔</span></div><div class="cell"><span class="actor-badge badge-friedrich">김방언</span></div><div class="cell"><span class="actor-badge badge-hagen">김지웅</span></div><div class="cell"><span class="actor-badge badge-jasper">최기정</span></div><div class="cell"><span class="actor-badge badge-reinhardt">이형훈</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="최석진" data-abel="박정원" data-friedrich="김도현" data-hagen="조모세" data-jasper="김태환" data-reinhardt="김보현">
     <div class="cell date">8/21</div><div class="cell day day-wkd">금</div><div class="cell time">19:30</div>
     <div class="cell"><span class="actor-badge badge-magnus">최석진</span></div><div class="cell"><span class="actor-badge badge-abel">박정원</span></div><div class="cell"><span class="actor-badge badge-friedrich">김도현</span></div><div class="cell"><span class="actor-badge badge-hagen">조모세</span></div><div class="cell"><span class="actor-badge badge-jasper">김태환</span></div><div class="cell"><span class="actor-badge badge-reinhardt">김보현</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="황순종" data-abel="이한솔" data-friedrich="김준식" data-hagen="황건우" data-jasper="김도민" data-reinhardt="고철순">
     <div class="cell date">8/22</div><div class="cell day day-sat">토</div><div class="cell time">14:00</div>
     <div class="cell"><span class="actor-badge badge-magnus">황순종</span></div><div class="cell"><span class="actor-badge badge-abel">이한솔</span></div><div class="cell"><span class="actor-badge badge-friedrich">김준식</span></div><div class="cell"><span class="actor-badge badge-hagen">황건우</span></div><div class="cell"><span class="actor-badge badge-jasper">김도민</span></div><div class="cell"><span class="actor-badge badge-reinhardt">고철순</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="한상훈" data-abel="이한솔" data-friedrich="김준식" data-hagen="김지웅" data-jasper="최기정" data-reinhardt="이형훈">
     <div class="cell date">8/22</div><div class="cell day day-sat">토</div><div class="cell time">18:30</div>
     <div class="cell"><span class="actor-badge badge-magnus">한상훈</span></div><div class="cell"><span class="actor-badge badge-abel">이한솔</span></div><div class="cell"><span class="actor-badge badge-friedrich">김준식</span></div><div class="cell"><span class="actor-badge badge-hagen">김지웅</span></div><div class="cell"><span class="actor-badge badge-jasper">최기정</span></div><div class="cell"><span class="actor-badge badge-reinhardt">이형훈</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="황순종" data-abel="강병훈" data-friedrich="김방언" data-hagen="황건우" data-jasper="김태환" data-reinhardt="김보현">
     <div class="cell date">8/23</div><div class="cell day day-sun">일</div><div class="cell time">14:00</div>
     <div class="cell"><span class="actor-badge badge-magnus">황순종</span></div><div class="cell"><span class="actor-badge badge-abel">강병훈</span></div><div class="cell"><span class="actor-badge badge-friedrich">김방언</span></div><div class="cell"><span class="actor-badge badge-hagen">황건우</span></div><div class="cell"><span class="actor-badge badge-jasper">김태환</span></div><div class="cell"><span class="actor-badge badge-reinhardt">김보현</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="최석진" data-abel="박정원" data-friedrich="김방언" data-hagen="조모세" data-jasper="김도민" data-reinhardt="김보현">
     <div class="cell date">8/23</div><div class="cell day day-sun">일</div><div class="cell time">18:30</div>
     <div class="cell"><span class="actor-badge badge-magnus">최석진</span></div><div class="cell"><span class="actor-badge badge-abel">박정원</span></div><div class="cell"><span class="actor-badge badge-friedrich">김방언</span></div><div class="cell"><span class="actor-badge badge-hagen">조모세</span></div><div class="cell"><span class="actor-badge badge-jasper">김도민</span></div><div class="cell"><span class="actor-badge badge-reinhardt">김보현</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="최석진" data-abel="박정원" data-friedrich="김준식" data-hagen="조모세" data-jasper="김태환" data-reinhardt="고철순">
     <div class="cell date">8/25</div><div class="cell day day-wkd">화</div><div class="cell time">19:30</div>
     <div class="cell"><span class="actor-badge badge-magnus">최석진</span></div><div class="cell"><span class="actor-badge badge-abel">박정원</span></div><div class="cell"><span class="actor-badge badge-friedrich">김준식</span></div><div class="cell"><span class="actor-badge badge-hagen">조모세</span></div><div class="cell"><span class="actor-badge badge-jasper">김태환</span></div><div class="cell"><span class="actor-badge badge-reinhardt">고철순</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="한상훈" data-abel="이한솔" data-friedrich="김도현" data-hagen="황건우" data-jasper="김도민" data-reinhardt="이형훈">
     <div class="cell date">8/26</div><div class="cell day day-wkd">수</div><div class="cell time">15:00</div>
     <div class="cell"><span class="actor-badge badge-magnus">한상훈</span></div><div class="cell"><span class="actor-badge badge-abel">이한솔</span></div><div class="cell"><span class="actor-badge badge-friedrich">김도현</span></div><div class="cell"><span class="actor-badge badge-hagen">황건우</span></div><div class="cell"><span class="actor-badge badge-jasper">김도민</span></div><div class="cell"><span class="actor-badge badge-reinhardt">이형훈</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="황순종" data-abel="강병훈" data-friedrich="김도현" data-hagen="조모세" data-jasper="김태환" data-reinhardt="이형훈">
     <div class="cell date">8/26</div><div class="cell day day-wkd">수</div><div class="cell time">19:30</div>
     <div class="cell"><span class="actor-badge badge-magnus">황순종</span></div><div class="cell"><span class="actor-badge badge-abel">강병훈</span></div><div class="cell"><span class="actor-badge badge-friedrich">김도현</span></div><div class="cell"><span class="actor-badge badge-hagen">조모세</span></div><div class="cell"><span class="actor-badge badge-jasper">김태환</span></div><div class="cell"><span class="actor-badge badge-reinhardt">이형훈</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="황순종" data-abel="강병훈" data-friedrich="김방언" data-hagen="김지웅" data-jasper="최기정" data-reinhardt="고철순">
     <div class="cell date">8/27</div><div class="cell day day-wkd">목</div><div class="cell time">19:30</div>
     <div class="cell"><span class="actor-badge badge-magnus">황순종</span></div><div class="cell"><span class="actor-badge badge-abel">강병훈</span></div><div class="cell"><span class="actor-badge badge-friedrich">김방언</span></div><div class="cell"><span class="actor-badge badge-hagen">김지웅</span></div><div class="cell"><span class="actor-badge badge-jasper">최기정</span></div><div class="cell"><span class="actor-badge badge-reinhardt">고철순</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="최석진" data-abel="박정원" data-friedrich="김준식" data-hagen="황건우" data-jasper="김도민" data-reinhardt="김보현">
     <div class="cell date">8/28</div><div class="cell day day-wkd">금</div><div class="cell time">19:30</div>
     <div class="cell"><span class="actor-badge badge-magnus">최석진</span></div><div class="cell"><span class="actor-badge badge-abel">박정원</span></div><div class="cell"><span class="actor-badge badge-friedrich">김준식</span></div><div class="cell"><span class="actor-badge badge-hagen">황건우</span></div><div class="cell"><span class="actor-badge badge-jasper">김도민</span></div><div class="cell"><span class="actor-badge badge-reinhardt">김보현</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="한상훈" data-abel="강병훈" data-friedrich="김방언" data-hagen="김지웅" data-jasper="최기정" data-reinhardt="이형훈">
     <div class="cell date">8/29</div><div class="cell day day-sat">토</div><div class="cell time">14:00</div>
     <div class="cell"><span class="actor-badge badge-magnus">한상훈</span></div><div class="cell"><span class="actor-badge badge-abel">강병훈</span></div><div class="cell"><span class="actor-badge badge-friedrich">김방언</span></div><div class="cell"><span class="actor-badge badge-hagen">김지웅</span></div><div class="cell"><span class="actor-badge badge-jasper">최기정</span></div><div class="cell"><span class="actor-badge badge-reinhardt">이형훈</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="최석진" data-abel="이한솔" data-friedrich="김준식" data-hagen="황건우" data-jasper="김도민" data-reinhardt="이형훈">
     <div class="cell date">8/29</div><div class="cell day day-sat">토</div><div class="cell time">18:30</div>
     <div class="cell"><span class="actor-badge badge-magnus">최석진</span></div><div class="cell"><span class="actor-badge badge-abel">이한솔</span></div><div class="cell"><span class="actor-badge badge-friedrich">김준식</span></div><div class="cell"><span class="actor-badge badge-hagen">황건우</span></div><div class="cell"><span class="actor-badge badge-jasper">김도민</span></div><div class="cell"><span class="actor-badge badge-reinhardt">이형훈</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="황순종" data-abel="박정원" data-friedrich="김도현" data-hagen="조모세" data-jasper="김태환" data-reinhardt="고철순">
     <div class="cell date">8/30</div><div class="cell day day-sun">일</div><div class="cell time">14:00</div>
     <div class="cell"><span class="actor-badge badge-magnus">황순종</span></div><div class="cell"><span class="actor-badge badge-abel">박정원</span></div><div class="cell"><span class="actor-badge badge-friedrich">김도현</span></div><div class="cell"><span class="actor-badge badge-hagen">조모세</span></div><div class="cell"><span class="actor-badge badge-jasper">김태환</span></div><div class="cell"><span class="actor-badge badge-reinhardt">고철순</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
   <div class="row" data-magnus="한상훈" data-abel="박정원" data-friedrich="김방언" data-hagen="김지웅" data-jasper="최기정" data-reinhardt="김보현">
     <div class="cell date">8/30</div><div class="cell day day-sun">일</div><div class="cell time">18:30</div>
     <div class="cell"><span class="actor-badge badge-magnus">한상훈</span></div><div class="cell"><span class="actor-badge badge-abel">박정원</span></div><div class="cell"><span class="actor-badge badge-friedrich">김방언</span></div><div class="cell"><span class="actor-badge badge-hagen">김지웅</span></div><div class="cell"><span class="actor-badge badge-jasper">최기정</span></div><div class="cell"><span class="actor-badge badge-reinhardt">김보현</span></div>
-    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="highlightSeat(this.value)"></div>
+    <div class="cell"><input class="seat-input" placeholder="예: 1층 A 5" oninput="updateAllSeats()"></div>
     <div class="cell"><button class="copy-btn" onclick="copyRow(this)">⚔️</button></div>
   </div>
 
@@ -562,8 +555,18 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink)
 <!-- 좌석 도면 영역 -->
 <div class="seating-section">
   <div class="seating-title">링크아트센터드림 드림1관 좌석 배치도</div>
-  <div class="seating-desc">표의 '내 좌석' 입력칸에 입력(예: <b>1층 A 5</b>, <b>2층 C 12</b>)하시면 배치도에 실시간 강조 표시됩니다.</div>
+  <div class="seating-desc">표의 '내 좌석' 칸에 동일한 자리를 입력할수록 방문 횟수가 누적되어 보라색이 점점 진해집니다.</div>
   
+  <!-- 범례 추가 -->
+  <div class="seat-legend">
+    <div class="legend-item"><div class="legend-box" style="background:#e2e8f0;"></div> 미선택</div>
+    <div class="legend-item"><div class="legend-box" style="background:#f5f0ff;"></div> 1회</div>
+    <div class="legend-item"><div class="legend-box" style="background:#d6b3ff;"></div> 2회</div>
+    <div class="legend-item"><div class="legend-box" style="background:#a64dff;"></div> 3회</div>
+    <div class="legend-item"><div class="legend-box" style="background:#7300e6;"></div> 4회</div>
+    <div class="legend-item"><div class="legend-box" style="background:#390073;"></div> 5회 이상</div>
+  </div>
+
   <div class="stage">STAGE</div>
 
   <div class="floor-title">1층</div>
@@ -574,34 +577,34 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink)
 </div>
 
 <script>
-// 1. 전달받은 좌석 도면 구성 데이터
+// 1. 좌석 도면 구성 데이터
 const floor1Config = [
-  { row: 'A', pattern: ['bg-grey', 'bg-grey', 'bg-blue', 'bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue', 'gap', 'bg-blue','bg-blue','bg-grey','bg-grey'] },
-  { row: 'B', pattern: ['bg-blue', 'bg-blue', 'bg-blue', 'bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue', 'gap', 'bg-blue','bg-blue','bg-grey','bg-grey'] },
-  { row: 'C', pattern: ['bg-blue', 'bg-blue', 'bg-blue', 'bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue', 'gap', 'bg-blue','bg-blue','bg-grey','bg-grey'] },
-  { row: 'D', pattern: ['bg-blue', 'bg-blue', 'bg-blue', 'bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue', 'gap', 'bg-blue','bg-blue','bg-grey'] },
-  { row: 'E', pattern: ['bg-green','bg-green','bg-green', 'gap', 'gap', 'gap', 'gap', 'gap', 'gap', 'gap', 'gap', 'gap', 'gap', 'gap', 'gap', 'gap', 'gap'] },
-  { row: 'F', pattern: ['gap', 'gap', 'gap', 'gap', 'gap', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue'] },
-  { row: 'G', pattern: ['gap', 'gap', 'gap', 'bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue'] },
-  { row: 'H', pattern: ['gap', 'gap', 'gap', 'bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue'] },
-  { row: 'I', pattern: ['gap', 'gap', 'gap', 'bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue'] },
-  { row: 'J', pattern: ['bg-blue', 'bg-blue', 'gap', 'bg-blue', 'bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue'] },
-  { row: 'K', pattern: ['bg-blue', 'bg-blue', 'gap', 'bg-blue', 'bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue'] },
-  { row: 'L', pattern: ['bg-blue', 'bg-blue', 'gap', 'bg-blue', 'bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue'] },
-  { row: 'M', pattern: ['bg-blue', 'bg-blue', 'gap', 'bg-blue', 'bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue'] },
-  { row: 'N', pattern: ['bg-blue', 'bg-blue', 'gap', 'bg-blue', 'bg-blue', 'bg-blue','bg-blue','bg-blue', 'gap', 'bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue','bg-blue', 'gap', 'bg-blue','bg-blue'] }
+  { row: 'A', pattern: ['gap', 'gap', 'seat', 'seat', 'gap', 'seat','seat','seat','seat','seat','seat','seat','seat','seat','seat','seat','seat', 'gap', 'seat','seat','gap','gap'] },
+  { row: 'B', pattern: ['seat', 'seat', 'seat', 'seat', 'gap', 'seat','seat','seat','seat','seat','seat','seat','seat','seat','seat','seat','seat', 'gap', 'seat','seat','gap','gap'] },
+  { row: 'C', pattern: ['seat', 'seat', 'seat', 'seat', 'gap', 'seat','seat','seat','seat','seat','seat','seat','seat','seat','seat','seat','seat', 'gap', 'seat','seat','gap','gap'] },
+  { row: 'D', pattern: ['seat', 'seat', 'seat', 'seat', 'gap', 'seat','seat','seat','seat','seat','seat','seat','seat','seat','seat','seat', 'gap', 'seat','seat','gap'] },
+  { row: 'E', pattern: ['seat','seat','seat', 'gap', 'gap', 'gap', 'gap', 'gap', 'gap', 'gap', 'gap', 'gap', 'gap', 'gap', 'gap', 'gap', 'gap'] },
+  { row: 'F', pattern: ['gap', 'gap', 'gap', 'gap', 'gap', 'gap', 'seat','seat','seat','seat','seat','seat','seat','seat','seat','seat','seat','seat', 'gap', 'seat','seat','seat','seat'] },
+  { row: 'G', pattern: ['gap', 'gap', 'gap', 'seat', 'gap', 'seat','seat','seat','seat','seat','seat','seat','seat','seat','seat','seat','seat', 'gap', 'seat','seat','seat','seat'] },
+  { row: 'H', pattern: ['gap', 'gap', 'gap', 'seat', 'gap', 'seat','seat','seat','seat','seat','seat','seat','seat','seat','seat','seat','seat', 'gap', 'seat','seat','seat','seat'] },
+  { row: 'I', pattern: ['gap', 'gap', 'gap', 'seat', 'gap', 'seat','seat','seat','seat','seat','seat','seat','seat','seat','seat','seat','seat', 'gap', 'seat','seat','seat','seat'] },
+  { row: 'J', pattern: ['seat', 'seat', 'gap', 'seat', 'seat', 'gap', 'seat','seat','seat','seat','seat','seat','seat','seat','seat','seat','seat','seat', 'gap', 'seat','seat','seat','seat'] },
+  { row: 'K', pattern: ['seat', 'seat', 'gap', 'seat', 'seat', 'gap', 'seat','seat','seat','seat','seat','seat','seat','seat','seat','seat','seat','seat', 'gap', 'seat','seat','seat','seat'] },
+  { row: 'L', pattern: ['seat', 'seat', 'gap', 'seat', 'seat', 'gap', 'seat','seat','seat','seat','seat','seat','seat','seat','seat','seat','seat','seat', 'gap', 'seat','seat','seat','seat'] },
+  { row: 'M', pattern: ['seat', 'seat', 'gap', 'seat', 'seat', 'gap', 'seat','seat','seat','seat','seat','seat','seat','seat','seat','seat','seat','seat', 'gap', 'seat','seat','seat','seat'] },
+  { row: 'N', pattern: ['seat', 'seat', 'gap', 'seat', 'seat', 'seat','seat','seat', 'gap', 'seat','seat','seat','seat','seat','seat','seat','seat', 'gap', 'seat','seat'] }
 ];
 
 const floor2Config = [
-  { row: 'B', pattern: ['bg-orange','bg-orange','bg-orange','bg-orange','bg-orange', 'gap', 'bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange', 'gap', 'bg-orange','bg-orange','bg-orange','bg-orange'] },
-  { row: 'C', pattern: ['gap', 'bg-orange','bg-orange','bg-orange','bg-orange', 'gap', 'bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange', 'gap', 'bg-orange','bg-orange','bg-orange','bg-grey'] },
-  { row: 'D', pattern: ['gap', 'bg-orange','bg-orange','bg-orange','bg-orange', 'gap', 'bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange', 'gap', 'bg-orange','bg-orange','bg-orange','bg-grey'] },
-  { row: 'E', pattern: ['gap', 'bg-orange','bg-orange','bg-orange','bg-orange', 'gap', 'bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange', 'gap', 'bg-orange','bg-orange','bg-orange','bg-grey'] },
-  { row: 'F', pattern: ['gap', 'bg-orange','bg-orange','bg-orange','bg-orange', 'gap', 'bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange', 'gap', 'bg-orange','bg-orange','bg-orange','bg-grey'] },
-  { row: 'G', pattern: ['gap', 'bg-orange','bg-orange','bg-orange','bg-orange','bg-orange', 'gap', 'bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange','bg-orange', 'gap', 'bg-orange','bg-orange'] }
+  { row: 'B', pattern: ['seat','seat','seat','seat','seat', 'gap', 'seat','seat','seat','seat','seat','seat','seat','seat','seat', 'gap', 'seat','seat','seat','seat'] },
+  { row: 'C', pattern: ['gap', 'seat','seat','seat','seat', 'gap', 'seat','seat','seat','seat','seat','seat','seat','seat','seat', 'gap', 'seat','seat','seat','gap'] },
+  { row: 'D', pattern: ['gap', 'seat','seat','seat','seat', 'gap', 'seat','seat','seat','seat','seat','seat','seat','seat','seat', 'gap', 'seat','seat','seat','gap'] },
+  { row: 'E', pattern: ['gap', 'seat','seat','seat','seat', 'gap', 'seat','seat','seat','seat','seat','seat','seat','seat','seat', 'gap', 'seat','seat','seat','gap'] },
+  { row: 'F', pattern: ['gap', 'seat','seat','seat','seat', 'gap', 'seat','seat','seat','seat','seat','seat','seat','seat','seat', 'gap', 'seat','seat','seat','gap'] },
+  { row: 'G', pattern: ['gap', 'seat','seat','seat','seat','seat', 'gap', 'seat','seat','seat','seat','seat','seat','seat','seat','seat', 'gap', 'seat','seat'] }
 ];
 
-// 좌석 도면 랜더링 알고리즘
+// 좌석 도면 랜더링 (디폴트: 회색)
 function renderSeatMap(config, containerId, floorNumber) {
   const container = document.getElementById(containerId);
   container.innerHTML = '';
@@ -624,9 +627,9 @@ function renderSeatMap(config, containerId, floorNumber) {
       if (type === 'gap') {
         seatDiv.className = 'gap';
       } else {
-        seatDiv.className = `seat ${type}`;
+        seatDiv.className = 'seat';
         seatDiv.innerText = seatNum;
-        // 고유 ID 부여 (예: seat-1-A-5)
+        // ID 형식: seat-1-A-5
         seatDiv.id = `seat-${floorNumber}-${rowData.row}-${seatNum}`;
         seatNum++;
       }
@@ -644,34 +647,53 @@ function renderSeatMap(config, containerId, floorNumber) {
   });
 }
 
-// 좌석 강조 기능
-function highlightSeat(val) {
-  // 기존 하이라이트 제거
-  document.querySelectorAll('.seat.selected').forEach(s => s.classList.remove('selected'));
+// 입력된 전체 좌석 파싱 및 카운팅 업데이트
+function updateAllSeats() {
+  // 1. 모든 좌석 색상 클래스 초기화
+  document.querySelectorAll('.seat').forEach(seat => {
+    seat.classList.remove('count-1', 'count-2', 'count-3', 'count-4', 'count-5');
+  });
 
-  if (!val) return;
+  // 2. 입력된 모든 seat-input 값 수집 후 좌석별 카운트 계산
+  const seatCounts = {};
+  const inputs = document.querySelectorAll('.seat-input');
 
-  const str = val.replace(/\s+/g, '').toUpperCase(); // 공백 제거 및 대문자화
-  
-  // 층 추출 (기본값 1층)
-  let floor = 1;
-  if (str.includes('2층') || str.startsWith('2')) {
-    floor = 2;
-  }
+  inputs.forEach(input => {
+    const val = input.value.trim();
+    if (!val) return;
 
-  // 열(문자)과 번호(숫자) 추출
-  const rowMatch = str.match(/[A-Z]/);
-  const numMatch = str.match(/\d+/g);
+    const str = val.replace(/\s+/g, '').toUpperCase();
+    
+    // 층 판별 (2층 명시시 2층, 기본은 1층)
+    let floor = 1;
+    if (str.includes('2층') || str.startsWith('2')) {
+      floor = 2;
+    }
 
-  if (rowMatch && numMatch) {
-    const row = rowMatch[0];
-    // '2층'의 '2'가 넘어가서 숫자가 여러개일 경우 마지막 숫자를 번호로 활용
-    const num = numMatch[numMatch.length - 1]; 
-    const targetId = `seat-${floor}-${row}-${num}`;
-    const targetSeat = document.getElementById(targetId);
+    const rowMatch = str.match(/[A-Z]/);
+    const numMatch = str.match(/\d+/g);
 
+    if (rowMatch && numMatch) {
+      const row = rowMatch[0];
+      const num = numMatch[numMatch.length - 1];
+      const seatId = `seat-${floor}-${row}-${num}`;
+
+      if (!seatCounts[seatId]) {
+        seatCounts[seatId] = 0;
+      }
+      seatCounts[seatId]++;
+    }
+  });
+
+  // 3. 누적 횟수에 맞춰 색상 클래스 적용
+  for (const [seatId, count] of Object.entries(seatCounts)) {
+    const targetSeat = document.getElementById(seatId);
     if (targetSeat) {
-      targetSeat.classList.add('selected');
+      if (count === 1) targetSeat.classList.add('count-1');
+      else if (count === 2) targetSeat.classList.add('count-2');
+      else if (count === 3) targetSeat.classList.add('count-3');
+      else if (count === 4) targetSeat.classList.add('count-4');
+      else if (count >= 5) targetSeat.classList.add('count-5');
     }
   }
 }
@@ -730,7 +752,7 @@ function copyRow(btn) {
   });
 }
 
-// 초기화
+// 초기 배치도 생성
 window.onload = function() {
   renderSeatMap(floor1Config, 'floor1Map', 1);
   renderSeatMap(floor2Config, 'floor2Map', 2);
