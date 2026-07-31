@@ -280,6 +280,140 @@ body{
   .seat{width:17px;height:17px;font-size:8.5px;}
   .gap{width:17px;height:17px;}
 }
+
+/* 전체 레이아웃 */
+.settle-wrap {
+  max-width: 780px;
+  margin: 30px auto;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Malgun Gothic", sans-serif;
+}
+
+.settle-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #3a322d;
+  margin-bottom: 16px;
+  padding-left: 4px;
+}
+
+/* 1. 역할별 전체 감싸는 베이지색 빅 카드 (이미지 스타일 100% 재현) */
+.role-card {
+  background-color: #fbf9f5;  /* 밝고 따뜻한 베이지 */
+  border: 1px solid #ece8e1;  /* 은은한 외곽선 */
+  border-radius: 12px;        /* 부드러운 라운드 */
+  padding: 14px 18px;
+  margin-bottom: 12px;
+}
+
+/* 역할 이름 (좌측 브라운 세로선 포인트) */
+.cgl {
+  font-size: 14px;
+  font-weight: 800;
+  color: #3d312a;             /* 딥 브라운 */
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cgl::before {
+  content: '';
+  display: inline-block;
+  width: 3px;
+  height: 14px;
+  background-color: #7a4b2a;  /* 시그니처 포인트 브라운 컬러 */
+  border-radius: 2px;
+}
+
+/* 배우 카드 정렬 그리드 */
+.counting-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* 2. 내부 납작한 배우 카드 (흰색 둥근 카드) */
+.count-card {
+  flex: 1;
+  min-width: 100px;
+  background-color: #ffffff;  /* 깨끗한 흰색 배경 */
+  border: 1px solid #e5e0d8;  /* 은은한 테두리 */
+  border-radius: 8px;         /* 둥근 형태 */
+  padding: 10px 8px;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 배우 이름 폰트 비율 */
+.cnt-name {
+  font-size: 13px;
+  font-weight: 800;
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+
+/* 카운팅 숫자 폰트 비율 (강조) */
+.cnt-num {
+  font-size: 20px;
+  font-weight: 900;
+  color: #6b528b;             /* 인디고/보라색 톤 강조 (필요 시 원하는 색으로 수정 가능) */
+  line-height: 1.1;
+  margin-bottom: 2px;
+}
+
+/* 기준 회차 표시 (작은 폰트) */
+.cnt-label {
+  font-size: 10px;
+  color: #a0988e;             /* 차분한 회갈색 */
+  font-weight: 500;
+}
+
+/* TOTAL 결과 박스 디자인 */
+.cnt-total-box {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.cnt-total-card {
+  width: 160px;
+  background-color: #8476a7;  /* 포인트 딥퍼플 (브라운으로 원하시면 #7a4b2a 로 변경 가능) */
+  border-radius: 10px;
+  color: #ffffff;
+  padding: 16px 12px;
+  text-align: center;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+}
+
+.cnt-total-title {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+  opacity: 0.9;
+}
+
+.cnt-total-num {
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.cnt-total-of {
+  font-size: 15px;
+  font-weight: 700;
+  opacity: 0.8;
+}
+
+.cnt-total-sub {
+  font-size: 11px;
+  margin-top: 2px;
+  opacity: 0.85;
+}  
 </style>
 </head>
 <body>
@@ -736,71 +870,167 @@ body{
       </div>
     </div>
   </div>
+  
+첨부해주신 이미지를 확인했습니다!
 
-  <!-- 캐스팅 정산 (카운팅) 섹션 -->
-  <div class="settle-wrap">
-    <div class="settle-title">CASTING COUNT</div>
-    <div class="counting-section">
-      
-      <!-- 매그너스 볼커 -->
+원하시는 스타일은 역할별로 커다란 부드러운 베이지색 컨테이너 카드가 감싸고, 그 내부에 흰색 배경의 납작한 둥근 배우 카드들이 수평으로 들어가는 형태군요!
+
+이 디자인 톤(따뜻한 베이지, 브라운 포인트 line, 보라/딥브라운 강조 폰트)에 맞춰 HTML 구조와 CSS 스타일, 폰트 비율을 완벽하게 맞춘 코드 세트입니다.
+
+1. HTML 구조 (.settle-wrap 전체 교체)
+배역 카드가 전체를 감싸고 내부 배우 카드가 들어가도록 구조를 정돈했습니다.
+
+HTML
+<!-- 캐스팅 정산 (카운팅) 섹션 -->
+<div class="settle-wrap">
+  <div class="settle-title">비더슈탄트</div>
+  <div class="counting-section">
+    
+    <!-- 매그너스 볼커 -->
+    <div class="role-card">
       <div class="cgl">매그너스 볼커</div>
       <div class="counting-box">    
-        <div class="count-card"><div class="cnt-name">최석진</div><div class="cnt-num"><span id="cnt-magnus-1">0</span></div><div class="cnt-label" id="lbl-magnus-1">/ 0회</div></div>
-        <div class="count-card"><div class="cnt-name">한상훈</div><div class="cnt-num"><span id="cnt-magnus-2">0</span></div><div class="cnt-label" id="lbl-magnus-2">/ 0회</div></div>
-        <div class="count-card"><div class="cnt-name">황순종</div><div class="cnt-num"><span id="cnt-magnus-3">0</span></div><div class="cnt-label" id="lbl-magnus-3">/ 0회</div></div>
-      </div>
-
-      <!-- 아벨 루터 -->
-      <div class="cgl">아벨 루터</div>
-      <div class="counting-box">
-        <div class="count-card"><div class="cnt-name">박정원</div><div class="cnt-num"><span id="cnt-abel-1">0</span></div><div class="cnt-label" id="lbl-abel-1">/ 0회</div></div>
-        <div class="count-card"><div class="cnt-name">이한솔</div><div class="cnt-num"><span id="cnt-abel-2">0</span></div><div class="cnt-label" id="lbl-abel-2">/ 0회</div></div>
-        <div class="count-card"><div class="cnt-name">강병훈</div><div class="cnt-num"><span id="cnt-abel-3">0</span></div><div class="cnt-label" id="lbl-abel-3">/ 0회</div></div>
-      </div>
-
-      <!-- 프레드릭 칼 -->
-      <div class="cgl">프레드릭 칼</div>
-      <div class="counting-box">
-        <div class="count-card"><div class="cnt-name">김도현</div><div class="cnt-num"><span id="cnt-friedrich-1">0</span></div><div class="cnt-label" id="lbl-friedrich-1">/ 0회</div></div>
-        <div class="count-card"><div class="cnt-name">김방언</div><div class="cnt-num"><span id="cnt-friedrich-2">0</span></div><div class="cnt-label" id="lbl-friedrich-2">/ 0회</div></div>
-        <div class="count-card"><div class="cnt-name">김준식</div><div class="cnt-num"><span id="cnt-friedrich-3">0</span></div><div class="cnt-label" id="lbl-friedrich-3">/ 0회</div></div>     
-      </div>
-
-      <!-- 하겐 악스만 -->
-      <div class="cgl">하겐 악스만</div>
-      <div class="counting-box">
-        <div class="count-card"><div class="cnt-name">조모세</div><div class="cnt-num"><span id="cnt-hagen-1">0</span></div><div class="cnt-label" id="lbl-hagen-1">/ 0회</div></div>
-        <div class="count-card"><div class="cnt-name">김지웅</div><div class="cnt-num"><span id="cnt-hagen-2">0</span></div><div class="cnt-label" id="lbl-hagen-2">/ 0회</div></div>
-        <div class="count-card"><div class="cnt-name">황건우</div><div class="cnt-num"><span id="cnt-hagen-3">0</span></div><div class="cnt-label" id="lbl-hagen-3">/ 0회</div></div> 
-      </div>
-
-      <!-- 재스퍼 뮬러 -->
-      <div class="cgl">재스퍼 뮬러</div>
-      <div class="counting-box">
-        <div class="count-card"><div class="cnt-name">김태환</div><div class="cnt-num"><span id="cnt-jasper-1">0</span></div><div class="cnt-label" id="lbl-jasper-1">/ 0회</div></div>
-        <div class="count-card"><div class="cnt-name">최기정</div><div class="cnt-num"><span id="cnt-jasper-2">0</span></div><div class="cnt-label" id="lbl-jasper-2">/ 0회</div></div>
-        <div class="count-card"><div class="cnt-name">김도민</div><div class="cnt-num"><span id="cnt-jasper-3">0</span></div><div class="cnt-label" id="lbl-jasper-3">/ 0회</div></div>
-      </div>
-
-      <!-- 라인하르트 클레어 -->
-      <div class="cgl">라인하르트 클레어</div>
-      <div class="counting-box">
-        <div class="count-card"><div class="cnt-name">김보현</div><div class="cnt-num"><span id="cnt-reinhardt-1">0</span></div><div class="cnt-label" id="lbl-reinhardt-1">/ 0회</div></div>
-        <div class="count-card"><div class="cnt-name">이형훈</div><div class="cnt-num"><span id="cnt-reinhardt-2">0</span></div><div class="cnt-label" id="lbl-reinhardt-2">/ 0회</div></div>
-        <div class="count-card"><div class="cnt-name">고철순</div><div class="cnt-num"><span id="cnt-reinhardt-3">0</span></div><div class="cnt-label" id="lbl-reinhardt-3">/ 0회</div></div>
-      </div>
-
-      <!-- TOTAL -->
-      <div class="cnt-total-box">
-        <div class="cnt-total-card">
-          <div class="cnt-name">TOTAL WATCH</div>
-          <div class="cnt-num"><span id="cnt-total">0</span><span class="cnt-total-of" id="lbl-total-all">/ 50회</span></div>
+        <div class="count-card">
+          <div class="cnt-name" style="color:#8b0000">최석진</div>
+          <div class="cnt-num"><span id="cnt-magnus-1">0</span></div>
+          <div class="cnt-label" id="lbl-magnus-1">/ 0회</div>
+        </div>
+        <div class="count-card">
+          <div class="cnt-name" style="color:#8b0000">한상훈</div>
+          <div class="cnt-num"><span id="cnt-magnus-2">0</span></div>
+          <div class="cnt-label" id="lbl-magnus-2">/ 0회</div>
+        </div>
+        <div class="count-card">
+          <div class="cnt-name" style="color:#8b0000">황순종</div>
+          <div class="cnt-num"><span id="cnt-magnus-3">0</span></div>
+          <div class="cnt-label" id="lbl-magnus-3">/ 0회</div>
         </div>
       </div>
+    </div>
 
+    <!-- 아벨 루터 -->
+    <div class="role-card">
+      <div class="cgl">아벨 루터</div>
+      <div class="counting-box">
+        <div class="count-card">
+          <div class="cnt-name" style="color:#7a3300">박정원</div>
+          <div class="cnt-num"><span id="cnt-abel-1">0</span></div>
+          <div class="cnt-label" id="lbl-abel-1">/ 0회</div>
+        </div>
+        <div class="count-card">
+          <div class="cnt-name" style="color:#7a3300">이한솔</div>
+          <div class="cnt-num"><span id="cnt-abel-2">0</span></div>
+          <div class="cnt-label" id="lbl-abel-2">/ 0회</div>
+        </div>
+        <div class="count-card">
+          <div class="cnt-name" style="color:#7a3300">강병훈</div>
+          <div class="cnt-num"><span id="cnt-abel-3">0</span></div>
+          <div class="cnt-label" id="lbl-abel-3">/ 0회</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 프레드릭 칼 -->
+    <div class="role-card">
+      <div class="cgl">프레드릭 칼</div>
+      <div class="counting-box">
+        <div class="count-card">
+          <div class="cnt-name" style="color:#665500">김도현</div>
+          <div class="cnt-num"><span id="cnt-friedrich-1">0</span></div>
+          <div class="cnt-label" id="lbl-friedrich-1">/ 0회</div>
+        </div>
+        <div class="count-card">
+          <div class="cnt-name" style="color:#665500">김방언</div>
+          <div class="cnt-num"><span id="cnt-friedrich-2">0</span></div>
+          <div class="cnt-label" id="lbl-friedrich-2">/ 0회</div>
+        </div>
+        <div class="count-card">
+          <div class="cnt-name" style="color:#665500">김준식</div>
+          <div class="cnt-num"><span id="cnt-friedrich-3">0</span></div>
+          <div class="cnt-label" id="lbl-friedrich-3">/ 0회</div>
+        </div>     
+      </div>
+    </div>
+
+    <!-- 하겐 악스만 -->
+    <div class="role-card">
+      <div class="cgl">하겐 악스만</div>
+      <div class="counting-box">
+        <div class="count-card">
+          <div class="cnt-name" style="color:#005533">조모세</div>
+          <div class="cnt-num"><span id="cnt-hagen-1">0</span></div>
+          <div class="cnt-label" id="lbl-hagen-1">/ 0회</div>
+        </div>
+        <div class="count-card">
+          <div class="cnt-name" style="color:#005533">김지웅</div>
+          <div class="cnt-num"><span id="cnt-hagen-2">0</span></div>
+          <div class="cnt-label" id="lbl-hagen-2">/ 0회</div>
+        </div>
+        <div class="count-card">
+          <div class="cnt-name" style="color:#005533">황건우</div>
+          <div class="cnt-num"><span id="cnt-hagen-3">0</span></div>
+          <div class="cnt-label" id="lbl-hagen-3">/ 0회</div>
+        </div> 
+      </div>
+    </div>
+
+    <!-- 재스퍼 뮬러 -->
+    <div class="role-card">
+      <div class="cgl">재스퍼 뮬러</div>
+      <div class="counting-box">
+        <div class="count-card">
+          <div class="cnt-name" style="color:#005566">김태환</div>
+          <div class="cnt-num"><span id="cnt-jasper-1">0</span></div>
+          <div class="cnt-label" id="lbl-jasper-1">/ 0회</div>
+        </div>
+        <div class="count-card">
+          <div class="cnt-name" style="color:#005566">최기정</div>
+          <div class="cnt-num"><span id="cnt-jasper-2">0</span></div>
+          <div class="cnt-label" id="lbl-jasper-2">/ 0회</div>
+        </div>
+        <div class="count-card">
+          <div class="cnt-name" style="color:#005566">김도민</div>
+          <div class="cnt-num"><span id="cnt-jasper-3">0</span></div>
+          <div class="cnt-label" id="lbl-jasper-3">/ 0회</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 라인하르트 클레어 -->
+    <div class="role-card">
+      <div class="cgl">라인하르트 클레어</div>
+      <div class="counting-box">
+        <div class="count-card">
+          <div class="cnt-name" style="color:#002288">김보현</div>
+          <div class="cnt-num"><span id="cnt-reinhardt-1">0</span></div>
+          <div class="cnt-label" id="lbl-reinhardt-1">/ 0회</div>
+        </div>
+        <div class="count-card">
+          <div class="cnt-name" style="color:#002288">이형훈</div>
+          <div class="cnt-num"><span id="cnt-reinhardt-2">0</span></div>
+          <div class="cnt-label" id="lbl-reinhardt-2">/ 0회</div>
+        </div>
+        <div class="count-card">
+          <div class="cnt-name" style="color:#002288">고철순</div>
+          <div class="cnt-num"><span id="cnt-reinhardt-3">0</span></div>
+          <div class="cnt-label" id="lbl-reinhardt-3">/ 0회</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOTAL 하단 카드 -->
+    <div class="cnt-total-box">
+      <div class="cnt-total-card">
+        <div class="cnt-total-title">TOTAL</div>
+        <div class="cnt-total-num">
+          <span id="cnt-total">0</span><span class="cnt-total-of" id="lbl-total-all">/ 0회</span>
+        </div>
+        <div class="cnt-total-sub">회</div>
+      </div>
     </div>
   </div>
-
+</div>
+  
   <!-- 좌석 도면 영역 -->
   <div class="seating-section">
     <div class="seating-title">링크아트센터드림 드림1관 좌석 배치도</div>
